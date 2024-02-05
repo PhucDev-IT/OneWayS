@@ -35,7 +35,7 @@ class RoleController extends Controller
     {
         try {
             $createData = $request->all();
-            $createData['guard_name'] = 'web';
+     
             // Tạo mới vai trò
             $role = Role::create($createData);
 

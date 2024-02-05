@@ -12,27 +12,55 @@ use Intervention\Image\Facades\Image;
 trait HandleImagesTrait
 {
     protected string $path = 'public/uploads/';
-    public function verify($request)
+    protected string $fullPath = 'public/storage/uploads';
+    public function verify($request,$name)
     {
         //Kiểm tra trường 'image' có tồn tại trong request hay không => T or F
-        return $request->has('image');
+        return $request->has($name);
     }
 
-    public function saveImage($request)
+
+
+    public function saveImage($request,$name)
     {
-        if ($this->verify($request)) {
-            $file = $request->file('image');
-            $name = time() . $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
-            $image = Image::make($file)->resize(300, 300);
-            
-            // Sử dụng save() để lưu hình ảnh vào storage
-            $image->save(storage_path("app/{$this->path}{$name}"));
-    
-            return $name;
+        if ($this->verify($request,$name)) {
+            $file = $request->file($name);
+
+        
+            return  $this->handleSaveImage($file);
         }
     }
     
+    public function saveImages($request,$name){
+        if ($this->verify($request,$name)) {
+           
+            $fileNames = [];
+            foreach($request->$name as $value){
+                $fileNames[] = $this->handleSaveImage($value);
+            }
+            
+            return $fileNames;
+        }
+    }
+
+    public function handleSaveImage($file){
+      
+
+        $originalFileName = $file->getClientOriginalName();
+        
+        // Chuyển đổi tên file sang ASCII
+        $convertedFileName = iconv('UTF-8', 'ASCII//TRANSLIT', $originalFileName);
+        
+        // Kết hợp thời gian hiện tại và tên file đã chuyển đổi
+        $uniqueFileName = time() . '_' . $convertedFileName;
+        
+        // Loại bỏ các ký tự không mong muốn
+        $uniqueFileName = preg_replace('/[^a-zA-Z0-9_.]/', '', $uniqueFileName);
+        
+        $file->storeAs($this->path . $uniqueFileName);
+
+        return  $uniqueFileName;
+    }
 
     /**
      * @paramfilesystems $request
@@ -40,11 +68,11 @@ trait HandleImagesTrait
      * @param $currentImage
      * @return mixed|string|null
      */
-    public function updateImage($request, $currentImage): mixed
+    public function updateImage($request,$name, $currentImage): mixed
     {
-        if ($this->verify($request)) {
+        if ($this->verify($request,$name)) {
             $this->deleteImage($currentImage);
-            return $this->saveImage($request);
+            return $this->saveImage($request,$name);
         }
         return $currentImage;
     }
@@ -55,9 +83,12 @@ trait HandleImagesTrait
      */
     public function deleteImage($imageName): void
     {
-        if ($imageName && file_exists($this->path . $imageName)) {
-            Storage::delete($this->path . $imageName);
+        $filePath = $this->fullPath . $imageName;
+    
+        if ($imageName && file_exists($filePath)) {
+            Storage::delete($filePath);
         }
     }
+    
   
 }

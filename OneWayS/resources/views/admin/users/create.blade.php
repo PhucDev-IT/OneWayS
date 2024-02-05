@@ -63,18 +63,24 @@
 
 
             <div class="form-group">
-                <label>Vai trò người dùng</label>
-                <select name="role_id" class="form-control">
-                    @foreach($roles as $groupName => $role)
-                    <optgroup label="{{$groupName}}">
+            <label>Vai trò người dùng</label>
+                <div class="row">
+                @foreach($roles as $groupName => $role)
+                    <div class="col-5">
+                        <h5>{{$groupName}}</h5>
+                        <div>
                         @foreach($role as $item)
-                        <option {{ $item->name == 'customer' ? 'selected' : '' }} value="{{$item->id}}">{{$item->display_name}}</option>
-                        @endforeach
-                    </optgroup>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input name="role_ids[]" type="checkbox" class="form-check-input" value="{{$item->id}}">
+                                    {{$item->display_name}}
+                                </label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                     @endforeach
-
-                </select>
-              
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary mr-2">Submit</button>

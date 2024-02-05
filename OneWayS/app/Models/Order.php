@@ -20,4 +20,20 @@ class Order extends Model
         'status',
         'methodpayment_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Sự kiện trước khi tạo mới order
+        static::creating(function ($order) {
+            $latestOrder = static::latest()->first();
+
+            // Nếu có order trước đó, tăng số lên 1, ngược lại, bắt đầu từ 1
+            $orderNumber = $latestOrder ? intval(substr($latestOrder->order_id, 2)) + 1 : 1;
+
+            // Format số thành chuỗi với độ dài 6 và thêm vào order_id
+            $order->id = 'OR' . str_pad($orderNumber, 6, '0', STR_PAD_LEFT);
+        });
+    }
 }

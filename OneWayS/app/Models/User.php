@@ -20,6 +20,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $guard_name = 'api';
     protected $fillable = [
         'fullname',
         'birthOfDay',
@@ -58,5 +60,17 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    //Gán vai trò cho người dùng
+    public function assignRoles(array | int $roles): array
+    {
+        return $this->roles()->sync($roles);
+    }
+
+
+    public function guardName()
+    {
+        return 'api';
     }
 }

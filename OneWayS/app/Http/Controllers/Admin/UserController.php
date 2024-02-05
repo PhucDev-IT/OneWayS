@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\CreateUserRequest;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,23 +14,19 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    private $user;
-    private $role;
+    protected $userService;
 
-    public function __construct(User $u, Role $role)
+    public function __construct(UserService $userS)
     {
-        $this->user = $u;
-        $this->role = $role;
+        $this->userService = $userS;
     }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = Role::with('customUsers')->get();
-
-        var_dump($users);
+        //$users = $this->user->getRoleNames();
+        $users = $this->userService->getWithPaginate();
         return view('admin.users.index', compact('users'));
     }
 
@@ -38,7 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = $this->role->all()->groupBy('group');
+        $roles = Role::all()->groupBy('group');
 
         return view('admin.users.create', compact('roles'));
     }
@@ -48,27 +45,15 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        try {
-            $dataRequest = $request->all();
-
-            $dataRequest['password'] = Hash::make($request->password);
-
-            if (isset($createData['image']) && $createData['image'] != null) {
-                $dataRequest['avatar'] = $this->user->saveImage($request);
-            }
-
-            $user = $this->user->create($dataRequest);
-            $user->roles()->attach($dataRequest['role_id']);
-
-            return to_route('users.index')->with(['message-success', 'Thêm dữ liệu thành công']);
-        } catch (\Exception $e) {
-            // Xử lý nếu có lỗi
-            $errorMessage = $e->getMessage();
-            var_dump($errorMessage);
-            die;
-            // Chuyển hướng về trang tạo mới vai trò với thông báo lỗi
-            return redirect()->route('users.create')->with(['message-error' => $errorMessage]);
+       
+        if($this->userService->store($request)){
+            return redirect()->route('users.index')->with(['message-success' => 'Thêm dữ liệu thành công']);
+        }else{
+            return back()->withInput();
         }
+
+            
+        
     }
 
     /**

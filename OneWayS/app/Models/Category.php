@@ -10,6 +10,12 @@ class Category extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-    
+
     ];
+
+    // Trong mô hình Category
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

@@ -17,9 +17,12 @@ class Role extends ModelsRole
         'guard_name'
     ];
 
-    public function customUsers()
-    {
+    public function roleUsers(){
         return $this->belongsToMany(User::class);
     }
 
+    public function model()
+    {
+        return $this->morphTo();
+    }
 }

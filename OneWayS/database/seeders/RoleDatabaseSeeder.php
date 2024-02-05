@@ -14,16 +14,7 @@ class RoleDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = [
-            ['name'=>'manager','display_name'=>'Manager','group'=>'system'],
-            ['name'=>'admin','display_name'=>'Admin','group'=>'system'],
-            ['name'=>'customer','display_name'=>'Customer','group'=>'system'],
-            ['name'=>'employee','display_name'=>'Employee','group'=>'system'],
-        ];
-
-        foreach($roles as $role){
-            Role::updateOrCreate($role);
-        }
+      
 
         $permissions = [
 
@@ -57,5 +48,25 @@ class RoleDatabaseSeeder extends Seeder
         foreach($permissions as $item){
             Permission::updateOrCreate($item);
         }
+
+
+        $roles = [
+            ['name'=>'manager','display_name'=>'Manager','group'=>'system'],
+            ['name'=>'admin','display_name'=>'Admin','group'=>'system'],
+            ['name'=>'customer','display_name'=>'Customer','group'=>'system'],
+            ['name'=>'employee','display_name'=>'Employee','group'=>'system'],
+        ];
+
+       
+        foreach ($roles as $role) {
+            $createdRole = Role::updateOrCreate($role);
+    
+            // Nếu vai trò hiện tại là "admin", gán tất cả các quyền cho nó
+            if ($createdRole->name === 'admin') {
+                $permissions = Permission::all();
+                $createdRole->syncPermissions($permissions);
+            }
+        }
+
     }
 }

@@ -14,17 +14,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->dateTime('orderdate')->default(now());
             $table->double('total');
             $table->float('feeship');
             $table->double('totalmoney');
             $table->text('customer_receive');
+            $table->string('voucher_id')->references('id')->on('vouchers');
             $table->string('status');
             $table->timestamps();
 
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Voucher::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(PaymentMethod::class)->constrained()->cascadeOnDelete();
         });
     }

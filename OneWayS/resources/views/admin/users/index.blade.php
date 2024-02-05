@@ -238,7 +238,14 @@
                         <td>{{$user->id}}</td>
                         <td><a href="#"><img src="{{ $user->avatar ? asset('uploads/'.$user->avatar) : asset('uploads/default/avart_default.jpg') }}" class="avatar" alt="Avatar">{{$user->fullname}}</a></td>
                         <td>{{$user->createdat}}</td>
-                        <td>Admin</td>
+                        <td>
+
+                            @if(!empty($user->getRoleNames()))
+                            @foreach($user->getRoleNames() as $v)
+                            <label class="badge badge-success">{{ $v }}</label>
+                            @endforeach
+                            @endif
+                        </td>
                         <td>
                             @if($user->status == "0")
                             <span class="status text-success">&bull;</span> ON
@@ -261,7 +268,7 @@
 
                 </tbody>
             </table>
-            {{$users->links()}}
+
         </div>
     </div>
 </div>

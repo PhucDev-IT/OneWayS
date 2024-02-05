@@ -29,22 +29,51 @@
           </li>
           <li class="nav-item">
             <a class="nav-link"  href="{{route('dashboard')}}">
-              <i class="typcn typcn-device-desktop menu-icon"></i>
-              <span class="menu-title">Dashboard <span class="badge badge-primary ml-3">New</span></span>
+              <i class="typcn typcn-home menu-icon"></i>
+              <span class="menu-title">Bảng điều khiển <span class="badge badge-primary ml-3">New</span></span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link"  href="">
-              <i class="typcn typcn-device-desktop menu-icon"></i>
-              <span class="menu-title">Products Management</span>
+            <a class="nav-link"  href="{{route('products.index')}}">
+              <i class=" typcn typcn-sort-alphabetically-outline menu-icon"></i>
+              <span class="menu-title">Sản phẩm</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"  href="{{route('categories.index')}}">
+              <i class="typcn typcn-th-list menu-icon"></i>
+              <span class="menu-title">Danh mục</span>
             </a>
           </li>
           
           <li class="nav-item">
+            <a class="nav-link"  href="{{route('vouchers.index')}}">
+              <i class="typcn typcn-tags menu-icon"></i>
+              <span class="menu-title">Mã giảm giá</span>
+            </a>
+          </li>
+      
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <i class="typcn typcn-dropbox menu-icon"></i>
+              <span class="menu-title">Đơn hàng</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Chờ xác nhận</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Chờ gói hàng</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Đang giao hàng</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="typcn typcn-briefcase menu-icon"></i>
-              <span class="menu-title">Users Management</span>
+              <i class=" typcn typcn-group menu-icon"></i>
+              <span class="menu-title">Người dùng</span>
               <i class="typcn typcn-chevron-right menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
@@ -55,20 +84,8 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="typcn typcn-film menu-icon"></i>
-              <span class="menu-title">Orders Management</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Waiting for confirm</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Packaging</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Shipping</a></li>
-              </ul>
-            </div>
-          </li>
+
+
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="typcn typcn-chart-pie-outline menu-icon"></i>

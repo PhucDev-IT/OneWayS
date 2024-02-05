@@ -12,12 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vouchers', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('name');
             $table->string('description');
             $table->double('discount');
             $table->string('type');
             $table->integer('quantity');
+            $table->integer('used')->default(0);
+            $table->boolean('status')->default(true);
+            $table->integer('user_id')->references('id')->on('users');
             $table->datetime('start_time');
             $table->dateTime('end_time');
             $table->timestamps();
