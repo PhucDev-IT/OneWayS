@@ -3,24 +3,43 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Vouchers\VoucherCreateRequest;
+use App\Models\User;
 use App\Models\Voucher;
+use App\Services\VoucherService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 
 class CouponController extends Controller
 {
+
+    protected $voucherService;
+
+    public function __construct(VoucherService $service)
+    {
+        $this->voucherService = $service;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $now = Carbon::now();
+        
+        // $now = Carbon::now();
 
-        $vouchers = Voucher::where('status', true)
-            ->where('start_time', '<=', $now)
-            ->get();
-     
-        return view('admin.coupons.index', compact('vouchers'));
+        // $vouchers = Voucher::where('status', true)
+        //     ->where('start_time', '<=', $now)
+        //     ->get();
+        // $vouchers = Voucher::paginate(5);
+        // return response()->json(['vouchers' => $vouchers]);
+        $vouchers = Voucher::paginate(5);
+        return view('admin.coupons.index',compact('vouchers'));
+    }
+
+    public function fetchCoupon() : JsonResponse {
+        $vouchers = Voucher::paginate(5);
+        return response()->json(['vouchers' => $vouchers]);
     }
 
     /**
@@ -34,10 +53,17 @@ class CouponController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VoucherCreateRequest $request)
     {
-        //
+    
+        if($this->voucherService->store($request)){
+            return redirect()->route('vouchers.index')->with(['message-success' => 'Thêm dữ liệu thành công']);
+        } else {
+            return back()->withInput();
+        }
+
     }
+    
 
     /**
      * Display the specified resource.
@@ -52,8 +78,15 @@ class CouponController extends Controller
      */
     public function edit(string $id)
     {
-        $voucher = Voucher::findOrFail($id);
+        $voucher = Voucher::where('voucher_id', $id)->first();
+
+        if (!$voucher) {
+            // Xử lý trường hợp không tìm thấy voucher
+            return redirect()->route('admin.coupons.index');
+        }
+    
         return view('admin.coupons.edit', compact('voucher'));
+
     }
 
     /**

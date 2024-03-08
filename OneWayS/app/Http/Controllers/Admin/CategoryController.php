@@ -18,13 +18,19 @@ class CategoryController extends Controller
 
     public function index()
     {
-       $categories = $this->category->withCount('products')->paginate(10);
-        return view('admin.categories.index',compact('categories'));
+        
+        return view('admin.categories.index');
+    }
+
+    public function fetchCategories()
+    {
+        $categories = $this->category->withCount('products')->paginate(10);
+        return response()->json(['categories' => $categories]);
     }
 
     public function create()
     {
-      
+
         return view('admin.categories.create');
     }
 
@@ -32,13 +38,13 @@ class CategoryController extends Controller
     {
         try {
             $createData = $request->all();
-           $this->category->create($createData);
+            $this->category->create($createData);
             // Chuyển hướng về trang tạo mới vai trò với thông báo thành công
             return redirect()->route('categories.index')->with(['message-success' => 'Thêm thành công']);
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
             $errorMessage = $e->getMessage();
-    
+
             // Chuyển hướng về trang tạo mới vai trò với thông báo lỗi
             return redirect()->route('categories.index')->with(['message-error' => $errorMessage]);
         }

@@ -23,7 +23,7 @@ class UserService
 
     public function getWithPaginate(): mixed
     {
-        $all_users_with_all_their_roles = User::with('roles')->get();
+        $all_users_with_all_their_roles = User::with('roles')->latest('created_at')->paginate(10);
         return $all_users_with_all_their_roles;
     }
 
@@ -34,21 +34,21 @@ class UserService
             $dataRequest['password'] = Hash::make($request->password);
 
             if (isset($dataRequest['image']) && $dataRequest['image'] != null) {
-                $dataRequest['avatar'] = $this->saveImage($request,'image');
+                $dataRequest['avatar'] = $this->saveImage($request, 'image');
             }
 
             $user = User::create($dataRequest);
 
-            $user->syncRoles($dataRequest['role_ids'] ?? []);
+            $user->assignRole($dataRequest['role_ids'] ?? []);
 
-            return redirect()->route('users.index')->with(['message-success' => 'Thêm dữ liệu thành công']);
+            return true;
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
             $errorMessage = $e->getMessage();
-            var_dump($errorMessage); die;
-            session('message-error',$errorMessage);
+            var_dump($errorMessage);
+            die;
+            session('message-error', $errorMessage);
             return false;
-            
         }
     }
 
@@ -60,37 +60,32 @@ class UserService
     public function update($request, $id): bool
     {
         try {
-            $product = $this->findOrFail($id)->load(['images']);
-            $dataUpdate = $request->all();
-    
-            // Xử lý ảnh cũ và ảnh mới
-            $oldImages = $request->data_images ? json_decode($request->data_images) : [];
-            $classifies = $request->classifies ? json_decode($request->classifies) : [];
-    
-            foreach ($oldImages as $image) {
-                if (!$product->images->contains('id', $image)) {
-                    $this->deleteImage($image->url);
-                }
+            $user = $this->findOrFail($id);
+
+            $dataRequest = $request->all();
+            if ($user['password'] !== $dataRequest['password']) {
+                $dataRequest['password'] = Hash::make($request->password);
             }
-    
-            $dataUpdate['img_preview'] =  $this->updateImage($request, 'img_preview', $product->img_preview);
-            $dataUpdate['images'] =  $this->saveImages($request, 'images');
-    
-            $product->update($dataUpdate);
-            $product->images()->delete();
-            $product->syncImages($oldImages);
-            $product->details()->delete();
-         
-    
+
+            if (isset($dataRequest['image']) && $dataRequest['image'] != null) {
+                $dataRequest['avatar'] = $this->updateImage($request, 'image', $dataRequest['image']);
+            }
+
+            $user->update($dataRequest);
+
+            $user->syncRoles($dataRequest['role_ids'] ?? []);
+
             return true;
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
             $errorMessage = $e->getMessage();
-            // Có thể log lỗi hoặc trả về thông báo lỗi cho người dùng
+            var_dump($errorMessage);
+            die;
+            session('message-error', $errorMessage);
             return false;
         }
     }
-    
+
 
     /**
      * @param $id
@@ -112,9 +107,24 @@ class UserService
      */
     public function findOrFail($id): mixed
     {
-        $product = User::findOrFail($id);
-        return $product;
+        return User::findOrFail($id);
     }
 
-   
+
+    //Khóa tài khoản
+    public function lockOnUser($id, $status)
+    {
+        try {
+            $user = $this->findOrFail($id);
+
+            $user->update(['status' => $status]);
+
+            return true;
+        } catch (\Exception $e) {
+            // Xử lý nếu có lỗi
+            $errorMessage = $e->getMessage();
+
+            return false;
+        }
+    }
 }

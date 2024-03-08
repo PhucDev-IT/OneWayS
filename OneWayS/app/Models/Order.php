@@ -10,6 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'user_id',
         'orderdate',
         'total',
@@ -33,7 +34,7 @@ class Order extends Model
             $orderNumber = $latestOrder ? intval(substr($latestOrder->order_id, 2)) + 1 : 1;
 
             // Format số thành chuỗi với độ dài 6 và thêm vào order_id
-            $order->id = 'OR' . str_pad($orderNumber, 6, '0', STR_PAD_LEFT);
+            $order->order_id = 'OR' . str_pad($orderNumber, 6, '0', STR_PAD_LEFT);
         });
     }
 }

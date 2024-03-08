@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Roles\CreateRolesRequest;
-use App\Models\Permission;
-use App\Models\Role;
-use Illuminate\Http\Request;
+use App\Http\Requests\Roles\CreateRoleRequest;
 
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class RoleController extends Controller
 {
     /**
@@ -15,10 +15,14 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(10);
-        return view('admin.roles.index', compact('roles'));
+        $roles = Role::paginate(1);
+        return view('admin.roles.index',compact('roles'));
     }
 
+    public function fetchRoles(){
+        $roles = Role::paginate(10);
+        return response()->json(['roles' => $roles]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -31,7 +35,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateRolesRequest $request)
+    public function store(CreateRoleRequest $request)
     {
         try {
             $createData = $request->all();

@@ -11,8 +11,8 @@
             @csrf
             <div class="form-group">
                 <label >Full Name</label>
-                <input name="fullname" value="{{old('fullname')}}" type="text" class="form-control" placeholder="Name">
-                @error('fullname')
+                <input name="name" value="{{old('name')}}" type="text" class="form-control" placeholder="Name">
+                @error('name')
                 <span class="text-danger"> {{ $message }}</span>
                 @enderror
 
@@ -72,7 +72,7 @@
                         @foreach($role as $item)
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input name="role_ids[]" type="checkbox" class="form-check-input" value="{{$item->id}}">
+                                    <input name="role_ids[]" type="checkbox" class="form-check-input" value="{{$item->name}}">
                                     {{$item->display_name}}
                                 </label>
                             </div>

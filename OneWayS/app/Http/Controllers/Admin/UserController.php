@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\CreateUserRequest;
-use App\Models\Role;
+use App\Models\Product;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
 
@@ -25,9 +26,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = $this->user->getRoleNames();
+        
+        return view('admin.users.index');
+    }
+
+    public function fetchData(){
         $users = $this->userService->getWithPaginate();
-        return view('admin.users.index', compact('users'));
+        return response()->json([
+            'users' => $users
+        ]);
     }
 
     /**
@@ -45,15 +52,12 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-       
-        if($this->userService->store($request)){
+
+        if ($this->userService->store($request)) {
             return redirect()->route('users.index')->with(['message-success' => 'Thêm dữ liệu thành công']);
-        }else{
+        } else {
             return back()->withInput();
         }
-
-            
-        
     }
 
     /**
@@ -69,7 +73,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+      
+        $user = User::findOrFail($id)->load('roles');
+        $roles = Role::all()->groupBy('group');;
+        return view('admin.users.edit', compact('user', 'roles'));
+
     }
 
     /**
@@ -77,7 +85,11 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if ($this->userService->update($request,$id)) {
+            return redirect()->route('users.index')->with(['message-success' => 'Cập nhật dữ liệu thành công']);
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**
@@ -87,4 +99,28 @@ class UserController extends Controller
     {
         //
     }
+
+    public function searchUsers(Request $request)
+    {
+
+        $query = $request['query'];
+  
+        // Thực hiện truy vấn tìm kiếm người dùng theo $query
+
+        $users = User::where('email', 'like', '%' . $query . '%')->get();
+
+        return response()->json($users);
+    }
+
+    //Khóa người dùng
+    public function lockOnUser(Request $request){
+        $id = $request['id'];
+        $status = $request['status'];
+
+        $this->userService->lockOnUser($id,$status);
+      return redirect()->route('users.index');
+        
+    }
+
+
 }

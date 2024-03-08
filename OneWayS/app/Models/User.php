@@ -3,8 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Traits\HandleImagesTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,16 +12,17 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HandleImagesTrait, HasRoles;
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
 
-    protected $guard_name = 'api';
+    protected $guard_name = "web";
+
     protected $fillable = [
-        'fullname',
+        'name',
         'birthOfDay',
         'gender',
         'email',
@@ -36,7 +35,6 @@ class User extends Authenticatable
         'createdat'
 
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -56,21 +54,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    //Gán vai trò cho người dùng
-    public function assignRoles(array | int $roles): array
-    {
-        return $this->roles()->sync($roles);
-    }
-
-
-    public function guardName()
-    {
-        return 'api';
-    }
 }

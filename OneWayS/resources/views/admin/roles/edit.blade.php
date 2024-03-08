@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="card" style="padding: 20px;">
-    <h1>Cập nhật vai trò người dùng {{$role->name}}</h1>
+    <h1>Cập nhật vai trò '{{$role->name}}'</h1>
 
     <div>
 
@@ -70,5 +70,13 @@
 
     </div>
 </div>
+
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        hiddenLoadingPage();
+    });
+</script>
 
 @endsection

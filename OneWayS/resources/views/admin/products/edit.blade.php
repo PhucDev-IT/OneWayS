@@ -167,6 +167,11 @@
 @section('script')
 <script src="{{ asset('admin/assets/js/product/product.js') }}"></script>
 <script>
+    $(document).ready(function() {
+        hiddenLoadingPage();
+    });
+</script>
+<script>
     let classifies = @json($product -> details);
     let dataImages = @json($product -> images);
 

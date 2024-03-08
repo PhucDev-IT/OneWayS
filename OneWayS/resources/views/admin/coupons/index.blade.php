@@ -44,7 +44,7 @@
                     @foreach($vouchers as $item)
                     <tr>
                         <td>
-                        {{ $item->id }}
+                        {{ $item->voucher_id }}
                         </td>
                         <td>
                             {{$item->name}}
@@ -58,8 +58,8 @@
                         <td>{{$item->start_time}}</td>
                         <td>{{$item->end_time}}</td>
                         <td>
-                        <a href="{{route('vouchers.edit',$item->id)}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        <a href="{{route('vouchers.edit',$item->voucher_id)}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                         </td>
                       
                     </tr>
@@ -68,8 +68,17 @@
                  
                 </tbody>
             </table>
+            {{$vouchers->links()}}
         </div>
+
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    hiddenLoadingPage();
+
+</script>
 
 @endsection

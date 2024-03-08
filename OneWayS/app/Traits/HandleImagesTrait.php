@@ -48,11 +48,8 @@ trait HandleImagesTrait
 
         $originalFileName = $file->getClientOriginalName();
         
-        // Chuyển đổi tên file sang ASCII
-        $convertedFileName = iconv('UTF-8', 'ASCII//TRANSLIT', $originalFileName);
-        
         // Kết hợp thời gian hiện tại và tên file đã chuyển đổi
-        $uniqueFileName = time() . '_' . $convertedFileName;
+        $uniqueFileName = time() . '_' . $originalFileName;
         
         // Loại bỏ các ký tự không mong muốn
         $uniqueFileName = preg_replace('/[^a-zA-Z0-9_.]/', '', $uniqueFileName);

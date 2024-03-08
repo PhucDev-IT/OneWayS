@@ -51,6 +51,23 @@
                 @enderror()
             </div>
 
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Hãng sản xuất</label>
+                <select name="supplier_id" class="form-control" id="exampleFormControlSelect2">
+                    @foreach($suppliers as $supplier)
+                    <option value="{{$supplier->id}}" >{{$supplier->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Thời gian bảo hành (tháng)</label>
+                <input name="guarantee_time" type="number" value="{{old('guarantee_time')?:1}}" class="form-control" min=1 placeholder="12">
+                @error('guarantee_time')
+                <span class="text-danger">{{$message}}</span>
+                @enderror()
+            </div>
+
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -77,9 +94,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-primary text-white">$</span>
                             </div>
-                            <input name="sale" value="{{old('sale')}}" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="1000">
+                            <input name="sale" value="{{old('sale')}}" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="1 -> 100%">
                             <div class="input-group-append">
-                                <span class="input-group-text">vnđ</span>
+                                <span class="input-group-text">%</span>
                             </div>
                         </div>
                         @error('sale')
@@ -101,7 +118,7 @@
 
                     <div class="col">
                         <div class="form-group">
-                            <input id="input-quantity" type="number" class="form-control " min="1" placeholder="Số lượng">
+                            <input id="input-quantity" type="number" class="form-control" min="1" placeholder="Số lượng">
                         </div>
                     </div>
                     <div class="col">
@@ -154,6 +171,11 @@
 @section('script')
 <script src="{{ asset('admin/assets/js/product/product.js') }}"></script>
 <script>
+    $(document).ready(function() {
+        hiddenLoadingPage();
+    });
+
+
     let classifies = [];
 
     renderClassifies(classifies);

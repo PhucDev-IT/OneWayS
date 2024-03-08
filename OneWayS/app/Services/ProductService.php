@@ -13,7 +13,7 @@ class ProductService
 {
 
     use HandleImagesTrait;
-
+    private $limit = 10;
 
 
     /**
@@ -49,26 +49,26 @@ class ProductService
         try {
             $product = $this->findOrFail($id)->load(['images']);
             $dataUpdate = $request->all();
-    
+
             // Xử lý ảnh cũ và ảnh mới
             $oldImages = $request->data_images ? json_decode($request->data_images) : [];
             $classifies = $request->classifies ? json_decode($request->classifies) : [];
-    
+
             foreach ($oldImages as $image) {
                 if (!$product->images->contains('id', $image)) {
                     $this->deleteImage($image->url);
                 }
             }
-    
+
             $dataUpdate['img_preview'] =  $this->updateImage($request, 'img_preview', $product->img_preview);
             $dataUpdate['images'] =  $this->saveImages($request, 'images');
-    
+
             $product->update($dataUpdate);
             $product->images()->delete();
             $product->syncImages($oldImages);
             $product->details()->delete();
             $this->updateDetail($product, $dataUpdate, $classifies);
-    
+
             return true;
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
@@ -77,7 +77,7 @@ class ProductService
             return false;
         }
     }
-    
+
 
     /**
      * @param $id
@@ -93,22 +93,13 @@ class ProductService
         return $product;
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
     public function findOrFail($id): mixed
     {
         $product = Product::findOrFail($id);
         return $product;
     }
 
-    /**
-     * @param mixed $product
-     * @param mixed $dataCreate
-     * @param mixed $sizes
-     * @return null|Product
-     */
+
     public function updateDetail(Product $product, mixed $dataCreate, $classifies): Product|null
     {
 
@@ -125,4 +116,11 @@ class ProductService
 
         return $product;
     }
+
+
+    public function searchProducts($name)
+    {
+        return Product::where('name', 'like', '%' . $name . '%')->paginate(10);
+    }
+    
 }

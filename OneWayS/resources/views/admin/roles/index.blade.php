@@ -41,18 +41,24 @@
 </div>
 
 <script>
-      // Hiển thị modal khi người dùng nhấn nút xóa
-      function showModelConfirm(value) {
+     $(document).ready(function() {
+        hiddenLoadingPage();
+    });
+    
+    // Hiển thị modal khi người dùng nhấn nút xóa
+    function showModelConfirm(value) {
         var id = $(value).data('id');
         $('#confirmDeleteModal').data('itemid', id).modal('show');
     }
 
-     // Gọi hành động xóa khi xác nhận
-     $('#confirmDeleteButton').click(function() {
-    
+    // Gọi hành động xóa khi xác nhận
+    $('#confirmDeleteButton').click(function() {
+
         var itemId = $('#confirmDeleteModal').data('itemid');
-        $('#form-delete'+itemId).submit();
+        $('#form-delete' + itemId).submit();
         $('#confirmDeleteModal').modal('hide');
     });
+   
+    
 </script>
 @endsection

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Quản lý danh mục')
 @section('content')
 
 <div class="card">
@@ -23,20 +23,52 @@
                         <th>
                             Action
                         </th>
-                    
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($categories as $item)
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('script')
+<script src="{{ asset('admin/assets/js/public-js.js') }}"></script>
+<script>
+    fetchData();
+
+    function fetchData() {
+        $('tbody').empty();
+        $.ajax({
+            url: '/api/fetch-categories',
+            method: 'GET',
+            dataType: "json",
+            success: function(response) {
+                hiddenLoadingPage();
+                displayDataToView(response.categories.data);
+                customPaginate(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function displayDataToView(categories) {
+        $.each(categories, function(key, category) {
+            $('tbody').append(`
                     <tr>
                         <td>
-                            {{$item->id}}
+                           ${category.id}
                         </td>
                         <td>
-                            {{$item->name}}
+                            ${category.name}
                         </td>
                         <td>
-                           {{$item->products_count}}
+                            ${category.products_count}
                         </td>
                         <td>
                         <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
@@ -44,12 +76,27 @@
                         </td>
                       
                     </tr>
-                    @endforeach
-                   
-                 
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                `);
+        });
+    }
+
+    function getDataByPage(url,active) {
+        console.log(url)
+        if(url==='null' || active === true) return
+
+        showLoadingPage();
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: "json",
+            success: function(response) {
+                hiddenLoadingPage();
+                displayDataToView(response.categories.data);
+                customPaginate(response);
+            }
+        });
+    }
+</script>
+
 @endsection

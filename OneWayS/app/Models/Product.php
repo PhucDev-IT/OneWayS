@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\ProductService;
 use App\Traits\HandleImagesTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +14,7 @@ class Product extends Model
         'name',
         'description',
         'price',
+       'guarantee_time',
         'sale',
         'rate',
         'createdat',
@@ -58,6 +58,4 @@ class Product extends Model
         //Quan hệ 1-n
         return $this->hasMany(ProductDetails::class);
     }
-
-   
 }

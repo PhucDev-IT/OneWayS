@@ -2,7 +2,7 @@
 
 @section('title', 'Users')
 @section('content')
-
+@include('admin/partials/modal_remove')
 <style>
     body {
         color: #566787;
@@ -233,39 +233,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td><a href="#"><img src="{{ $user->avatar ? asset('uploads/'.$user->avatar) : asset('uploads/default/avart_default.jpg') }}" class="avatar" alt="Avatar">{{$user->fullname}}</a></td>
-                        <td>{{$user->createdat}}</td>
-                        <td>
-
-                            @if(!empty($user->getRoleNames()))
-                            @foreach($user->getRoleNames() as $v)
-                            <label class="badge badge-success">{{ $v }}</label>
-                            @endforeach
-                            @endif
-                        </td>
-                        <td>
-                            @if($user->status == "0")
-                            <span class="status text-success">&bull;</span> ON
-                            @else
-                            <span class="status text-danger">&bull;</span>LOCK
-                            @endif
-
-                        <td>
-                            <a href="#" class="edit" title="Sửa" data-toggle="tooltip" style="color: #ff0000;"><i class="material-icons" style="color: #f0da35;">&#xE254;</i></a>
-
-                            @if($user->status == "0")
-                            <a href="#" class="lock" title="Khóa" data-toggle="tooltip" style="color: #e64e30;"><i class="material-icons">&#xe897;</i></a>
-
-                            @else
-                            <a href="#" class="lock" title="Mở" data-toggle="tooltip" style="color: #12e34a;"><i class="material-icons">&#Xf656;</i></a>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-
                 </tbody>
             </table>
 
@@ -273,5 +240,97 @@
     </div>
 </div>
 
+
+@endsection
+
+@section('script')
+
+<script>
+    // Hiển thị modal khi người dùng nhấn nút xóa
+    function showModelConfirm(value) {
+        var id = $(value).data('id');
+        var status = $(value).data('status');
+
+        if (status === 0) {
+            document.getElementById('modal-body__text').innerHTML = 'Bạn có chắc muốn mở khóa tài khoản này?';
+        } else {
+            document.getElementById('modal-body__text').innerHTML = 'Bạn có chắc muốn khóa tài khoản này?';
+        }
+        $('#confirmDeleteModal').data('status', status);
+        $('#confirmDeleteModal').data('itemid', id).modal('show');
+    }
+
+
+    // Gọi hành động xóa khi xác nhận
+    $('#confirmDeleteButton').click(function() {
+        var itemId = $('#confirmDeleteModal').data('itemid');
+        var status = $('#confirmDeleteModal').data('status');
+
+        $.ajax({
+            url: '/api/lock-on-user',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: itemId,
+                status: status
+            },
+            success: function(response) {
+                fetchData();
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+        $('#confirmDeleteModal').modal('hide');
+    });
+
+
+    //Dùng API Call data from serve after render to view
+    fetchData();
+
+    function fetchData() {
+        showLoadingPage();
+
+        $.ajax({
+            type: 'GET',
+            url: "/api/fetch-user",
+            dataType: "json",
+            success: function(response) {
+                hiddenLoadingPage();
+                $('tbody').empty();
+                let i = 0;
+                $.each(response.users.data, function(key, user) {
+                 
+                    var avatarUrl = "{{ asset('storage/uploads/') }}" + '/' + user.avatar;
+
+                    $('tbody').append(`
+                    <tr>
+                    <td>${++i}</td>
+                    <td><a href="#"><img src="${avatarUrl}" class="avatar" alt="Avatar">${user.name}</a></td>
+                    <td>${user.createdat}</td>
+                    <td>
+                        ${
+                            user.roles ? user.roles.map(function(role) {
+                                return `<label class="badge badge-success">${role.display_name}</label>`;
+                            }).join('') : '' // Nếu user.roles không tồn tại, trả về chuỗi rỗng
+                        }
+                    </td>
+
+                    <td>
+                        ${user.status == '0' ? '<span class="status text-success">&bull;</span> Mở' : '<span class="status text-danger">&bull;</span> Khóa'}
+                    </td>
+                    <td>
+                        <a href="/users/${user.id}/edit" class="edit" title="Sửa" data-toggle="tooltip" style="color: #ff0000;"><i class="material-icons" style="color: #f0da35;">&#xE254;</i></a>
+                        ${user.status == '0' ? '<a onclick="showModelConfirm(this)" data-id="' + user.id + '" data-status="1" class="lock" title="Khóa" data-toggle="tooltip" style="color: #e64e30;"><i class="material-icons">&#xe897;</i></a>' : '<a onclick="showModelConfirm(this)" data-id="' + user.id + '" data-status="0" class="lock" title="Mở" data-toggle="tooltip" style="color: #12e34a;"><i class="material-icons">&#xe898;</i></a>'}
+                    </td>
+                    </tr>
+            `);
+                });
+            }
+        });
+
+    }
+</script>
 
 @endsection

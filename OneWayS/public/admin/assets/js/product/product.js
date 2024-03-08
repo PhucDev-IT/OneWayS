@@ -135,3 +135,4 @@ function readURL(input) {
 $("#image-input").change(function () {
     readURL(this);
 });
+

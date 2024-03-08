@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Sửa thông tin mã giảm giá')
+@section('title', 'Sửa thông tin voucher')
 @section('content')
 
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Sửa thông tin voucher '{{$voucher->id}}'</h4>
+        <h4 class="card-title">Sửa thông tin voucher '{{$voucher->voucher_id}}'</h4>
 
-        <form class="forms-sample" action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+        <form class="forms-sample" action="{{route('vouchers.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+
             <div class="form-group">
                 <label>Tiêu đề</label>
-                <input name="name" type="text" value="{{old('name') ?? $voucher->name }}" class="form-control" placeholder="Tặng bạn voucher giảm 20.000đ">
+                <input name="name" type="text" value="{{old('name') ?? $voucher->name}}" class="form-control" placeholder="Tặng bạn voucher giảm 20.000đ">
                 @error('name')
                 <span class="text-danger">{{$message}}</span>
                 @enderror()
@@ -26,7 +26,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-primary text-white">$</span>
                             </div>
-                            <input name="discount" value="{{old('discount') ?? $voucher->discount }}" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="100000">
+                            <input id="input_discount" min='1' name="discount" value="{{old('discount') ?? $voucher->discount}}" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="100000">
                             <div class="input-group-append">
                                 <span class="input-group-text">vnđ</span>
                             </div>
@@ -41,22 +41,23 @@
                     <div class="form-group">
                         <label class="">Loại giảm giá</label>
                         <select name="type" class="form-control">
-                        <option selected>Giảm giá theo tiền</option>
-                            <option>Miễn phí vận chuyển</option>
-                            <option>Giảm giá theo phần trăm %</option>
+                            <option value="DiscountMoney" {{ $voucher->type == "DiscountMoney" ? 'selected' : '' }}>Giảm giá theo tiền</option>
+                            <option value="FreeShip" {{ $voucher->type == "FreeShip" ? 'selected' : '' }}>Miễn phí vận chuyển</option>
+                            <option value="DiscountPercent" {{ $voucher->type == "DiscountPercent" ? 'selected' : '' }}>Giảm giá theo phần trăm %</option>
                         </select>
                         @error('type')
                         <span class="text-danger">{{$message}}</span>
                         @enderror()
                     </div>
                 </div>
+
             </div>
 
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label>Ngày bắt đầu</label>
-                        <input type="datetime-local" name="start_time" value="{{old('start_time') ?? $voucher->start_time }}" class="form-control" placeholder="dd/MM/yyyy">
+                        <input type="datetime-local" value="{{old('start_time') ?? $voucher->start_time}}" onchange="onSubmit()" name="start_time" value="" class="form-control" placeholder="dd/MM/yyyy">
                         @error('start_time')
                         <span class="text-danger">{{$message}}</span>
                         @enderror()
@@ -66,7 +67,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Ngày kết thúc</label>
-                        <input type="datetime-local" name="end_time" value="{{old('end_time') ?? $voucher->end_time }}" class="form-control" placeholder="dd/MM/yyyy">
+                        <input type="datetime-local" value="{{old('end_time') ?? $voucher->end_time}}" onchange="onSubmit()" name="end_time" value="" class="form-control" placeholder="dd/MM/yyyy">
                         @error('end_time')
                         <span class="text-danger">{{$message}}</span>
                         @enderror()
@@ -76,18 +77,30 @@
 
 
             <div class="form-group">
-            <label>Số lượng</label>
-                <input id="quantity" type="number" class="form-control " min="1" placeholder="Số lượng">
+                <label>Số lượng</label>
+                <input id="quantity" value="{{old('quantity') ?? $voucher->quantity}}" name="quantity" type="number" class="form-control " min="1" placeholder="Số lượng">
+                @error('quantity')
+                <span class="text-danger">{{$message}}</span>
+                @enderror()
             </div>
 
             <div class="form-group">
-            <label>Tặng người dùng (bỏ trống nếu không tặng riêng)</label>
-                <input  type="email" class="form-control " placeholder="abc@gmail.com">
+                <label>Tặng người dùng (bỏ trống nếu không tặng riêng)</label>
+                <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                    </div>
+                    <input id="user_id" value="{{ optional($voucher->user)->id }}" type="hidden" name="user_id" />
+                    <input id="input-email" value="{{ optional($voucher->user)->email }}" name="email_user" type="email" class="form-control" placeholder="abc@gmail.com">
+                </div>
+                <!-- Container để hiển thị gợi ý -->
+                <div id="userSuggestions"></div>
             </div>
+
 
             <div class="form-group">
                 <label for="exampleTextarea1">Mô tả</label>
-                <textarea class="form-control" name="description" rows="6">{{ old('description') }}</textarea>
+                <textarea class="form-control" name="description" rows="6">{{ old('description') ?? $voucher->description }}</textarea>
                 @error('description')
                 <span class="text-danger">{{$message}}</span>
                 @enderror()
@@ -98,4 +111,90 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        // Xử lý sự kiện khi người dùng nhập vào input
+        $('#input-email').keyup(function() {
+            // Lấy giá trị người dùng nhập
+            var query = $(this).val();
+
+            $("#userSuggestions").empty();
+            // Gọi Ajax để tìm kiếm người dùng
+            $.ajax({
+                url: '/search-users',
+                method: 'GET',
+                data: {
+                    query: query
+                },
+                success: function(response) {
+                    displaySuggestions(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+    // Hàm hiển thị gợi ý người dùng
+    function displaySuggestions(users) {
+        $("#userSuggestions").empty();
+
+        if (users.length > 0) {
+
+            let list = '<ul class="dropdown-menu" style="display:block; position:relative;width:100%" >';
+            users.forEach(function(user) {
+                list += `<li data-id="${user.id}" data-email = "${user.email}" ><span class="dropdown-item"> ${user.email} - ${user.fullname} </span> </li>`;
+            });
+            list += '</ul>';
+
+            $("#userSuggestions").append(list);
+
+        }
+    }
+
+    $(document).on('click', 'li', function() {
+        let userId = $(this).data('id');
+        let userEmail = $(this).data('email');
+        $('#user_id').val(userId);
+        $('#input-email').val(userEmail);
+        $('#userSuggestions').fadeOut();
+    });
+
+    $('select[name="type"]').on('change', function() {
+        var selectedValue = $(this).val();
+        document.getElementById('input_discount').removeAttribute('readonly');
+
+        // Thực hiện xử lý tùy thuộc vào giá trị được chọn
+        switch (selectedValue) {
+            case 'DiscountMoney':
+
+                break;
+            case 'FreeShip':
+                $('#input_discount').val(1);
+                document.getElementById('input_discount').setAttribute('readonly', 'true');
+                break;
+            case 'DiscountPercent':
+                console.log('phần trăm');
+                break;
+            default:
+                // Xử lý mặc định
+                break;
+        }
+    });
+
+    function onSubmit() {
+
+        var start = new Date($('input[name="start_time"]').val()); // or Date.parse(...)
+        var end = new Date($('input[name="end_time"]').val()); // or Date.now()
+        if (start.getTime() > end.getTime()) {
+            alert('Thời gian kết thúc phải lớn hơn thời gian hiện tại')
+            $('input[name="end_time"]').val(null);
+        }
+    }
+</script>
+
 @endsection

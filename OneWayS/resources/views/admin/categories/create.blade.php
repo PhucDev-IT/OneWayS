@@ -9,7 +9,7 @@
         <p class="card-description">
             Phân loại danh mục để dễ dàng quản lý sản phẩm của bạn
         </p>
-        <form action="{{route('categories.store')}}" method="post" class="forms-sample">
+        <form action="/api/create-category" method="post" class="forms-sample">
             @csrf
             <div class="form-group">
                 <label>Tên danh mục</label>
@@ -26,3 +26,13 @@
 </div>
 
 @endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        hiddenLoadingPage();
+    });
+</script>
+
+@endsection
+

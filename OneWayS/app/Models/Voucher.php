@@ -11,7 +11,7 @@ class Voucher extends Model
 
 
     protected $fillable = [
-        'id',
+        'voucher_id',
         'name',
         'description',
         'discount',
@@ -29,7 +29,7 @@ class Voucher extends Model
 
         // Sự kiện trước khi tạo mới order
         static::creating(function ($order) {
-            $order->id = self::generateRandomString();
+            $order->voucher_id = self::generateRandomString();
         });
     }
 

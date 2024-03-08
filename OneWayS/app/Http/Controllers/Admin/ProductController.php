@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\CreateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Supplier;
 use App\Services\ProductService;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -24,13 +25,24 @@ class ProductController extends Controller
 
     public function index()
     {
-
-        $products = $this->productService->getWithPaginate();
         $categories = Category::all();
-
-
-        return view('admin.products.index', compact('products', 'categories'));
+        return view('admin.products.index',compact('categories'));
     }
+
+    public function fetchProducts(Request $request)  {
+        $page = $request['page']?:1;
+    
+        // Xử lý logic lấy danh sách sản phẩm ở trang $page từ database hoặc bất kỳ nguồn dữ liệu nào khác
+        $products = Product::paginate(5, ['*'], 'page', $page);
+    
+        return response()->json([
+            'products' => $products
+        
+        ]);
+      
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -38,7 +50,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        $suppliers = Supplier::all();
+        return view('admin.products.create', compact('categories','suppliers'));
     }
 
     /**
@@ -88,28 +101,34 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         // Nhận dữ liệu từ form tìm kiếm
-        $searchQuery = $request->input('search_query');
-        $categoryId = $request->input('category');
+        $searchQuery = $request->input('name')??'';
+        $categoryId = $request->input('category')??0;
 
         $products = [];
-   
 
 
-        if($categoryId == '0'){
-            $products = Product::search('name', 'like', '%' . $searchQuery . '%');
+
+        if($categoryId !== '0'){
+            $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->where('isSelling','1')->whereHas('categories', function ($query) use ($categoryId) {
+                $query->where('id', $categoryId);
+            })->paginate(8);
 
         }else{
-            $product = Product::whereHas('categories', function ($query) use ($categoryId) {
-                $query->where('id', $categoryId);
-            })->get();
+  
+            $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->paginate(8);
         }
-
-        dd($products);
+        
         $categories = Category::all();
-
-
-        return view('admin.products.index', compact('products', 'categories'));
+        return response()->json([
+            'products' => $products
+        
+        ]);
+       // return view('admin.products.index', compact('products', 'categories'));
     }
+
+
+    
+
     /**
      * Remove the specified resource from storage.
      */

@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
-use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class RoleDatabaseSeeder extends Seeder
 {
     /**
@@ -14,8 +13,6 @@ class RoleDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      
-
         $permissions = [
 
             ['name'=>'create-user','display_name'=>'Thêm người dùng','group'=>'User'],
@@ -69,4 +66,5 @@ class RoleDatabaseSeeder extends Seeder
         }
 
     }
+    
 }
