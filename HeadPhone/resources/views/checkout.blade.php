@@ -207,38 +207,42 @@
                     </section>
                 </div>
 
-
                 <!-- THÔNG TIN NHẬN HÀNG -->
                 <div>
                     <h5 class="font-size-16 mb-1">Thông tin vận chuyển</h5>
                     <p class="text-muted text-truncate mb-4">Thông tin nhận hàng của bạn</p>
                     <div class="mb-3">
-                        @foreach($addresses as $address)
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-6">
-                                <div data-bs-toggle="collapse">
-                                    <label class="card-radio-label mb-0">
-                                        <input type="radio" name="address" id="info-address1" class="card-radio-input" checked>
-                                        <div class="card-radio text-truncate p-3" style="width: max-content;">
-                                            <!-- <span class="fs-14 mb-4 d-block">Mặc định</span> -->
-                                            <span style="display: inline;" class="fs-14 mb-2 d-block">{{$address->name}} | </span>
-                                            <span style="display: inline;">{{$address->phone}}</span>
-                                            <span style="font-weight: 200; display: block;" class="text-muted fw-normal text-wrap mb-1 d-block">{{$address->ward_name}}, {{$address->district_name}}, {{$address->province_name}}</span>
-                                            <span style="font-weight: 200;" class="text-muted fw-normal d-block">
-                                                ( {{$address->details}} )
-                                            </span>
+                        @if(count($addresses) <= 0) <span style="display: inline;">Bạn chưa thêm địa chỉ nhận hàng!</span>
+                            <a href="{{route('profile.fetchAddress')}}">Nhấn để thêm ngay</a>
+                            @else
+                            @foreach($addresses as $address)
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-6">
+                                    <div data-bs-toggle="collapse">
+                                        <label class="card-radio-label mb-0">
+                                            <input type="radio" name="address" id="info-address-{{$address->id}}" class="card-radio-input" data-district="{{$address->district_id}}" value="{{$address->id}}">
+                                            <div class="card-radio text-truncate p-3" style="width: max-content;">
+                                                <!-- <span class="fs-14 mb-4 d-block">Mặc định</span> -->
+                                                <span style="display: inline;" class="fs-14 mb-2 d-block">{{$address->name}} | </span>
+                                                <span style="display: inline;">{{$address->phone}}</span>
+                                                <span style="font-weight: 200; display: block;" class="text-muted fw-normal text-wrap mb-1 d-block">{{$address->ward_name}}, {{$address->district_name}}, {{$address->province_name}}</span>
+                                                <span style="font-weight: 200;" class="text-muted fw-normal d-block">
+                                                    ( {{$address->details}} )
+                                                </span>
 
+                                            </div>
+                                        </label>
+                                        <div class="edit-btn bg-light  rounded">
+                                            <a href="/Profile/Index" data-bs-toggle="tooltip" data-placement="top" title data-bs-original-title="Edit">
+                                                <i class="bx bx-pencil font-size-16"></i>
+                                            </a>
                                         </div>
-                                    </label>
-                                    <div class="edit-btn bg-light  rounded">
-                                        <a href="/Profile/Index" data-bs-toggle="tooltip" data-placement="top" title data-bs-original-title="Edit">
-                                            <i class="bx bx-pencil font-size-16"></i>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+
+                            @endif
                     </div>
                 </div>
             </div>
@@ -270,7 +274,7 @@
                     </div>
                     <div class="order-col">
                         <div>Shiping</div>
-                        <div><strong id="fee-ship">FREE</strong></div>
+                        <div><strong id="fee-ship">Chưa chọn địa chỉ</strong></div>
                     </div>
                     <div class="order-col">
                         <div>Voucher</div>
@@ -297,7 +301,7 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div data-bs-toggle="collapse">
                                     <label class="card-radio-label">
-                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+                                        <input type="radio" name="pay-method" value="MOMO" id="pay-methodoption1" class="card-radio-input">
                                         <div class="card-radio py-3 text-center text-truncate">
                                             <img width="35" style="display: block; margin: 0 auto;" src="https://img.mservice.io/momo-payment/icon/images/logo512.png" class="d-block h2 mb-3" alt="">
                                             <span>Momo</span>
@@ -308,10 +312,10 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div>
                                     <label class="card-radio-label">
-                                        <input type="radio" name="pay-method" id="pay-methodoption2" class="card-radio-input">
+                                        <input type="radio" name="pay-method" value="VNPAY" id="pay-methodoption2" class="card-radio-input">
                                         <span class="card-radio py-3 text-center text-truncate">
                                             <img width="35" style="display: block; margin: 0 auto;" src="https://www.nexusinw.com/wp-content/uploads/2017/08/Paypal-icon.png" alt="">
-                                            Paypal
+                                            VnPay
                                         </span>
                                     </label>
                                 </div>
@@ -319,7 +323,7 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div>
                                     <label class="card-radio-label">
-                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked>
+                                        <input type="radio" name="pay-method" value="CASH" id="pay-methodoption3" class="card-radio-input" checked>
                                         <span class="card-radio py-3 text-center text-truncate">
                                             <img width="35" style="display: block; margin: 0 auto;" src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/hand_money.png" alt="">
                                             <span>Khi nhận hàng</span>
@@ -337,7 +341,7 @@
                         I've read and accept the <a href="#">terms & conditions</a>
                     </label>
                 </div>
-                <a href="{{route('checkout.payment')}}" class="primary-btn order-submit">Place order</a>
+                <a onclick="payment()" class="primary-btn order-submit">Place order</a>
             </div>
             <!-- /Order Details -->
         </div>
@@ -368,28 +372,32 @@
 @section('script')
 <script src="{{ asset('admin/assets/js/public-js.js') }}"></script>
 <script>
-
+    let address_id = null;
     let feeShip = 0;
+    let idCouponSelected = null;
+    let totalMoney = parseFloat($('#total-cache').val());
 
-    transportUnit();
 
-    function transportUnit() {
+    function transportUnit(district_id) {
         $.ajax({
             url: "{{ route('checkout.service') }}",
             type: 'GET',
+            data: {
+                to_district: district_id
+            },
             dataType: 'json',
             success: function(response) {
                 console.log(response);
                 $.each(response.data, function(key, value) {
                     if (key === 0) { // Chỉ thêm thuộc tính checked cho phần tử đầu tiên
                         $('section').append(`
-                            <input type="radio" onclick="selectService(${value.service_id})" id="option_${value.service_id}" name="options" value="${value.service_id}" checked>
+                            <input type="radio" onclick="calculateFee(${value.service_id})" id="option_${value.service_id}" name="options" value="${value.service_id}" checked>
                             <label for="option_${value.service_id}">${value.short_name}</label><br>
                         `);
-                        selectService(value.service_id)
+                        calculateFee(value.service_id)
                     } else {
                         $('section').append(`
-                        <input type="radio" onclick="selectService(${value.service_id})" id="option_${value.service_id}" name="options" value="${value.service_id}">
+                        <input type="radio" onclick="calculateFee(${value.service_id})" id="option_${value.service_id}" name="options" value="${value.service_id}">
                             <label for="option_${value.service_id}">${value.short_name}</label><br>
                         `);
                     }
@@ -403,8 +411,8 @@
         });
     }
 
-    function selectService(service_id) {
-        console.log(service_id);
+    function calculateFee(service_id) {
+
         //   calculate();
         $.ajax({
             type: 'GET',
@@ -414,10 +422,11 @@
                 service_id: service_id
             },
             success: function(response) {
-                console.log(response);
+
                 var total = parseFloat($('#total-cache').val());
                 feeShip = response.data.total;
-                $('#total-money').html(formatCurrency(response.data.total + total));
+                totalMoney = response.data.total + total;
+                $('#total-money').html(formatCurrency(totalMoney));
                 $('#fee-ship').html(formatCurrency(response.data.total));
 
             }
@@ -425,13 +434,33 @@
     }
 
     function payment() {
+        if (address_id == null) {
+            alert('Vui lòng chọn địa chỉ nhận hàng');
+            return;
+        }
+
+        var order = {
+            method_payment: methodPayment(),
+            total: parseFloat($('#total-cache').val()),
+            feeShip: feeShip,
+            totalmoney: totalMoney,
+            voucher_id: idCouponSelected,
+            address_id: address_id,
+
+        };
+        var requestData = {
+            order: order,
+            _token: '{{ csrf_token() }}'
+        };
+
         $.ajax({
             type: 'POST',
             url: "{{ route('checkout.payment') }}",
-            dataType: 'json',
+            data: JSON.stringify(requestData),
+            contentType: 'application/json; charset=utf-8',
             success: function(response) {
                 console.log(response);
-
+                window.location.href = response.payUrl;
             },
             error: function(xhr, status, error) {
                 console.error(error);
@@ -470,12 +499,15 @@
                     } else {
                         title = 'Giảm ' + formatCurrency(coupon.discount);
                     }
+                    var isChecked = idCouponSelected === coupon.voucher_id ? 'checked' : '';
+                    console.log(isChecked);
                     $('#voucher-contain').append(`
                         <div onclick="selectCoupon('${encodeURIComponent(JSON.stringify(coupon))}')"  class="row">
                             <div class="col-lg-4 col-sm-6" style="width: 100%;">
                                 <div data-bs-toggle="collapse">
                                     <label class="card-radio-label mb-0">
-                                        <input type="radio" name="address" id="info-address1" class="card-radio-input" >
+                                 
+                                        <input type="radio"  class="card-radio-input" ${isChecked}>
                                         <div class="card-radio text-truncate p-3" style="width: 100%;">
                                             <!-- <span class="fs-14 mb-4 d-block">Mặc định</span> -->
                                             <span style="color: #de23ce;" class="fs-14 mb-2 d-block">${coupon.voucher_id} | </span>
@@ -511,17 +543,51 @@
         var total = parseFloat($('#total-cache').val());
         var voucher = document.getElementById("id_coupon");
         voucher.innerText = object.voucher_id;
-        
-        if(object.type == "FreeShip"){
-            $('#coupon_discount').text = formatCurrency(feeShip);
-            feeShip = 0
-            $('#total-money').html(formatCurrency(feeShip + total));
-        }else if(object.type == "DISCOUNTPERCENT"){
-            $('#total-money').text = formatCurrency(total+(total * object.discount)/100);
-        }else{
-            $('#coupon_discount').text = formatCurrency(object.discount);
+
+        idCouponSelected = object.voucher_id;
+
+        if (object.type == "FreeShip") {
+            $('#coupon_discount').html('- ' + formatCurrency(feeShip));
+            $('#total-money').html(formatCurrency(total));
+            totalMoney = total;
+        } else if (object.type == "DISCOUNTPERCENT") {
+            totalMoney = total * ((total - object.discount) / 100);
+            $('#coupon_discount').html('- ' + formatCurrency(total * (object.discount / 100)));
+            $('#total-money').text = formatCurrency(totalMoney);
+
+        } else {
+            totalMoney = total + feeShip - object.discount;
+            $('#coupon_discount').html('- ' + formatCurrency(object.discount));
+            $('#total-money').html(formatCurrency(totalMoney));
         }
 
+    }
+
+    $('input[type="radio"][name="address"]').click(function() {
+        if ($(this).prop('checked')) {
+            var value = $(this).val();
+            var districtData = $(this).data('district');
+            address_id = value;
+            transportUnit(districtData);
+        }
+    })
+
+
+    //Lấy phương thức thanh toán đã chọn
+    function methodPayment() {
+        var radioButtons = document.querySelectorAll('input[name="pay-method"]');
+
+        for (var i = 0; i < radioButtons.length; i++) {
+            var radioButton = radioButtons[i];
+
+            if (radioButton.checked) {
+                var payMethodValue = radioButton.value;
+                return payMethodValue;
+            }
+        }
+
+        // Trả về một giá trị mặc định nếu không có phần tử nào được chọn
+        return null;
     }
 </script>
 @endsection

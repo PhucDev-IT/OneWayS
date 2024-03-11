@@ -13,6 +13,6 @@ class OrderDetails extends Model
         'order_id',
         'color',
         'quantity',
-        'price'
+        'price',
     ];
 }

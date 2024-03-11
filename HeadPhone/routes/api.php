@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\ShoppingCartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,5 +47,7 @@ Route::get('/wards/{district_id}',[ProfileController::class,'callWards']);
 
 Route::get('service',[ShoppingCartController::class,'getTransportUnits'])->name('checkout.service');
 Route::get('fee',[ShoppingCartController::class,'calculateFee'])->name('checkout.fee');
-Route::get('payment',[ShoppingCartController::class,'payment'])->name('checkout.payment');
+
 Route::get('getvouchers',[ShoppingCartController::class,'getvouchers'])->name('checkout.getvouchers');
+
+Route::post('products/filler',[StoreController::class,'filler'])->name('store.filler');

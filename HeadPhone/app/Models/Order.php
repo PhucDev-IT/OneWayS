@@ -17,9 +17,9 @@ class Order extends Model
         'voucher_id',
         'feeship',
         'totalmoney',
-        'customer_receive',
+        'address_id',
         'status',
-        'methodpayment_id'
+        'method_payment'
     ];
 
     protected static function boot()
@@ -36,5 +36,11 @@ class Order extends Model
             // Format số thành chuỗi với độ dài 6 và thêm vào order_id
             $order->order_id = 'OR' . str_pad($orderNumber, 6, '0', STR_PAD_LEFT);
         });
+    }
+
+    public function details()
+    {
+        //Quan hệ 1-n
+        return $this->hasMany(OrderDetails::class);
     }
 }

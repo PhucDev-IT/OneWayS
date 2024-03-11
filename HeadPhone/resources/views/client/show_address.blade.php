@@ -39,7 +39,7 @@
     </div>
 
     <div class="card-body">
-        @foreach($list as $address)
+        @foreach($addresses as $address)
         <div class="address-item">
             <div class="edit-icon">
                 <a href=""> <i style="font-size: 20px;" class="material-icons">&#xf88d;</i></a>

@@ -5,10 +5,12 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Client\CheckoutController;
 use App\Http\Controllers\Client\ProductsController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\ShoppingCartController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -47,12 +49,16 @@ Route::get('admin/search-users', [UserController::class, 'searchUsers']);
 
 Auth::routes();
 
-// Route::middleware(['auth'])->group(function() {
+ Route::middleware(['auth'])->group(function() {
 
 Route::post('cart/addToCart', [ShoppingCartController::class, 'addToCart'])->name('cart.addToCart');
 Route::post('/cart/updateQuantity', [ShoppingCartController::class, 'updateQuantity']);
-Route::get('/checkout{selectedCarts}', [ShoppingCartController::class, 'checkout'])->name('checkout');
-// });
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/request', [CheckoutController::class, 'requestCheckout'])->name('checkout.request');
+Route::get('completed',[CheckoutController::class,'paymentCompleted'])->name('checkout.complete');
+Route::post('payment',[CheckoutController::class,'payment'])->name('checkout.payment');
+ });
 Route::resource('shopping-cart', ShoppingCartController::class);
 
 Route::middleware(['auth'])->group(function () {
@@ -66,3 +72,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/show/product{id}', [ProductsController::class, 'show'])->name('products.details');
 
 Route::get('fetchNewProducts', [HomeController::class, 'fetchNewProducts']);
+
+
+Route::get('store',[StoreController::class,'index'])->name('store.index');

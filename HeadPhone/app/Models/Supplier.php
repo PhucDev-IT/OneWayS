@@ -12,4 +12,10 @@ class Supplier extends Model
         'name',
 
     ];
+
+    public function products()
+    {
+        //Quan hệ 1-n
+        return $this->hasMany(Product::class);
+    }
 }

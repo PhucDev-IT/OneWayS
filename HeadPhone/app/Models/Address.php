@@ -18,6 +18,7 @@ class Address extends Model
         'ward_id',
         'ward_name',
         'details',
+        'user_id',
         'status',
 
     ];

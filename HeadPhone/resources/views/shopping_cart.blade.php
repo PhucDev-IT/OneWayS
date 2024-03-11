@@ -306,10 +306,22 @@
             return;
         }
 
-        var data = JSON.stringify(selectedCarts);
-        console.log(data);
-        window.location.href = '/checkout'+data;
-
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('checkout.request') }}",
+            data:{
+                _token: '{{ csrf_token() }}',
+                carts: selectedCarts
+            },
+            dataType: 'json',
+            success:function(response){
+                 window.location.href = response;
+                
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        })
        
     }
 

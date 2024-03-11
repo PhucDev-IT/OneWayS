@@ -8,6 +8,7 @@ use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -20,8 +21,9 @@ class ProfileController extends Controller
     }
 
     public function fetchAddress(){
-        $list = Address::all();
-        return view('client.show_address',compact('list'));
+        $idU = Auth::id();
+        $addresses  = Address::where('user_id','=' ,$idU)->get();
+        return view('client.show_address',compact('addresses'));
     }
 
     public function createAddress(){
@@ -90,14 +92,17 @@ class ProfileController extends Controller
     public function storeAddress(CreateAddressRequest $request){
         $data = $request->all();
         try{
-
+            $idUser = Auth::id();
+            $data['user_id'] = $idUser;
+        
             $address = Address::create($data);
-            return view('client.show_address');
+            $this->fetchAddress();
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
             $errorMessage = $e->getMessage();
+            Log::error($e->getMessage());
             // Có thể log lỗi hoặc trả về thông báo lỗi cho người dùng
-            return redirect()->route('client.create_address')->with(['message-error' => $errorMessage]);
+            return back()->withInput();
         }
         
     }

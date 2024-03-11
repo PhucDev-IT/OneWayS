@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\PaymentMethod;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -19,13 +20,13 @@ return new class extends Migration
             $table->double('total');
             $table->float('feeship');
             $table->double('totalmoney');
-            $table->text('customer_receive');
             $table->integer('voucher_id')->references('voucher_id')->on('vouchers');
             $table->string('status');
+            $table->string('method_payment');
             $table->timestamps();
-
+            $table->foreignIdFor(Address::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(PaymentMethod::class)->constrained()->cascadeOnDelete();
+          
         });
     }
 

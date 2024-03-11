@@ -24,7 +24,7 @@
                         <span class="text-danger">{{$message}}</span>
                         @enderror()
                     </div>
-
+                    <input type="text" name="hello">
                     <div class="form-group">
                         <input id="files_multiple" type="file" name="images[]" accept="image/*" class="file-upload-default" multiple>
                         <div class="input-group col-xs-12">
