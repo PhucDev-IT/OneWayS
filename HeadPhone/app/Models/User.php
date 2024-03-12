@@ -30,7 +30,7 @@ class User extends Authenticatable
         'address_defaultid',
         'avatar',
         'password',
-        'status',
+        'is_active',
         'coin',
         'createdat'
 

@@ -16,7 +16,7 @@ class StoreController extends Controller
 
         $categories = Category::withCount('products')->get();
         $suppliers = Supplier::withCount('products')->get();
-        $products = Product::paginate(12);
+        $products = Product::paginate(6);
         return view('store', compact('categories', 'suppliers', 'products'));
     }
 

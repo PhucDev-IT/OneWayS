@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class ShoppingCartController extends Controller
 {
@@ -21,15 +22,24 @@ class ShoppingCartController extends Controller
 
     public function index()
     {
-        $id = Auth::id();
-        $cart = Cart::find($id);
 
+        Session::forget('order');
+        Session::forget('carts');
+        Session::forget('cartIds');
+
+        
+        $id = Auth::id();
+        $cart = Cart::where('user_id', $id)->first();
+        
         if ($cart) {
             $carts = $cart->load('cartDetails');
+           
+            return view('shopping_cart', compact('carts'));
         }
 
-        return view('shopping_cart', compact('carts'));
+        return view('shopping_cart'); 
     }
+    
 
     public function addToCart(Request $request)
     {

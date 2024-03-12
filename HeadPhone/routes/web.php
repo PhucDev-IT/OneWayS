@@ -52,7 +52,7 @@ Auth::routes();
  Route::middleware(['auth'])->group(function() {
 
 Route::post('cart/addToCart', [ShoppingCartController::class, 'addToCart'])->name('cart.addToCart');
-Route::post('/cart/updateQuantity', [ShoppingCartController::class, 'updateQuantity']);
+Route::post('/cart/updateQuantity', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update_quantity');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/request', [CheckoutController::class, 'requestCheckout'])->name('checkout.request');

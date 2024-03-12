@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Repositories\ProductRepository;
 use App\Traits\HandleImagesTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use phpDocumentor\Reflection\Types\This;
 
 
@@ -59,21 +60,27 @@ class ProductService
                     $this->deleteImage($image->url);
                 }
             }
-
+         
             $dataUpdate['img_preview'] =  $this->updateImage($request, 'img_preview', $product->img_preview);
+       
             $dataUpdate['images'] =  $this->saveImages($request, 'images');
+          
+            $urlArray = array_map(function ($image) {
+                return $image->url;
+            }, $oldImages);
 
             $product->update($dataUpdate);
             $product->images()->delete();
-            $product->syncImages($oldImages);
+   
+            $product->syncImages($urlArray);
+    
             $product->details()->delete();
             $this->updateDetail($product, $dataUpdate, $classifies);
 
             return true;
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
-            $errorMessage = $e->getMessage();
-            // Có thể log lỗi hoặc trả về thông báo lỗi cho người dùng
+            Log::error($e->getMessage());
             return false;
         }
     }
@@ -106,13 +113,14 @@ class ProductService
         $product->syncImages($dataCreate['images'] ?? []);
 
         $product->assignCategory($dataCreate['category_ids'] ?? []);
-        $proDetails = [];
-
-
-        foreach ($classifies as $classify) {
-            $proDetails[] = ['color' => $classify->color, 'quantity' => $classify->quantity, 'product_id' => $product->id];
+      
+        if($classifies!=null){
+            $proDetails = [];
+            foreach ($classifies as $classify) {
+                $proDetails[] = ['color' => $classify->color, 'quantity' => $classify->quantity, 'product_id' => $product->id];
+            }
+            $product->details()->insert($proDetails);
         }
-        $product->details()->insert($proDetails);
 
         return $product;
     }

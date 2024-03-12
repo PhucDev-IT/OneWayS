@@ -79,8 +79,8 @@ class ProductController extends Controller
 
         $product =  $this->productService->findOrFail($id)->load(['details', 'categories', 'images']);
         $categories = Category::get(['id', 'name']);
-
-        return view('admin.products.edit', compact('categories', 'product'));
+        $suppliers = Supplier::all();
+        return view('admin.products.edit', compact('categories', 'product','suppliers'));
     }
 
     /**

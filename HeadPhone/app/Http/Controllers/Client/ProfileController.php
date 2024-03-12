@@ -96,7 +96,7 @@ class ProfileController extends Controller
             $data['user_id'] = $idUser;
         
             $address = Address::create($data);
-            $this->fetchAddress();
+            return $this->fetchAddress();
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
             $errorMessage = $e->getMessage();

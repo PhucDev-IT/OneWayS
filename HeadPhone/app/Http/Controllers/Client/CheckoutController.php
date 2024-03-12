@@ -4,24 +4,24 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\Cart;
 use App\Models\CartDetails;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Services\OrderService;
 use App\Services\OrderSevice;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
 
-    private OrderSevice $orderService;
+  //  private OrderSevice $orderService;
 
-    public function __construct($orderService)
-    {
-        $this->orderService = $orderService;
-    }
+    
 
     public function index()
     {
@@ -173,7 +173,53 @@ class CheckoutController extends Controller
             $orderDetails[] = $o;
         }
 
-        return response()->json(['order' => $order, 'cart' => $carts, 'details' => $orderDetails]);
-        // return view('payment_success');
+      //  return response()->json($order);
+    
+        $this->addOrder($order,$orderDetails,$cart_ids);
+
+       
+         return view('payment_success');
+    }
+
+    public function addOrder($order, $orderDetails,$cart_ids) {
+        try {
+            DB::beginTransaction();
+    
+            $orderNew = Order::create($order);
+            
+            $orderDs = [];
+            foreach($orderDetails as $detail){
+                $orderDs[] = [
+                    'order_id' => $orderNew->order_id,
+                    'color' => $detail->color,
+                    'quantity' => $detail->quantity,
+                    'price' => $detail->price,
+                    'product_id' => $detail->product_id
+                ];
+            }
+            $orderNew->details()->insert($orderDs);
+            $this->updateStatusOrder($orderNew->order_id,"PENDING");
+            DB::commit();
+            Cart::whereIn('id', $cart_ids)->delete();
+
+            Session::forget('order');
+            Session::forget('carts');
+            Session::forget('cartIds');
+
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+            return false;
+        }
+    }
+
+    private function updateStatusOrder($idOrder, $status){
+        $status = [
+            "order_id" => $idOrder,
+            "status" => $status
+        ];
+
+        DB::table('order_status')->updateOrInsert($status);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -18,16 +19,25 @@ return new class extends Migration
             $table->string('order_id')->primary();
             $table->dateTime('orderdate')->default(now());
             $table->double('total');
-            $table->float('feeship');
+            $table->double('feeship');
             $table->double('totalmoney');
-            $table->integer('voucher_id')->references('voucher_id')->on('vouchers');
-            $table->string('status');
+            $table->string('voucher_id')->nullable()->index();
             $table->string('method_payment');
             $table->timestamps();
             $table->foreignIdFor(Address::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-          
+            $table->foreign('voucher_id')->references('voucher_id')->on('vouchers')->onDelete('set null');
         });
+        
+        Schema::create('order_status', function (Blueprint $table) {
+            $table->id();
+            $table->string('status');
+            $table->string('order_id')->references('order_id')->on('orders');
+            $table->timestamp('time')->default(now());
+            $table->string('reason')->nullable();
+            $table->timestamps();
+        });
+        
     }
 
     /**

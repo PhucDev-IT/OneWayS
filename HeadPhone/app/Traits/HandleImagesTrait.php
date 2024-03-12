@@ -13,7 +13,7 @@ trait HandleImagesTrait
 {
     protected string $path = 'public/uploads/';
     protected string $fullPath = 'public/storage/uploads';
-    public function verify($request,$name)
+    public function verify($request, $name)
     {
         //Kiểm tra trường 'image' có tồn tại trong request hay không => T or F
         return $request->has($name);
@@ -21,39 +21,42 @@ trait HandleImagesTrait
 
 
 
-    public function saveImage($request,$name)
+    public function saveImage($request, $name)
     {
-        if ($this->verify($request,$name)) {
+        if ($this->verify($request, $name)) {
             $file = $request->file($name);
-
-        
             return  $this->handleSaveImage($file);
         }
+        return null;
     }
-    
-    public function saveImages($request,$name){
-        if ($this->verify($request,$name)) {
-           
-            $fileNames = [];
-            foreach($request->$name as $value){
+
+    public function saveImages($request, $name)
+    {
+
+        $fileNames = [];
+        if ($request->$name != null) {
+        
+            foreach ($request->$name as $value) {
+
                 $fileNames[] = $this->handleSaveImage($value);
             }
-            
-            return $fileNames;
         }
+
+        return $fileNames;
     }
 
-    public function handleSaveImage($file){
-      
+    public function handleSaveImage($file)
+    {
+
 
         $originalFileName = $file->getClientOriginalName();
-        
+
         // Kết hợp thời gian hiện tại và tên file đã chuyển đổi
         $uniqueFileName = time() . '_' . $originalFileName;
-        
+
         // Loại bỏ các ký tự không mong muốn
         $uniqueFileName = preg_replace('/[^a-zA-Z0-9_.]/', '', $uniqueFileName);
-        
+
         $file->storeAs($this->path . $uniqueFileName);
 
         return  $uniqueFileName;
@@ -66,11 +69,11 @@ trait HandleImagesTrait
      * @param $currentImage
      * @return mixed|string|null
      */
-    public function updateImage($request,$name, $currentImage): mixed
+    public function updateImage($request, $name, $currentImage): mixed
     {
-        if ($this->verify($request,$name)) {
+        if ($this->verify($request, $name)) {
             $this->deleteImage($currentImage);
-            return $this->saveImage($request,$name);
+            return $this->saveImage($request, $name);
         }
         return $currentImage;
     }
@@ -81,12 +84,10 @@ trait HandleImagesTrait
      */
     public function deleteImage($imageName): void
     {
-        $filePath = $this->fullPath . $imageName;
-    
+        $filePath = $this->path . $imageName;
+
         if ($imageName && file_exists($filePath)) {
             Storage::delete($filePath);
         }
     }
-    
-  
 }

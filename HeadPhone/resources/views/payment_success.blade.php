@@ -37,7 +37,7 @@
             <h3>ĐẶT HÀNG THÀNH CÔNG !</h3>
             <p>Cảm ơn bạn đã tin tưởng và mua sắm cùng chúng tôi.</p>
             <p>Quay trở về đăng nhập để trải nghiệm gian hàng của chúng tôi!</p>
-            <a href="">TIẾP TỤC</a>
+            <a href="/">TIẾP TỤC</a>
         </div>
     </div>
 

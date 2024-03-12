@@ -108,7 +108,7 @@
     function setData(products) {
         $('tbody').empty();
         $.each(products, function(key, product) {
-      
+ 
             $('tbody').append(`
                     <tr>
                         <td>
@@ -124,7 +124,8 @@
                             <span class="text-danger">${formatCurrency(product.price)} </span>
                         </td>
                         <td>
-                            <span class="text-danger">${formatCurrency(product.sale)}</span>
+                    
+                            <span class="text-danger">${product.sale}%</span>
                         </td>
                         <td>${product.rate}</td>
                         <td>

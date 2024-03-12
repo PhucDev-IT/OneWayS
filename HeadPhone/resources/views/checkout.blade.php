@@ -202,7 +202,7 @@
                 <!-- ĐƠN VỊ VẬN CHUYỂN -->
                 <div style="margin-bottom: 20px;">
                     <h5>Đơn vị vận chuyển</h5>
-                    <section>
+                    <section id="transport-units">
 
                     </section>
                 </div>
@@ -360,7 +360,7 @@
         </div>
 
         <div id="voucher-contain" class="modal-body">
-
+        
         </div>
     </div>
 
@@ -387,16 +387,16 @@
             },
             dataType: 'json',
             success: function(response) {
-                console.log(response);
+                $('#transport-units').empty();
                 $.each(response.data, function(key, value) {
                     if (key === 0) { // Chỉ thêm thuộc tính checked cho phần tử đầu tiên
-                        $('section').append(`
+                        $('#transport-units').append(`
                             <input type="radio" onclick="calculateFee(${value.service_id})" id="option_${value.service_id}" name="options" value="${value.service_id}" checked>
                             <label for="option_${value.service_id}">${value.short_name}</label><br>
                         `);
                         calculateFee(value.service_id)
                     } else {
-                        $('section').append(`
+                        $('#transport-units').append(`
                         <input type="radio" onclick="calculateFee(${value.service_id})" id="option_${value.service_id}" name="options" value="${value.service_id}">
                             <label for="option_${value.service_id}">${value.short_name}</label><br>
                         `);
@@ -442,10 +442,11 @@
         var order = {
             method_payment: methodPayment(),
             total: parseFloat($('#total-cache').val()),
-            feeShip: feeShip,
+            feeship: feeShip,
             totalmoney: totalMoney,
             voucher_id: idCouponSelected,
             address_id: address_id,
+            status:1
 
         };
         var requestData = {
@@ -499,15 +500,15 @@
                     } else {
                         title = 'Giảm ' + formatCurrency(coupon.discount);
                     }
-                    var isChecked = idCouponSelected === coupon.voucher_id ? 'checked' : '';
-                    console.log(isChecked);
+                   // var isChecked = idCouponSelected === coupon.voucher_id ? 'checked' : '';
+                    
                     $('#voucher-contain').append(`
                         <div onclick="selectCoupon('${encodeURIComponent(JSON.stringify(coupon))}')"  class="row">
                             <div class="col-lg-4 col-sm-6" style="width: 100%;">
                                 <div data-bs-toggle="collapse">
                                     <label class="card-radio-label mb-0">
                                  
-                                        <input type="radio"  class="card-radio-input" ${isChecked}>
+                                        <input type="radio"  class="card-radio-input" >
                                         <div class="card-radio text-truncate p-3" style="width: 100%;">
                                             <!-- <span class="fs-14 mb-4 d-block">Mặc định</span> -->
                                             <span style="color: #de23ce;" class="fs-14 mb-2 d-block">${coupon.voucher_id} | </span>
@@ -551,9 +552,10 @@
             $('#total-money').html(formatCurrency(total));
             totalMoney = total;
         } else if (object.type == "DISCOUNTPERCENT") {
-            totalMoney = total * ((total - object.discount) / 100);
+            console.log('hello');
+            totalMoney = total - ((total * object.discount) / 100);
             $('#coupon_discount').html('- ' + formatCurrency(total * (object.discount / 100)));
-            $('#total-money').text = formatCurrency(totalMoney);
+            $('#total-money').html( formatCurrency(total));
 
         } else {
             totalMoney = total + feeShip - object.discount;

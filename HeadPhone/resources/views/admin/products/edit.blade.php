@@ -62,6 +62,26 @@
                 @enderror()
             </div>
 
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Hãng sản xuất</label>
+                <select name="supplier_id" class="form-control" id="exampleFormControlSelect2">
+                    @foreach($suppliers as $supplier)
+                    <option {{$supplier->id==$product->supplier_id ? 'selected' : ''}} value="{{$supplier->id}}">{{$supplier->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Thời gian bảo hành (tháng)</label>
+                <input name="guarantee_time" type="number" value="{{old('guarantee_time')?? $product->guarantee_time}}" class="form-control" min=1 max=24 placeholder="12">
+                @error('guarantee_time')
+                <span class="text-danger">{{$message}}</span>
+                @enderror()
+            </div>
+
+
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -121,7 +141,27 @@
                 </div>
 
                 <div id="classify-body">
+                    @foreach($product->details as $classify)
 
+                    <div class="row" id="product-classify{{$classify->id}}">
+        <div class="col">
+            <div class="form-group">
+             <input type="text" class="form-control "  value="{{$classify->color}}" readonly>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+            <input type="text" class="form-control " value="{{$classify->quantity}}" readonly>
+            </div>
+        </div>
+
+         <div class="col ">
+            <span id="remove-classify" data-id="{{$classify->id}}"> <i class="fa-solid fa-trash-can" style="color: #ff0000; margin-top:10px;"></i></span>
+        </div>
+    </div>
+
+                    @endforeach
                 </div>
             </div>
 

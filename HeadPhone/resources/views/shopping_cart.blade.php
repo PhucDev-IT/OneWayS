@@ -128,6 +128,7 @@
                         <h5>Items in your cart</h5>
                     </div>
 
+                    @if(isset($carts))
                     @foreach($carts->cartDetails as $cart)
 
                     <div class="ibox-content">
@@ -164,7 +165,7 @@
                                             <s class="small text-muted">{{ number_format($cart->product->price, 0, ',', '.') }}đ</s>
                                         </td>
                                         <td width="65">
-                                            <input id="input-quanity-{{$cart->id}}" data-price="{{$currentPrice}}" onchange="updateQuantity(this)" data-id="{{$cart->id}}" data-remaining="{{$cart->product->quantity}}" style="width: auto" type="number" class="form-control" value="{{$cart->quantity}}" min=1 max=100>
+                                            <input id="input-quanity-{{$cart->id}}" data-price="{{$currentPrice}}" onchange="updateQuantity(this)" data-id="{{$cart->id}}" style="width: auto" type="number" class="form-control" value="{{$cart->quantity}}" min=1 max=100>
                                         </td>
 
                                     </tr>
@@ -174,7 +175,9 @@
 
                     </div>
                     @endforeach
-
+                    @else
+                    <span>KHÔNG CÓ SẢN PHẨM NÀO</span>
+                    @endif
 
                     <div class="ibox-content">
                         <button onclick="checkout()" class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button>
@@ -233,7 +236,7 @@
 <script src="{{ asset('admin/assets/js/public-js.js') }}"></script>
 <script>
     let selectedCarts = [];
-   
+
     //Chọn sản phẩm
     function selectItemCart(checkbox) {
         var idCart = $(checkbox).data('id');
@@ -254,34 +257,34 @@
 
         var carts = document.querySelectorAll('.checkbox-item');
         var totalMoney = 0;
-		carts.forEach(function(item) {
-			if(item.checked){
+        carts.forEach(function(item) {
+            if (item.checked) {
                 var id = item.id;
                 var quantity = $('#input-quanity-' + id).val();
                 var price = $('#input-quanity-' + id).data('price');
-                
-                totalMoney+= (quantity * price);
+
+                totalMoney += (quantity * price);
             }
-		});
+        });
 
         $('#total').text(formatCurrency(totalMoney));
 
-       
+
     }
 
     function updateQuantity(element) {
         var idCart = element.getAttribute('data-id');
         var quantity = element.value;
-        var remaining = element.getAttribute('data-remaining');
 
-        if (quantity > remaining) {
-            $('#input-quanity-' + idCategory).value = remaining;
-            return;
-        }
+        // var remaining = element.getAttribute('data-remaining');
+        // if (quantity > remaining) {
+        //     $('#input-quanity-' + idCart).value = remaining;
+        //     return;
+        // }
 
         $.ajax({
             type: 'POST',
-            url: "/cart/updateQuantity",
+            url: "{{route('cart.update_quantity')}}",
             data: {
                 _token: '{{ csrf_token() }}',
                 idCart: idCart,
@@ -300,7 +303,7 @@
 
 
     //Nhấn mua hàng
-    function checkout($selectedCarts){
+    function checkout($selectedCarts) {
         if (selectedCarts.length <= 0) {
             alert("Chọn sản phẩm trước khi mua hàng");
             return;
@@ -309,21 +312,20 @@
         $.ajax({
             type: 'POST',
             url: "{{ route('checkout.request') }}",
-            data:{
+            data: {
                 _token: '{{ csrf_token() }}',
                 carts: selectedCarts
             },
             dataType: 'json',
-            success:function(response){
-                 window.location.href = response;
-                
+            success: function(response) {
+                window.location.href = response;
+
             },
             error: function(xhr, status, error) {
                 console.error(error);
             }
         })
-       
-    }
 
+    }
 </script>
 @endsection

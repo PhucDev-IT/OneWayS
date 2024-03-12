@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->integer('address_defaultid')->nullable();
             $table->string('avatar')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('is_active')->default(1);
             $table->float('coin')->default(0);
             $table->date('createdat')->default(date('Y-m-d'));
             $table->timestamp('email_verified_at')->nullable();

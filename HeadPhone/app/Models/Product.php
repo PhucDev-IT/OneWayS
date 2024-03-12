@@ -29,14 +29,15 @@ class Product extends Model
 
     public function syncImages($imageNames)
     {
-        // Chuyển đổi mảng tên ảnh thành mảng chứa các mảng associatives
-        $imageData = array_map(function ($imageName) {
-            return ['url' => $imageName];
+        // Biến đổi mảng chuỗi thành mảng đa chiều với các mảng associatives
+        $urlArray = array_map(function ($url) {
+            return ['url' => $url];
         }, $imageNames);
-
+ 
         // Thêm ảnh mới
-        $this->images()->createMany($imageData);
+        $this->images()->createMany($urlArray);
     }
+    
 
 
 

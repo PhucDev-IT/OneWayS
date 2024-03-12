@@ -18,7 +18,6 @@ class Order extends Model
         'feeship',
         'totalmoney',
         'address_id',
-        'status',
         'method_payment'
     ];
 
