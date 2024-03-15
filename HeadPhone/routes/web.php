@@ -10,6 +10,8 @@ use App\Http\Controllers\Client\ProductsController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\ShoppingCartController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BannerCategoryController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +47,8 @@ Route::resource('admin/categories', CategoryController::class);
 Route::resource('admin/products', ProductController::class);
 Route::resource('admin/vouchers', CouponController::class);
 Route::get('admin/search-users', [UserController::class, 'searchUsers']);
+Route::resource('admin/banner',BannerController::class);
+Route::resource('admin/banner_category',BannerCategoryController::class);
 
 
 Auth::routes();

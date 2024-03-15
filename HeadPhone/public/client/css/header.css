@@ -1,0 +1,416 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-family: "Be Vietnam", sans-serif;
+}
+
+.Fixed-btn-block {
+    position: fixed;
+    bottom: 50px;
+    right: 25px;
+    z-index: 99;
+}
+.Fixed-btn-block .List-fixed-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Fixed-btn-block .List-fixed-btn .fixed-items {
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+.Fixed-btn-block .List-fixed-btn .fixed-items:hover {
+    cursor: pointer;
+}
+.Fixed-btn-block .List-fixed-btn .fixed-items img {
+    width: 25px;
+}
+.Fixed-btn-block .List-fixed-btn .hotline_btn {
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    border: 5px rgba(255, 0, 0, 0.2) solid;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.2);
+    animation: hotlineShadow 2s ease 3s infinite normal both;
+}
+.Fixed-btn-block .List-fixed-btn .hotline_btn .add_Padding_phoneIcon {
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border: 10px rgba(255, 0, 0, 0.5) solid;
+}
+.Fixed-btn-block .List-fixed-btn .hotline_btn .add_Padding_phoneIcon:hover {
+    cursor: pointer;
+}
+.Fixed-btn-block
+    .List-fixed-btn
+    .hotline_btn
+    .add_Padding_phoneIcon
+    .phoneIcon {
+    border-radius: 100px;
+    padding: 8px;
+    width: 36px;
+    background-color: rgb(255, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Fixed-btn-block
+    .List-fixed-btn
+    .hotline_btn
+    .add_Padding_phoneIcon
+    .phoneIcon
+    .imgPhoneIcon {
+    height: 21px;
+    animation-name: rotatePhone;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+.Fixed-btn-block .List-fixed-btn .messenger_btn {
+    background-color: rgb(68, 139, 255);
+    position: relative;
+}
+.Fixed-btn-block .List-fixed-btn .messenger_btn .notiNumber {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    top: -4px;
+    left: -4px;
+    display: none;
+}
+.Fixed-btn-block .List-fixed-btn .backOnTop_btn {
+    background-color: rgb(0, 208, 132);
+}
+.Fixed-btn-block .List-fixed-btn .backOnTop_btn img {
+    width: 16px;
+    transition: all 0.3s ease;
+}
+.Fixed-btn-block .List-fixed-btn .backOnTop_btn:hover img {
+    transform: translateY(-50%);
+}
+
+.Bottom_bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: #ef6837;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 10px;
+    z-index: 99;
+    width: 32%;
+    padding: 6px 10px;
+}
+.Bottom_bar svg {
+    color: #fff;
+}
+.Bottom_bar p {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 400;
+    margin: 0 0 0 20px;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.navbar {
+    list-style-type: none;
+}
+
+li.li_header.level0.menu-item {
+    padding: 0px 10px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    position: relative;
+}
+li.li_header.level0.menu-item:hover .dropdown-menu {
+    display: block !important;
+}
+
+@keyframes hotlineShadow {
+    from {
+        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.3);
+    }
+    to {
+        box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+    }
+}
+@keyframes rotatePhone {
+    from {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+    20%,
+    32%,
+    44%,
+    56%,
+    68% {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+    23%,
+    35%,
+    47%,
+    59%,
+    71% {
+        transform: rotate3d(0, 0, 1, 15deg);
+    }
+    26%,
+    38%,
+    50%,
+    62%,
+    74% {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+    29%,
+    41%,
+    53%,
+    65%,
+    77% {
+        transform: rotate3d(0, 0, 1, -15deg);
+    }
+    80% {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+.dropdown {
+    position: relative;
+}
+.dropdown .dropdown-language {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100px;
+    background-color: #fff;
+    display: none;
+    transform: translate(-50px, 60px);
+    border-radius: 5px;
+    z-index: 9;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.dropdown:hover .dropdown-language {
+    display: block;
+}
+
+.dropdown-menu {
+    min-width: 300px;
+}
+.dropdown-menu .container {
+    flex-direction: column;
+    align-items: flex-start;
+}
+.dropdown-menu .nav-items {
+    border: none !important;
+}
+.dropdown-menu li {
+    padding: 10px !important;
+}
+.dropdown-menu li a {
+    text-transform: initial !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+}
+
+.li_header.level1 {
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.li_header.level1:hover {
+    background: #eee;
+    transition: 0.3s;
+}
+
+.dropdown-menu {
+    padding: 0px;
+}
+
+@media screen and (min-width: 1200px) {
+    .header-mobile {
+        display: none !important;
+    }
+    .header-desktop {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #fff;
+    }
+}
+@media screen and (max-width: 768px) {
+    .header-desktop {
+        display: none;
+    }
+    .header-mobile {
+        height: 70px;
+        background-color: white;
+        display: flex !important;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+    .header-mobile {
+        display: none !important;
+    }
+    .logo-eidai {
+        width: 120px;
+    }
+    .logo-eidai img {
+        width: 100%;
+    }
+    li.li_header.level0.menu-item {
+        padding: 0px 10px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: -moz-fit-content;
+        height: fit-content;
+    }
+    .nav-items {
+        font-size: 13px !important;
+    }
+    .logo-eidai {
+        width: 130px !important;
+    }
+    .navbar-side .main-menu {
+        margin: 5px 0;
+    }
+    .contact-to-eidai p {
+        font-size: 12px !important;
+    }
+}
+.container {
+    padding: 0;
+}
+
+.header-desktop {
+    background-color: #ef6837;
+    padding: 8px 0px;
+}
+.header-desktop .content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-desktop .content-header .logo-search {
+    display: flex;
+    align-items: center;
+}
+.header-desktop .content-header .logo-search .form-search-header {
+    position: relative;
+    padding: 0 20px 0 0;
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #d7d7d7;
+    justify-content: center;
+    margin-left: 20px;
+    width: 310px;
+}
+.header-desktop
+    .content-header
+    .logo-search
+    .form-search-header
+    .search-input-field {
+    background-color: #fff;
+    padding: 0 12px;
+    color: #7b7b7b;
+    font-size: 13px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    border-radius: 12px;
+    width: 100%;
+    outline: none;
+    border: none;
+}
+.header-desktop .content-header .logo-search .form-search-header .SearchIcon {
+    background-color: #fff;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+.header-desktop
+    .content-header
+    .logo-search
+    .form-search-header
+    .SearchIcon
+    svg {
+    color: #ef6837;
+}
+.header-desktop .content-header .services-header {
+    display: flex;
+    align-items: center;
+}
+.header-desktop .content-header .services-header .service-items {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+.header-desktop
+    .content-header
+    .services-header
+    .service-items
+    .icon-services-header {
+    background: rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-desktop
+    .content-header
+    .services-header
+    .service-items
+    .desc-services-header {
+    margin-left: 5px;
+}
+
+.header-desktop
+    .content-header
+    .services-header
+    .service-items
+    .desc-services-header
+    p {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 300;
+}
+.header-desktop
+    .content-header
+    .services-header
+    .service-items
+    .desc-services-header
+    .bolder-p {
+    font-weight: 500;
+} /*# sourceMappingURL=header.css.map */

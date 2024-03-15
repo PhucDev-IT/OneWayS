@@ -24,10 +24,17 @@
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
+	<!-- Owl carousel css -->
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/owl.carousel.min.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/owl.theme.default.min.css')}}" />
+
+	<!-- LAYOUT CSS-->
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/header.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/footer.css')}}" />
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/style.css')}}" />
-
+	<link type="text/css" rel="stylesheet" href="{{asset('client/css/home.css')}}" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -61,6 +68,13 @@
 	<script src="{{asset('client/js/nouislider.min.js')}}"></script>
 	<script src="{{asset('client/js/jquery.zoom.min.js')}}"></script>
 	<script src="{{asset('client/js/main.js')}}"></script>
+
+	<script src="{{asset('client/js/home/aos.js')}}"></script>
+
+	{{-- OWL CAROUSEL JS --}}
+	<script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
+	<script src="{{asset('client/js/home/default.js')}}"></script>
+ 
 	@yield('script')
 </body>
 

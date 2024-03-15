@@ -8,7 +8,7 @@
         </div>
         <div class="sidebar-profile-name">
           <p class="sidebar-name">
-            Kenneth Osborne
+             Nguyễn Văn Phúc
           </p>
           <p class="sidebar-designation">
             Welcome
@@ -32,6 +32,34 @@
         <i class="typcn typcn-home menu-icon"></i>
         <span class="menu-title">Bảng điều khiển <span class="badge badge-primary ml-3">New</span></span>
       </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#configuration_page" aria-expanded="false" aria-controls="configuration_page">
+        <i class="typcn typcn-spanner-outline menu-icon"></i>
+        <span class="menu-title">Cấu hình</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="configuration_page">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Cấu hình chung</a></li>
+
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#banner" aria-expanded="false" aria-controls="banner">
+        <i class="typcn typcn-image-outline menu-icon"></i>
+        <span class="menu-title">Banner</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="banner">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="{{ route('banner_category.index') }}">Danh mục banner</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('banner.index') }}">Danh sách banner</a></li>
+        </ul>
+      </div>
     </li>
 
     <li class="nav-item">

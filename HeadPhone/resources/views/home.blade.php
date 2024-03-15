@@ -1,686 +1,416 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <!-- shop -->
-            <div class="col-md-4 col-xs-6">
-                <div class="shop">
-                    <div class="shop-img">
-                        <img src="{{asset('client/./img/shop01.png')}}" alt="">
+<div class="container">
+    <!-- BANNER -->
+    <div class="all-banner-hp">
+        <div class="hometop-banner">
+            <div class="homepage_menu_left">
+                <ul class="ul_menu">
+                    @foreach($cate_p_data as $item)
+                    <li class="js_hover_menu">
+                        <a href="">{{$item->name}}</a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="homepage_slider_right">
+                <div class="owl-carousel owl-theme slider_banner_homepage">
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner1.jpeg')}}" alt="" />
+                        </a>
                     </div>
-                    <div class="shop-body">
-                        <h3>HeadPhone<br>Bluetooth</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner8.jpeg')}}"alt="" />
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner7.jpeg')}}"alt="" />
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner3.jpeg')}}"alt="" />
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner4.png')}}"alt="" />
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner5.jpeg')}}"alt="" />
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="">
+                            <img src="{{asset('client/img/HomePage/sliderBanner6.jpeg')}}"alt="" />
+                        </a>
                     </div>
                 </div>
-            </div>
-            <!-- /shop -->
-
-            <!-- shop -->
-            <div class="col-md-4 col-xs-6">
-                <div class="shop">
-                    <div class="shop-img">
-                        <img src="{{asset('client/./img/shop03.png')}}" alt="">
+                <div class="Banner_slider_right">
+                    <div class="Banner-hp-right video_intro_wrapper">
+                        <img src="{{asset('client/img/HomePage/banner1.jpeg')}}" alt="" />
                     </div>
-                    <div class="shop-body">
-                        <h3>Wireless<br>HeadPhones</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
+                    <a class="Banner-hp-right" href="">
+                        <img src="{{asset('client/img/HomePage/banner2.jpeg')}}" alt="" />
+                    </a>
                 </div>
-            </div>
-            <!-- /shop -->
-
-            <!-- shop -->
-            <div class="col-md-4 col-xs-6">
-                <div class="shop">
-                    <div class="shop-img">
-                        <img src="{{asset('client/./img/shop02.png')}}" alt="">
-                    </div>
-                    <div class="shop-body">
-                        <h3>Cameras<br>Collection</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- /shop -->
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /SECTION -->
-
-<!-- SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-
-            <!-- section title -->
-            <div class="col-md-12">
-                <div class="section-title">
-                    <h3 class="title">New Products</h3>
-                </div>
-            </div>
-            <!-- /section title -->
-
-            <!-- Products tab & slick -->
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="products-tabs">
-                        <!-- tab -->
-                        <div id="tab1" class="tab-pane active">
-                            <div id="new-products" class="products-slick" data-nav="#slick-nav-1">
-                                @foreach($newProducts as $product)
-                        
-                                    <div class="product">
-                                        <div class="product-img">
-                                            <img src="{{asset('storage/uploads/'.$product->img_preview)}}" alt="">
-                                            <div class="product-label">
-                                                @if($product->sale > 0)
-                                                <span class="sale">{{$product->sale}}%</span>
-                                                @endif
-                                                <span class="new">NEW</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-body">
-                                            <p class="product-category">Category</p>
-                                            <h3 class="product-name"><a href="{{ route('products.details', $product->id) }}">{{ $product->name }}</a></h3>
-
-                                            <h4 class="product-price">{{ number_format($product->price - ($product->price * $product->sale)/100, 0, ',', '.') }} đ <del class="product-old-price">{{ number_format($product->price, 0, ',', '.') }}đ</del></h4>
-
-                                            <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                           
-                                @endforeach
-
-                            </div>
-                            <div id="slick-nav-1" class="products-slick-nav"></div>
-                        </div>
-                        <!-- /tab -->
-                    </div>
-                </div>
-            </div>
-            <!-- Products tab & slick -->
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /SECTION -->
-
-<!-- HOT DEAL SECTION -->
-<div id="hot-deal" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="hot-deal">
-                    <ul class="hot-deal-countdown">
-                        <li>
-                            <div>
-                                <h3>02</h3>
-                                <span>Days</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>10</h3>
-                                <span>Hours</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>34</h3>
-                                <span>Mins</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>60</h3>
-                                <span>Secs</span>
-                            </div>
-                        </li>
-                    </ul>
-                    <h2 class="text-uppercase">hot deal this week</h2>
-                    <p>New Collection Up to 50% OFF</p>
-                    <a class="primary-btn cta-btn" href="#">Shop now</a>
+                <div class="Banner_slider_bottom">
+                    <a href="" class="img_banner_bottom_wrapper"><img src="{{asset('client/img/HomePage/banner3.jpeg')}}" alt=""
+                            class="img_banner_bottom" /></a>
+                    <a href="" class="img_banner_bottom_wrapper"><img src="{{asset('client/img/HomePage/banner4.jpeg')}}" alt=""
+                            class="img_banner_bottom" /></a>
+                    <a href="" class="img_banner_bottom_wrapper"><img src="{{asset('client/img/HomePage/banner5.jpeg')}}" alt=""
+                            class="img_banner_bottom" /></a>
                 </div>
             </div>
         </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /HOT DEAL SECTION -->
-
-<!-- SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-
-            <!-- section title -->
-            <div class="col-md-12">
-                <div class="section-title">
-                    <h3 class="title">Top selling</h3>
-
-                </div>
-            </div>
-            <!-- /section title -->
-
-            <!-- Products tab & slick -->
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="products-tabs">
-                        <!-- tab -->
-                        <div id="tab2" class="tab-pane fade in active">
-                            <div class="products-slick" data-nav="#slick-nav-2">
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="../../public/client/img/product04.png" alt="">
-                                        <div class="product-label">
-                                            <span class="sale">-30%</span>
-                                            <span class="new">NEW</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product07.png" alt="">
-                                        <div class="product-label">
-                                            <span class="new">NEW</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product08.png" alt="">
-                                        <div class="product-label">
-                                            <span class="sale">-30%</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                        <div class="product-rating">
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product09.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product01.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                        <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-                            </div>
-                            <div id="slick-nav-2" class="products-slick-nav"></div>
-                        </div>
-                        <!-- /tab -->
-                    </div>
-                </div>
-            </div>
-            <!-- /Products tab & slick -->
+        <div class="homebottom_banner">
+            <a class="link_images" href="">
+                <img class="img_banner_bottom_hp" src="{{asset('client/img/HomePage/Banner_iPhoneSale.webp')}}" alt="IphoneSale" />
+            </a>
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
-</div>
-<!-- /SECTION -->
-
-<!-- SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-4 col-xs-6">
-                <div class="section-title">
-                    <h4 class="title">Top selling</h4>
-                    <div class="section-nav">
-                        <div id="slick-nav-3" class="products-slick-nav"></div>
-                    </div>
-                </div>
-
-                <div class="products-widget-slick" data-nav="#slick-nav-3">
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product07.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product08.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product09.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product01.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product02.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product03.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xs-6">
-                <div class="section-title">
-                    <h4 class="title">Top selling</h4>
-                    <div class="section-nav">
-                        <div id="slick-nav-4" class="products-slick-nav"></div>
-                    </div>
-                </div>
-
-                <div class="products-widget-slick" data-nav="#slick-nav-4">
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product04.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product05.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product06.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product07.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product08.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product09.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="clearfix visible-sm visible-xs"></div>
-
-            <div class="col-md-4 col-xs-6">
-                <div class="section-title">
-                    <h4 class="title">Top selling</h4>
-                    <div class="section-nav">
-                        <div id="slick-nav-5" class="products-slick-nav"></div>
-                    </div>
-                </div>
-
-                <div class="products-widget-slick" data-nav="#slick-nav-5">
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product01.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product02.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product03.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product04.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product05.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="./img/product06.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-                </div>
-            </div>
-
+    <!-- CATEGORY PRODUCT 1 -->
+    <div class="cate_product_1">
+        <div class="heading_cate_product">
+            <p class="title_heading_cate">LAPTOP, MACBOOK, SURFACE</p>
+            <div class="sub_cat_title"></div>
+            <a href="" class="view_all">
+                Xem tất cả
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
         </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /SECTION -->
+        <div class="product_cate1_slider owl-carousel owl-theme">
 
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </li>
-                    </ul>
+            @foreach($p_data as $data2)
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{ @$data2->image}}" alt="" />
+
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LDAHP1762</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                {{$data2->name}}
+                            </a>
+                            <span class="p_old_price">
+                                {{$data2->price}}
+                            </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">
+                                {{ number_format($data2->price, 0, ',', '.') }} đ
+                            </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- CATEGORY PRODUCT 2 -->
+    <div class="cate_product_1">
+        <div class="heading_cate_product">
+            <p class="title_heading_cate">LAPTOP, MACBOOK, SURFACE</p>
+            <div class="sub_cat_title"></div>
+            <a href="" class="view_all">
+                Xem tất cả
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+        </div>
+        <div class="product_cate1_slider owl-carousel owl-theme">
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="/images/HomePage/star_0.png" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="fa-solid fa-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
+    <!-- CATEGORY PRODUCT 3 -->
+    
+    <!-- CATEGORY PRODUCT 4 -->
+    
 </div>
-<!-- /NEWSLETTER -->
 
 @endsection
 
