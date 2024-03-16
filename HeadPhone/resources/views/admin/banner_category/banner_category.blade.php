@@ -35,12 +35,12 @@
                 <tbody>
                 @foreach($banner as $item)
                     <tr>
+                        <th>{{$item->id}}</th>
                         <th>{{$item->name}}</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>{{$item->published}}</th>
+                        <th>{{$item->ordering}}</th>
+                        <th>{{$item->updated_at}}</th>
+                        <th>Thêm mấy icon vào đây</th>
                     </tr>
                 @endforeach
                 </tbody>

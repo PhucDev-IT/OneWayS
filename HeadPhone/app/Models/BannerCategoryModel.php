@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BannerCategoryModel extends Model
 {
     use HasFactory;
+
+    protected $table = 'banners_categories';
+
 }
