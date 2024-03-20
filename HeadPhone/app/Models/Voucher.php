@@ -28,8 +28,8 @@ class Voucher extends Model
         parent::boot();
 
         // Sự kiện trước khi tạo mới order
-        static::creating(function ($order) {
-            $order->voucher_id = self::generateRandomString();
+        static::creating(function ($voucher) {
+            $voucher->voucher_id = self::generateRandomString();
         });
     }
 

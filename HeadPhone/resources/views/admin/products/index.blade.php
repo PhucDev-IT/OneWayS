@@ -99,7 +99,8 @@
             success: function(response) {
                 hiddenLoadingPage();
                 setData(response.products.data)
-                customPaginate(response)
+                customPaginate(response.products)
+                
             }
         });
     }
@@ -155,7 +156,7 @@
             success: function(response) {
                 hiddenLoadingPage();
                 setData(response.products.data);
-                customPaginate(response);
+                customPaginate(response.products);
             }
         });
     }

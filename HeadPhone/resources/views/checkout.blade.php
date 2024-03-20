@@ -446,7 +446,7 @@
             totalmoney: totalMoney,
             voucher_id: idCouponSelected,
             address_id: address_id,
-            status:1
+            current_status:'PENDING'
 
         };
         var requestData = {

@@ -15,11 +15,13 @@ class Order extends Model
         'orderdate',
         'total',
         'voucher_id',
+        'current_status',
         'feeship',
         'totalmoney',
         'address_id',
         'method_payment'
     ];
+
 
     protected static function boot()
     {
@@ -27,19 +29,35 @@ class Order extends Model
 
         // Sự kiện trước khi tạo mới order
         static::creating(function ($order) {
-            $latestOrder = static::latest()->first();
-
-            // Nếu có order trước đó, tăng số lên 1, ngược lại, bắt đầu từ 1
-            $orderNumber = $latestOrder ? intval(substr($latestOrder->order_id, 2)) + 1 : 1;
-
-            // Format số thành chuỗi với độ dài 6 và thêm vào order_id
-            $order->order_id = 'OR' . str_pad($orderNumber, 6, '0', STR_PAD_LEFT);
+            $order->order_id = self::generateRandomString();
         });
+    }
+
+
+    public static function generateRandomString($length = null) {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $charactersLength = strlen($characters);
+        $length = $length ?? rand(8, 14);
+        $randomString = '';
+    
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+    
+        return $randomString;
     }
 
     public function details()
     {
         //Quan hệ 1-n
         return $this->hasMany(OrderDetails::class);
+    }
+
+    public function user()  {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tracking(){
+        return $this->hasMany(TrackingOrder::class);
     }
 }

@@ -23,20 +23,14 @@ return new class extends Migration
             $table->double('totalmoney');
             $table->string('voucher_id')->nullable()->index();
             $table->string('method_payment');
+            $table->string('current_status')->default('PENDING');
             $table->timestamps();
             $table->foreignIdFor(Address::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreign('voucher_id')->references('voucher_id')->on('vouchers')->onDelete('set null');
         });
         
-        Schema::create('order_status', function (Blueprint $table) {
-            $table->id();
-            $table->string('status');
-            $table->string('order_id')->references('order_id')->on('orders');
-            $table->timestamp('time')->default(now());
-            $table->string('reason')->nullable();
-            $table->timestamps();
-        });
+
         
     }
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Client\ShoppingCartController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BannerCategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,7 +47,13 @@ Route::resource('admin/users', UserController::class);
 Route::resource('admin/categories', CategoryController::class);
 Route::resource('admin/products', ProductController::class);
 Route::resource('admin/vouchers', CouponController::class);
-Route::get('admin/search-users', [UserController::class, 'searchUsers']);
+Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
+
+//admin - orders
+Route::get('waiting-confirm',[OrderController::class,'WaitingConfirm'])->name('orders.waiting_confirm');
+Route::get('fetch-order-confirm',[OrderController::class,'callOrderConfirm'])->name('orders.fetch_order_pending');
+Route::get('order/id={id}',[OrderController::class,'orderDetail'])->name('orders.orderDetail');
+
 Route::resource('admin/banner',BannerController::class);
 Route::resource('admin/banner_category',BannerCategoryController::class);
 

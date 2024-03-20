@@ -33,12 +33,14 @@ class CouponController extends Controller
         //     ->get();
         // $vouchers = Voucher::paginate(5);
         // return response()->json(['vouchers' => $vouchers]);
-        $vouchers = Voucher::paginate(5);
-        return view('admin.coupons.index',compact('vouchers'));
+ 
+        return view('admin.coupons.index');
     }
 
-    public function fetchCoupon() : JsonResponse {
-        $vouchers = Voucher::paginate(5);
+    public function fetchCoupon(Request $request) {
+        $page = $request['page']?:1;
+
+        $vouchers = Voucher::paginate(5, ['*'], 'page', $page);
         return response()->json(['vouchers' => $vouchers]);
     }
 
@@ -102,6 +104,12 @@ class CouponController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $voucher = Voucher::find($id);
+
+        if ($voucher != null) {
+            $voucher->update(['is_use' => false]);
+
+            return response()->json(["success"=>"Cập nhật thành công"],200);
+        }
     }
 }

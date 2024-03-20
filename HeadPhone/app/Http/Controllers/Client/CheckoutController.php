@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\CartDetails;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\TrackingOrder;
 use App\Services\OrderService;
 use App\Services\OrderSevice;
 use Illuminate\Support\Facades\Session;
@@ -162,26 +163,43 @@ class CheckoutController extends Controller
         $order['user_id'] = $idUser;
 
         $orderDetails = [];
-
+        $trackingOrders = [];
+        
         foreach ($carts as $item) {
             $o = new OrderDetails();
             $o->color = $item->color;
             $o->quantity = $item->quantity;
             $o->price = $item->product->price - ($item->product->price * $item->product->sale) / 100;
             $o->product_id = $item->product->id;
-            // Thêm đối tượng $o vào mảng $orderDetails
+         
             $orderDetails[] = $o;
+        
+            // Kiểm tra xem key $o->product_id đã tồn tại trong $trackingOrders hay chưa
+            if (!array_key_exists($o->product_id, $trackingOrders)) {
+                // Nếu chưa tồn tại, thêm một mảng mới vào $trackingOrders với key là $o->product_id
+                $trackingOrders[$o->product_id] = [
+                    'product_id' => $o->product_id,
+                    'name' => 'PENDING',
+                    'time' => now(),
+                    'note' => 'Đơn hàng đã được xác nhận',
+                ];
+            }
         }
+        
 
       //  return response()->json($order);
     
-        $this->addOrder($order,$orderDetails,$cart_ids);
+        if($this->addOrder($order,$orderDetails,$cart_ids,$trackingOrders)==true){
+            return view('payment_success');
+        }else{
+            return view('shopping_cart');
+        }
 
        
-         return view('payment_success');
+         
     }
 
-    public function addOrder($order, $orderDetails,$cart_ids) {
+    public function addOrder($order, $orderDetails,$cart_ids,$trackingOrders) {
         try {
             DB::beginTransaction();
     
@@ -198,8 +216,10 @@ class CheckoutController extends Controller
                 ];
             }
             $orderNew->details()->insert($orderDs);
-            $this->updateStatusOrder($orderNew->order_id,"PENDING");
+            $this->addTrackingOrder($orderNew->order_id,$trackingOrders);
+
             DB::commit();
+
             Cart::whereIn('id', $cart_ids)->delete();
 
             Session::forget('order');
@@ -214,12 +234,11 @@ class CheckoutController extends Controller
         }
     }
 
-    private function updateStatusOrder($idOrder, $status){
-        $status = [
-            "order_id" => $idOrder,
-            "status" => $status
-        ];
-
-        DB::table('order_status')->updateOrInsert($status);
+    private function addTrackingOrder($idOrder, &$trackingOrders){
+        foreach($trackingOrders as &$tracking){
+            $tracking['order_id'] = $idOrder;
+            TrackingOrder::create($tracking);
+        }
     }
+    
 }

@@ -115,6 +115,11 @@
 
 @section('script')
 <script>
+    hiddenLoadingPage();
+
+</script>
+<script>
+    
     $(document).ready(function() {
         // Xử lý sự kiện khi người dùng nhập vào input
         $('#input-email').keyup(function() {
@@ -124,12 +129,13 @@
             $("#userSuggestions").empty();
             // Gọi Ajax để tìm kiếm người dùng
             $.ajax({
-                url: '/search-users',
+                url: "{{route('voucher.search_user')}}",
                 method: 'GET',
                 data: {
                     query: query
                 },
                 success: function(response) {
+                    console.log(response)
                     displaySuggestions(response);
                 },
                 error: function(error) {

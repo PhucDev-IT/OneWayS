@@ -18,6 +18,7 @@ class Product extends Model
         'sale',
         'rate',
         'createdat',
+        'published',
         'img_preview'
     ];
 

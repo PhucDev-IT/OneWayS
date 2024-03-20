@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         $p_data = Product::where('published',1)
         ->orderBy('created_at')
-        ->take(3)
+        ->take(10)
         ->get();
         return view('home',compact('cate_p_data','p_data'));
 
