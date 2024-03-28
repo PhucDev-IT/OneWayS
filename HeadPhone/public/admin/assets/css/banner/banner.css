@@ -1,0 +1,39 @@
+.fix_width_name_column {
+    width: 120px;
+}
+.fix_width_img_column {
+    width: 200px;
+}
+
+.fix_width_img_column img {
+    width: 100%;
+}
+
+.fix_width_published_column {
+    width: 60px;
+}
+.fix_width_ordering_column {
+    width: 55px;
+}
+.error_image {
+    width: 30%;
+    margin: 20px 0;
+    border: 1px rgb(230, 230, 230) solid;
+}
+.image_preload {
+    width: 50%;
+    margin: 20px 0;
+}
+.form-check {
+    display: flex;
+    align-items: center;
+}
+.form-check label {
+    margin-bottom: 0;
+}
+.check_input {
+    margin-left: 50px;
+}
+.input-group-append .file-upload-browse {
+    width: 300px;
+}

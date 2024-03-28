@@ -57,7 +57,7 @@
       <div class="collapse" id="banner">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"><a class="nav-link" href="{{ route('banner_category.index') }}">Danh mục banner</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('banner.index') }}">Danh sách banner</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('banner') }}">Danh sách banner</a></li>
         </ul>
       </div>
     </li>

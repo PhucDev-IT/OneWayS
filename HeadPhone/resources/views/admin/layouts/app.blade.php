@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     {{-- CUSTOM CSS ADMINDECK --}}
     <link rel="stylesheet" href="{{asset('admin/assets/css/banner/banner_categories.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/banner/banner.css')}}">
 </head>
 
 <body>

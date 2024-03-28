@@ -73,7 +73,7 @@ Route::resource('admin/categories', CategoryController::class);
 Route::resource('admin/products', ProductController::class);
 Route::resource('admin/vouchers', CouponController::class);
 Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
-
+//BANNER CATEGORIES
 Route::prefix('/banner-categories')->group(function () {
     Route::get('/', [BannerCategoryController::class, 'index'])->name('banner-categories');
 
@@ -87,6 +87,22 @@ Route::prefix('/banner-categories')->group(function () {
 
   });
   Route::post('/banner-categories-store', [BannerCategoryController::class, 'banner_store_category'])->name('banner-categories-store');
+  
+  //BANNER
+  Route::prefix('/banner')->group(function () {
+    Route::get('/', [BannerController::class, 'index'])->name('banner');
+
+    Route::get('/edit-banner/{id}', [BannerController::class, 'edit'])
+      ->where('id', '[0-9]+')
+      ->name('banner-edit');
+
+    Route::get('/add', [BannerController::class, 'add'])->name('banner-add');
+    
+    Route::get('/delete-banner/{id}', [BannerController::class, 'delete'])->name('delete-banner');
+
+  });
+  Route::post('/banner-store', [BannerController::class, 'banner_store'])->name('banner-store');
+  
 
 
 //admin - orders

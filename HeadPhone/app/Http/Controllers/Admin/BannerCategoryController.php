@@ -9,15 +9,17 @@ use App\Models\BannerCategoryModel;
 class BannerCategoryController extends Controller
 {
     public function index(){
+
         $banner = BannerCategoryModel::orderBy('created_at')->get();
         return view('admin.banner_category.banner_category', compact('banner'));
     }
     public function add(){
         return view('admin.banner_category.banner_category_edit');
-
     }
     public function edit($id = NULL){
         $banner = BannerCategoryModel::find($id);
+                $banner_cate_list = BannerCategoryModel::orderBy('created_at')->get();
+
         return view('admin.banner_category.banner_category_edit', compact('banner'));
     }
 

@@ -16,57 +16,34 @@
             </div>
             <div class="homepage_slider_right">
                 <div class="owl-carousel owl-theme slider_banner_homepage">
+                    @foreach($bannerSlider as $item)
                     <div class="item">
                         <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner1.jpeg')}}" alt="" />
+                            <img src="{{ asset('storage/images/banner/' . basename($item->image)) }}" alt="" />
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner8.jpeg')}}"alt="" />
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner7.jpeg')}}"alt="" />
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner3.jpeg')}}"alt="" />
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner4.png')}}"alt="" />
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner5.jpeg')}}"alt="" />
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="">
-                            <img src="{{asset('client/img/HomePage/sliderBanner6.jpeg')}}"alt="" />
-                        </a>
-                    </div>
+                    @endforeach
+                    
                 </div>
                 <div class="Banner_slider_right">
-                    <div class="Banner-hp-right video_intro_wrapper">
+                    {{-- <div class="Banner-hp-right video_intro_wrapper">
                         <img src="{{asset('client/img/HomePage/banner1.jpeg')}}" alt="" />
                     </div>
                     <a class="Banner-hp-right" href="">
                         <img src="{{asset('client/img/HomePage/banner2.jpeg')}}" alt="" />
-                    </a>
+                    </a> --}}
+                    @foreach($right_banner_slider as $item)
+                    <div class="Banner-hp-right video_intro_wrapper">
+                        <img src="{{ asset('storage/images/banner/' . basename($item->image)) }}" alt="" />
+                    </div>
+                    @endforeach
                 </div>
                 <div class="Banner_slider_bottom">
-                    <a href="" class="img_banner_bottom_wrapper"><img src="{{asset('client/img/HomePage/banner3.jpeg')}}" alt=""
-                            class="img_banner_bottom" /></a>
-                    <a href="" class="img_banner_bottom_wrapper"><img src="{{asset('client/img/HomePage/banner4.jpeg')}}" alt=""
-                            class="img_banner_bottom" /></a>
-                    <a href="" class="img_banner_bottom_wrapper"><img src="{{asset('client/img/HomePage/banner5.jpeg')}}" alt=""
-                            class="img_banner_bottom" /></a>
+                    @foreach($bottom_banner_slider as $item)
+                    <a href="" class="img_banner_bottom_wrapper">
+                        <img class="img_banner_bottom" src="{{asset('storage/images/banner/'. basename($item->image))}}" alt=""/>
+                    </a>
+                    @endforeach
                 </div>
             </div>
         </div>
