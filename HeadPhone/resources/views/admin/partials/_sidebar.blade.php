@@ -28,7 +28,7 @@
       <p class="sidebar-menu-title">Dash menu</p>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{route('dashboard')}}">
+      <a class="nav-link" href="{{route('dashboard.index')}}">
         <i class="typcn typcn-home menu-icon"></i>
         <span class="menu-title">Bảng điều khiển <span class="badge badge-primary ml-3">New</span></span>
       </a>
@@ -75,7 +75,12 @@
         <span class="menu-title">Danh mục</span>
       </a>
     </li>
-
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('imports.index')}}">
+        <i class="typcn typcn-download menu-icon"></i>
+        <span class="menu-title">Nhập hàng</span>
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" href="{{route('vouchers.index')}}">
         <i class="typcn typcn-tags menu-icon"></i>

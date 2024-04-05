@@ -83,7 +83,7 @@
                 </div>
                 <div class="service-items">
                     <div class="icon-services-header">
-                        <img src="{{asset('client/img/HomePage/cart.svg')}}" alt="">
+                        <a href="{{route('shopping-cart.index')}}"><img src="{{asset('client/img/HomePage/cart.svg')}}" alt=""></a>
                     </div>
                     <div class="desc-services-header">
                         <p>Giỏ hàng</p>

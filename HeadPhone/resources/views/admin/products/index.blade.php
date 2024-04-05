@@ -103,6 +103,8 @@
                 
             }
         });
+
+        
     }
 
 
@@ -113,7 +115,7 @@
             $('tbody').append(`
                     <tr>
                         <td>
-                            ${product.id}
+                            ${product.product_id}
                         </td>
                         <td>
                             <img src="{{asset('storage/uploads/${product.img_preview}')}}" alt="Demo" width="250">

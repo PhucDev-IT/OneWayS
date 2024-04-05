@@ -8,6 +8,7 @@ use App\Traits\HandleImagesTrait;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\This;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserService
 {
@@ -23,14 +24,16 @@ class UserService
 
     public function getWithPaginate(): mixed
     {
-        $all_users_with_all_their_roles = User::with('roles')->latest('created_at')->paginate(10);
+        $all_users_with_all_their_roles = User::with('getRoles')->latest('created_at')->paginate(10);
+        
         return $all_users_with_all_their_roles;
     }
 
     public function store($request): mixed
-    {
+    {   
         try {
             $dataRequest = $request->all();
+    
             $dataRequest['password'] = Hash::make($request->password);
 
             if (isset($dataRequest['image']) && $dataRequest['image'] != null) {
@@ -39,16 +42,14 @@ class UserService
 
             $user = User::create($dataRequest);
 
-            $user->assignRole($dataRequest['role_ids'] ?? []);
+            $user->assignUserRole($dataRequest['role_ids'] ?? []);
 
             return true;
         } catch (\Exception $e) {
-            // Xử lý nếu có lỗi
-            $errorMessage = $e->getMessage();
-            var_dump($errorMessage);
-            die;
-            session('message-error', $errorMessage);
-            return false;
+           
+            Log::error($e->getMessage());
+         
+            return back()->withInput();
         }
     }
 

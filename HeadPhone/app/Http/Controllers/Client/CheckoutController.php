@@ -4,23 +4,22 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
-use App\Models\Cart;
 use App\Models\CartDetails;
-use App\Models\Order;
-use App\Models\OrderDetails;
-use App\Models\TrackingOrder;
 use App\Services\OrderService;
-use App\Services\OrderSevice;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
 
-  //  private OrderSevice $orderService;
+    private $orderService;
+
+    public function __construct(OrderService $orderS)
+    {
+        $this->orderService = $orderS;
+    }
+
 
     
 
@@ -162,34 +161,8 @@ class CheckoutController extends Controller
         $cart_ids = Session::get('cartIds');
         $order['user_id'] = $idUser;
 
-        $orderDetails = [];
-        $trackingOrders = [];
-        
-        foreach ($carts as $item) {
-            $o = new OrderDetails();
-            $o->color = $item->color;
-            $o->quantity = $item->quantity;
-            $o->price = $item->product->price - ($item->product->price * $item->product->sale) / 100;
-            $o->product_id = $item->product->id;
-         
-            $orderDetails[] = $o;
-        
-            // Kiểm tra xem key $o->product_id đã tồn tại trong $trackingOrders hay chưa
-            if (!array_key_exists($o->product_id, $trackingOrders)) {
-                // Nếu chưa tồn tại, thêm một mảng mới vào $trackingOrders với key là $o->product_id
-                $trackingOrders[$o->product_id] = [
-                    'product_id' => $o->product_id,
-                    'name' => 'PENDING',
-                    'time' => now(),
-                    'note' => 'Đơn hàng đã được xác nhận',
-                ];
-            }
-        }
-        
-
-      //  return response()->json($order);
     
-        if($this->addOrder($order,$orderDetails,$cart_ids,$trackingOrders)==true){
+        if($this->orderService->addOrder($order,$carts,$cart_ids)==true){
             return view('payment_success');
         }else{
             return view('shopping_cart');
@@ -199,46 +172,6 @@ class CheckoutController extends Controller
          
     }
 
-    public function addOrder($order, $orderDetails,$cart_ids,$trackingOrders) {
-        try {
-            DB::beginTransaction();
-    
-            $orderNew = Order::create($order);
-            
-            $orderDs = [];
-            foreach($orderDetails as $detail){
-                $orderDs[] = [
-                    'order_id' => $orderNew->order_id,
-                    'color' => $detail->color,
-                    'quantity' => $detail->quantity,
-                    'price' => $detail->price,
-                    'product_id' => $detail->product_id
-                ];
-            }
-            $orderNew->details()->insert($orderDs);
-            $this->addTrackingOrder($orderNew->order_id,$trackingOrders);
-
-            DB::commit();
-
-            Cart::whereIn('id', $cart_ids)->delete();
-
-            Session::forget('order');
-            Session::forget('carts');
-            Session::forget('cartIds');
-
-            return true;
-        } catch (\Exception $e) {
-            DB::rollback();
-            Log::error($e->getMessage());
-            return false;
-        }
-    }
-
-    private function addTrackingOrder($idOrder, &$trackingOrders){
-        foreach($trackingOrders as &$tracking){
-            $tracking['order_id'] = $idOrder;
-            TrackingOrder::create($tracking);
-        }
-    }
+  
     
 }

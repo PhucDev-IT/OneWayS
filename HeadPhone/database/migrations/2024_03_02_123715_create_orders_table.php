@@ -28,6 +28,8 @@ return new class extends Migration
             $table->foreignIdFor(Address::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreign('voucher_id')->references('voucher_id')->on('vouchers')->onDelete('set null');
+
+            $table->index('user_id');
         });
         
 

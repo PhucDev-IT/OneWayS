@@ -71,11 +71,17 @@
             <li><a href="{{ route('profile.fetchAddress') }}">Địa chỉ nhận hàng</a></li>
             <li><a href="#">Đơn hàng</a></li>
             <li><a href="#">Mã giảm giá</a></li>
-            <li><a href="#">Menu Item 5</a></li>
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                  
+                    <button type="submit">Đăng Xuất</button>
+                </form>
+            </li>
         </ul>
     </div>
     <div class="content">
-       @yield('content-profile')
+        @yield('content-profile')
     </div>
 </div>
 

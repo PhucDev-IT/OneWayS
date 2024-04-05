@@ -57,7 +57,12 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tracking(){
-        return $this->hasMany(TrackingOrder::class);
+    public function address() {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function trackingOrders()
+    {
+        return $this->hasMany(TrackingOrder::class, 'order_id', 'order_id');
     }
 }

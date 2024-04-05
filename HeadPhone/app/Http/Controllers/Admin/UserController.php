@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+  
         return view('admin.users.index');
     }
 
@@ -52,11 +52,12 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+    
 
         if ($this->userService->store($request)) {
             return redirect()->route('users.index')->with(['message-success' => 'Thêm dữ liệu thành công']);
         } else {
-            return back()->withInput();
+            return redirect()->route('users.index');
         }
     }
 

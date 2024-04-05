@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory, HandleImagesTrait;
 
     protected $fillable = [
+        'product_id',
         'name',
         'description',
         'price',
@@ -19,8 +20,33 @@ class Product extends Model
         'rate',
         'createdat',
         'published',
-        'img_preview'
+        'img_preview',
+        'supplier_id'
     ];
+
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     // Sự kiện trước khi tạo mới order
+    //     static::creating(function ($product) {
+    //         $product->product_id = self::generateRandomString();
+    //     });
+    // }
+
+
+    // public static function generateRandomString($length = null) {
+    //     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    //     $charactersLength = strlen($characters);
+    //     $length = $length ?? rand(6, 10);
+    //     $randomString = '';
+    
+    //     for ($i = 0; $i < $length; $i++) {
+    //         $randomString .= $characters[rand(0, $charactersLength - 1)];
+    //     }
+    
+    //     return $randomString;
+    // }
 
     public function images()
     {
@@ -38,9 +64,6 @@ class Product extends Model
         // Thêm ảnh mới
         $this->images()->createMany($urlArray);
     }
-    
-
-
 
     public function categories()
     {

@@ -59,6 +59,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->productService->store($request);
         return redirect()->route('products.index')->with(['message-success' => 'create product success']);
     }
@@ -78,6 +79,7 @@ class ProductController extends Controller
     {
 
         $product =  $this->productService->findOrFail($id)->load(['details', 'categories', 'images']);
+  
         $categories = Category::get(['id', 'name']);
         $suppliers = Supplier::all();
         return view('admin.products.edit', compact('categories', 'product','suppliers'));
@@ -118,7 +120,7 @@ class ProductController extends Controller
             $products = Product::where('name', 'LIKE', '%' . $searchQuery . '%')->paginate(8);
         }
         
-        $categories = Category::all();
+    //    $categories = Category::all();
         return response()->json([
             'products' => $products
         
@@ -127,7 +129,16 @@ class ProductController extends Controller
     }
 
 
-    
+    //Tìm  sản phẩm cho thêm hàng
+    public function fillerByName(Request $request){
+        $query = $request['query'];
+  
+        // Thực hiện truy vấn tìm kiếm người dùng theo $query
+
+        $products = Product::where('name', 'like', '%' . $query . '%')->get();
+
+        return response()->json($products);
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -100,7 +100,7 @@
                             <div class="star_vote">
                                 <img src="/images/HomePage/star_0.png" alt="" />
                             </div>
-                            <div class="p_code">Mã: <span>LDAHP1762</span></div>
+                            <div class="p_code">Mã: <span>{{$data2->id}}</span></div>
                         </div>
                         <div class="p_infor">
                             <a href="/show/product{{$data2->id}}" class="p_name">

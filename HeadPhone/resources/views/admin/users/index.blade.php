@@ -301,6 +301,8 @@
                 $('tbody').empty();
                 let i = 0;
                 $.each(response.users.data, function(key, user) {
+
+                    console.log(user);
                  
                     var avatarUrl = "{{ asset('storage/uploads/') }}" + '/' + user.avatar;
 
@@ -311,7 +313,7 @@
                     <td>${user.createdat}</td>
                     <td>
                         ${
-                            user.roles ? user.roles.map(function(role) {
+                            user.get_role ? user.get_role.map(function(role) {
                                 return `<label class="badge badge-success">${role.display_name}</label>`;
                             }).join('') : '' // Nếu user.roles không tồn tại, trả về chuỗi rỗng
                         }

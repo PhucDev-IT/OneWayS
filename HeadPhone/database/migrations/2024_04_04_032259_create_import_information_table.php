@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +14,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tracking_orders', function (Blueprint $table) {
+        Schema::create('import_information', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id')->references('order_id')->on('orders');
-            $table->string('name')->default('PENDING');
-            $table->string('name_vn')->default('Chờ xác nhận');
-            $table->timestamp('time')->default(now());
-            $table->string('description')->nullable();
+            $table->decimal('total', 10, 2);
+            $table->date('time');
+            $table->foreignIdFor(Supplier::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tracking_orders');
+        Schema::dropIfExists('import_information');
     }
 };

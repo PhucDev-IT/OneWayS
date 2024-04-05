@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('used')->default(0);
             $table->boolean('status')->default(true);
-          
+            
             $table->datetime('start_time');
             $table->dateTime('end_time');
             $table->timestamps();

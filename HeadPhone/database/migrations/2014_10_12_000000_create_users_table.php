@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('birthofday')->default(date('Y-m-d'));
             $table->string('phone')->nullable();
             $table->integer('address_defaultid')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default("https://firebasestorage.googleapis.com/v0/b/clothingstore-741c3.appspot.com/o/avatars%2Foneways.jpg?alt=media&token=7426420c-a514-456e-8673-89772540b70f");
             $table->tinyInteger('is_active')->default(1);
             $table->float('coin')->default(0);
             $table->date('createdat')->default(date('Y-m-d'));

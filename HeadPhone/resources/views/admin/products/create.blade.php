@@ -55,7 +55,7 @@
                 <label for="exampleFormControlSelect2">Hãng sản xuất</label>
                 <select name="supplier_id" class="form-control" id="exampleFormControlSelect2">
                     @foreach($suppliers as $supplier)
-                    <option value="{{$supplier->id}}" >{{$supplier->name}}</option>
+                    <option selected value="{{$supplier->id}}" >{{$supplier->name}}</option>
                     @endforeach
                 </select>
             </div>

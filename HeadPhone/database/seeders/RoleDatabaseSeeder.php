@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 class RoleDatabaseSeeder extends Seeder
@@ -48,10 +50,9 @@ class RoleDatabaseSeeder extends Seeder
 
 
         $roles = [
-            ['name'=>'manager','display_name'=>'Manager','group'=>'system'],
-            ['name'=>'admin','display_name'=>'Admin','group'=>'system'],
-            ['name'=>'customer','display_name'=>'Customer','group'=>'system'],
-            ['name'=>'employee','display_name'=>'Employee','group'=>'system'],
+            ['name'=>'manager','display_name'=>'Manager','group'=>'system','team_id' => 1],
+            ['name'=>'admin','display_name'=>'Admin','group'=>'system','team_id' => 1],
+            ['name'=>'employee','display_name'=>'Employee','group'=>'system','team_id' => 1],
         ];
 
        
@@ -65,6 +66,16 @@ class RoleDatabaseSeeder extends Seeder
             }
         }
 
+        $data = [
+            'name' => "Nguyễn Văn Phúc",
+            'email' => 'admin@gmail.com',
+            'gender' => 1,
+            'is_active' => 1,
+            'password' => Hash::make('12345678')
+        ];
+
+        $user = User::create($data);
+        $user->assignUserRole('admin');
     }
     
 }

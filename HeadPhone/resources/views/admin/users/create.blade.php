@@ -7,7 +7,7 @@
     <div class="card-body">
         <h4 class="card-title">Thêm người dùng</h4>
 
-        <form class="forms-sample" action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
+        <form class="forms-sample" action="/admin/user/store" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label >Full Name</label>
@@ -88,5 +88,13 @@
         </form>
     </div>
 </div>
+
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        hiddenLoadingPage();
+    });
+</script>
 
 @endsection

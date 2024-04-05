@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('ward_id');
             $table->string('ward_name');
             $table->string('details');
-            $table->string('isOpen')->default(1);
+            $table->tinyInteger('published')->default(true);
             $table->timestamps();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
         });

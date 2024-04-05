@@ -1,25 +1,16 @@
-.card-order{
+.card-order {
     display: flex;
-
+  
 }
 
- .left{
-   
-    background-color: #ffffff;
-    width: 28%;
-    height: 500px;
-
-    border-radius: 5px;
-    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
-}
-.card-content{
+.card-content {
     width: 70%;
     margin-left: 10px;
     height: 500px;
-   
+
 }
 
-.order{
+.order {
     margin-bottom: 10px;
     padding: 20px;
     font-family: "Be Vietnam", sans-serif;
@@ -27,18 +18,21 @@
     background-color: #ffffff;
     box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
 }
-.left-header{
+
+.left-header {
+
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.left-header .title{
+.left-header .title {
     font-weight: bold;
     font-size: 20px;
 }
-.content-header{
+
+.content-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,38 +40,148 @@
 
 }
 
-.content-header span{
+.content-header span {
     display: block;
     font-weight: bold;
 }
 
-.content-header label{
+.content-header label {
     color: #bdbbb5;
 }
 
-.contact img{
+.contact img {
     border-radius: 50px;
 }
-.contact-information{
+
+.contact-information {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
 }
 
-.contact-user{
+.contact-user {
     margin-left: 10px;
 }
-.contact-user div{
+
+.contact-user div {
     margin-bottom: 4px;
 }
-.contact-content{
+
+.contact-content {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.address .details span{
+
+.address .details span {
 
     display: block;
     margin: 5px;
 }
+
+.product-item{
+  padding: 5px;
+  border: 1px solid orange;
+  border-radius: 10px;
+}
+.order .product-item img{
+  width: 80px;
+  border-radius: 20px;
+}
+.product-item{
+  display: flex;
+  align-items: center
+}
+
+.product-item .information{
+  margin-left: 10px;
+
+}
+.product-item .information label{
+  font-weight: bold;
+  font-size: 16px;
+}
+.product-item .information span{
+  color: gray;
+  font-size: 14px;
+}
+/* ------------------- */
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+.tracking {
+  background-color: #ffffff;
+    width: 25%;
+    height: 500px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.tracking-content{
+  background-color: #ffffff;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
+}
+.rightbox {
+  
+    height: 100%;
+  }
+  
+  .rb-container {
+    font-family: "PT Sans", sans-serif;
+    /* width: 50%; */
+    margin: 0px 30px 30px 30px ; 
+    display: block;
+    position: relative;
+  }
+  
+  .rb-container ul.rb {
+    margin: 2.5em 0;
+    padding: 0;
+    display: inline-block;
+  }
+  
+  .rb-container ul.rb li {
+    list-style: none;
+    margin: auto;
+
+    min-height: 50px;
+    border-left: 1px dashed #ea0303;
+    padding: 0 0 50px 30px;
+    position: relative;
+  }
+  
+  .rb-container ul.rb li:last-child {
+    border-left: 0;
+  }
+  
+  .rb-container ul.rb li::before {
+    position: absolute;
+    left: -10px;
+    top: -5px;
+    content: " ";
+    border: 8px solid rgb(234, 93, 135);
+    border-radius: 500%;
+    background: #50d890;
+    height: 20px;
+    width: 20px;
+    transition: all 500ms ease-in-out;
+  }
+  
+  .rb-container ul.rb li:hover::before {
+    border-color: #232931;
+    transition: all 1000ms ease-in-out;
+  }
+  
+  ul.rb li .timestamp {
+    color: #50d890;
+    position: relative;
+
+    font-size: 12px;
+  }
+  
+  /* .item-title {
+    color: #fff;
+  } */
+  

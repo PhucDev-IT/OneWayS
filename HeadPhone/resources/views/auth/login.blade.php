@@ -72,7 +72,7 @@
                                         <i class="typcn typcn-social-facebook-circular mr-2"></i>Connect using facebook
                                     </button>
                                 </div>
-                       
+
                                 <div class="text-center mt-4 font-weight-light">
                                     Don't have an account? <a href="{{ route('register') }}" class="text-primary">Create</a>
                                 </div>

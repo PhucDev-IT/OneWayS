@@ -10,15 +10,16 @@ class TrackingOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-
         'order_id',
-        'product_id',
         'name',
+        'name_vn',
         'time',
-        'reason',
-        'note',
+        'description',
     ];
     
+
+
+
     public function order()  {
         return $this->belongsTo(Order::class);
     }

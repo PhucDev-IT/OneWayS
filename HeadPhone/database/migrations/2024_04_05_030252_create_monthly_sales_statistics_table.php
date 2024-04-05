@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->tinyInteger('published')->default(true);
-
+        Schema::create('monthly_sales_statistics', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedSmallInteger('month');
+            $table->unsignedSmallInteger('year');
+            $table->decimal('total_revenue', 10, 2);
+            $table->timestamps();
         });
     }
 
@@ -22,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('monthly_sales_statistics');
     }
 };
