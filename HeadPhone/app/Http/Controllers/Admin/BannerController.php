@@ -13,4 +13,5 @@ class BannerController extends Controller
         $banner = BannerModel::orderBy('created_at')->get();
         return view('admin.banner.banners', compact('banner'));
     }
+    
 }

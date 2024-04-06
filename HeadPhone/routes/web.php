@@ -65,17 +65,34 @@ Route::middleware(['middleware' => 'auth'],)->group(function () {
     Route::resource('admin/users', UserController::class);
     Route::post('admin/user/store', [UserController::class, 'store'])->name('admin.users.store');
 
-    Route::resource('admin/roles', RoleController::class);
-    Route::resource('admin/categories', CategoryController::class);
-    Route::resource('admin/products', ProductController::class);
-    Route::resource('admin/vouchers', CouponController::class);
-});
+Route::resource('admin/roles', RoleController::class);
 
 
+Route::resource('admin/users', UserController::class);
+Route::resource('admin/categories', CategoryController::class);
+Route::resource('admin/products', ProductController::class);
+Route::resource('admin/vouchers', CouponController::class);
+Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
+
+Route::prefix('/banner-categories')->group(function () {
+    Route::get('/', [BannerCategoryController::class, 'index'])->name('banner-categories');
+
+    Route::get('/edit-banner-categories/{id}', [BannerCategoryController::class, 'edit'])
+      ->where('id', '[0-9]+')
+      ->name('banner-categories-edit');
+
+    Route::get('/add', [BannerCategoryController::class, 'add'])->name('banner-categories-add');
+    
+    Route::get('/delete-banner-categories/{id}', [BannerCategoryController::class, 'delete'])->name('delete-banner-categories');
+
+  });
+  Route::post('/banner-categories-store', [BannerCategoryController::class, 'banner_store_category'])->name('banner-categories-store');
 
 
-
-
+//admin - orders
+Route::get('waiting-confirm',[OrderController::class,'WaitingConfirm'])->name('orders.waiting_confirm');
+Route::get('fetch-order-confirm',[OrderController::class,'callOrderConfirm'])->name('orders.fetch_order_pending');
+Route::get('order/id={id}',[OrderController::class,'orderDetail'])->name('orders.orderDetail');
 
 Route::resource('admin/banner', BannerController::class);
 Route::resource('admin/banner_category', BannerCategoryController::class);

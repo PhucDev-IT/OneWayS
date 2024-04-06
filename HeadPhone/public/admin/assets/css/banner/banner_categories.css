@@ -1,0 +1,24 @@
+.group_action {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+
+    height: 100%;
+}
+.edit {
+}
+.delete {
+    color: rgb(255, 0, 0);
+}
+.delete:hover {
+    color: rgb(255, 0, 0);
+}
+.published {
+    font-size: 30px;
+
+    color: rgb(0, 255, 0);
+}
+.unpublished {
+    font-size: 30px;
+    color: rgb(255, 0, 0);
+}

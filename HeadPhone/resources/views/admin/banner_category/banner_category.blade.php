@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Quản lý danh mục banner</h4>
-        <div><a href="" class="btn btn-primary">Thêm mới</a></div>
+        <div><a href="{{route('banner-categories-add')}}" class="btn btn-primary">Thêm mới</a></div>
         <div class="table-responsive pt-3">
             <table class="table table-bordered">
                 <thead>
@@ -37,10 +37,27 @@
                     <tr>
                         <th>{{$item->id}}</th>
                         <th>{{$item->name}}</th>
-                        <th>{{$item->published}}</th>
+                        <th>
+                            @if($item->published == 1)
+                                <i class="published typcn typcn-input-checked"></i>
+                            @else
+                                <i class="unpublished typcn typcn-input-checked"></i>
+                            @endif
+                        </th>
                         <th>{{$item->ordering}}</th>
                         <th>{{$item->updated_at}}</th>
-                        <th>Thêm mấy icon vào đây</th>
+                        <th>
+                            <div class="group_action">
+                                <a class="edit" href="{{ route('banner-categories-edit', ['id' => $item->id]) }}">
+                                    <i class="typcn typcn-pencil"></i>
+                                    Chỉnh sửa
+                                </a>
+                                <a class="delete" href="{{ route('delete-banner-categories', ['id' => $item->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xoá?')">
+                                    <i class="typcn typcn-trash"></i>
+                                    Xoá
+                                </a>
+                            </div>
+                        </th>
                     </tr>
                 @endforeach
                 </tbody>
