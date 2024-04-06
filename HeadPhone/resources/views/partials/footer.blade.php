@@ -91,10 +91,10 @@
 						<p><a href="">Liên hệ hợp tác kinh doanh </a></p>
 						<p><a href="">Thông tin tuyển dụng </a></p>
 						<div class="license thongbao">
-							<img src="/images/HomePage/dathongbao.jpeg" alt="" />
+							<img src="{{asset('client/img/HomePage/dathongbao.jpeg')}}" alt="" />
 						</div>
 						<div class="license DMCA">
-							<img src="/images/HomePage/dmca_protected_16_120.png" alt="" />
+							<img src="{{asset('client/img/HomePage/dmca_protected_16_120.png')}}" alt="" />
 						</div>
 					</div>
 				</div>

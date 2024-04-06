@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
             CategoryDatabaseSeeder::class,
             SupplierDatabaseSeeder::class,
             VoucherDatabaseSeeder::class,
-            RoleDatabaseSeeder::class,
+            //RoleDatabaseSeeder::class,
+            BannerCategories_Seeder::class,
+            Banners_Seeder::class,
         ]);
 
     }

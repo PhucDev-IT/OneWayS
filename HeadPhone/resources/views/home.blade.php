@@ -53,6 +53,10 @@
             </a>
         </div>
     </div>
+    <!-- CATEGORY PRODUCT HOT SALE -->
+    <div class="cate_product_sale">
+        <div class=""></div>
+    </div>
     <!-- CATEGORY PRODUCT 1 -->
     <div class="cate_product_1">
         <div class="heading_cate_product">
@@ -71,11 +75,10 @@
                     <div class="content_p_wrapper">
                         <a href="/show/product{{$data2->id}}" class="p_img">
                             <img src="{{ asset('storage/uploads/'.$data2->img_preview) }}" alt="" />
-
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>{{$data2->id}}</span></div>
                         </div>
@@ -106,7 +109,7 @@
             @endforeach
         </div>
     </div>
-    <!-- CATEGORY PRODUCT 2 -->
+    <!-- CATEGORY FEATURES PRODUCTS -->
     <div class="cate_product_1">
         <div class="heading_cate_product">
             <p class="title_heading_cate">LAPTOP, MACBOOK, SURFACE</p>
@@ -125,7 +128,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -158,7 +161,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -191,7 +194,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -224,7 +227,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -257,7 +260,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -290,7 +293,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -323,7 +326,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>
@@ -356,7 +359,7 @@
                         </a>
                         <div class="vote_pcode">
                             <div class="star_vote">
-                                <img src="/images/HomePage/star_0.png" alt="" />
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
                             </div>
                             <div class="p_code">Mã: <span>LTGI039</span></div>
                         </div>

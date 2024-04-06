@@ -32,7 +32,7 @@ class Banners_Seeder extends Seeder
         ];
 
         foreach ($banners_array as $banner) {
-            BannerModel::create($banner);
+            BannerModel::updateOrCreate($banner);
         }
     }
 }
