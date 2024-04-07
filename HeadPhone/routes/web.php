@@ -64,7 +64,6 @@ Route::middleware(['middleware' => 'auth'],)->group(function () {
     Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
     Route::resource('admin/users', UserController::class);
     Route::post('admin/user/store', [UserController::class, 'store'])->name('admin.users.store');
-
 Route::resource('admin/roles', RoleController::class);
 
 
@@ -143,3 +142,4 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/show/product{id}', [ProductsController::class, 'show'])->name('products.details');
 Route::get('fetchNewProducts', [HomeController::class, 'fetchNewProducts']);
+});
