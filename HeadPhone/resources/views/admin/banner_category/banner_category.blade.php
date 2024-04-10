@@ -11,8 +11,9 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+
                         <th>
-                            #
+                            STT
                         </th>
                         <th>
                             Tên danh mục
@@ -34,7 +35,7 @@
                 <tbody>
                 @foreach($banner as $item)
                     <tr>
-                        <th>{{$item->id}}</th>
+                        <th>{{$loop->iteration}}</th>
                         <th>{{$item->name}}</th>
                         <th>
                             @if($item->published == 1)

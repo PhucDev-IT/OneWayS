@@ -37,3 +37,24 @@
 .input-group-append .file-upload-browse {
     width: 300px;
 }
+.group_btn_function {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.group_btn_function select {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.group_btn_function button {
+    outline: none;
+    border: none;
+    padding: 7px 15px;
+    background-color: #f2125e;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.group_btn_function button:hover {
+    background-color: #be0d48;
+}

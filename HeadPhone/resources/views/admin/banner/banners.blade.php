@@ -6,13 +6,31 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Danh sách banner</h4>
-        <div><a href="{{route('banner-add')}}" class="btn btn-primary">Thêm mới</a></div>
+        <div class="group_btn_function">
+            <a href="{{route('banner-add')}}" class="btn btn-primary">Thêm mới</a>  
+            <form action="{{route('banner_filter')}}" method="POST">   
+                @csrf
+                <select name="banner_categories" class="" id="">
+                    <option value="0">-- Tất cả --</option>
+                    @foreach($banner_categories as $item)
+                    <option {{@$filter_categories == $item->id ? "selected" : null}} value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+                <button type="submit">
+                    Tìm kiếm
+                </button>
+            </form>
+            
+        </div>
         <div class="table-responsive pt-3">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>
-                            #
+                            STT
+                        </th>
+                        <th>
+                            ID banner
                         </th>
                         <th class="fix_width_name_column">
                             Tên banner
@@ -40,6 +58,7 @@
                 <tbody>
                 @foreach($banner as $item)
                     <tr>
+                        <th>{{$loop->iteration}}</th>
                         <th>{{$item->id}}</th>
                         <th class="fix_width_name_column">{{$item->name}}</th>
                         <th>{{$item->banner_cate->name}}</th>

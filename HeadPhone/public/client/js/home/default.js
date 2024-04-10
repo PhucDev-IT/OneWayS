@@ -1,13 +1,13 @@
 $(document).ready(function () {
-  $(".banner-home").owlCarousel({
-    loop: true,
-    margin: 10,
-    nav: true,
-    dots: false,
-    autoplay: true,
-    autoplaySpeed: 1000,
-    navText: [
-      `
+    $(".banner-home").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: false,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        navText: [
+            `
       <svg width="60" height="100" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g opacity="0.5">
         <rect opacity="0.2" width="60" height="100" fill="black"/>
@@ -23,7 +23,7 @@ $(document).ready(function () {
         </defs>
       </svg>
       `,
-      `
+            `
       <svg width="60" height="100" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect opacity="0.2" width="60" height="100" fill="black"/>
         <g clip-path="url(#clip0_3953_604)">
@@ -39,58 +39,84 @@ $(document).ready(function () {
 
 
       `,
-    ],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      600: {
-        items: 1,
-      },
-      1000: {
-        items: 1,
-      },
-    },
-  });
-  AOS.init();
-  $(document).ready(function () {
-    var owl = $(".slider_banner_homepage");
-    owl.owlCarousel({
-      items: 1,
-      loop: true,
-      margin: 10,
-      autoplay: true,
-      autoplayTimeout: 4000,
-      autoplayHoverPause: true,
-      nav: true,
+        ],
+        responsive: {
+            0: {
+                items: 1,
+            },
+            600: {
+                items: 1,
+            },
+            1000: {
+                items: 1,
+            },
+        },
     });
-    $(".play").on("click", function () {
-      owl.trigger("play.owl.autoplay", [1000]);
-    });
-    $(".stop").on("click", function () {
-      owl.trigger("stop.owl.autoplay");
+    AOS.init();
+    $(document).ready(function () {
+        var owl = $(".slider_banner_homepage");
+        owl.owlCarousel({
+            items: 1,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            nav: true,
+        });
+        $(".play").on("click", function () {
+            owl.trigger("play.owl.autoplay", [1000]);
+        });
+        $(".stop").on("click", function () {
+            owl.trigger("stop.owl.autoplay");
+        });
+
+        $(".product_cate1_slider").owlCarousel({
+            items: 5,
+            loop: false,
+            margin: 5,
+            nav: true,
+            navText: [
+                "<img src='/images/HomePage/chevron_left.svg'>",
+                "<img src='/images/HomePage/chevron_right.svg'>",
+            ],
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 3,
+                },
+                1000: {
+                    items: 5,
+                },
+            },
+        });
     });
 
-    $(".product_cate1_slider").owlCarousel({
-      items: 5,
-      loop: false,
-      margin: 5,
-      nav: true,
-      navText: [
-        "<img src='/images/HomePage/chevron_left.svg'>",
-        "<img src='/images/HomePage/chevron_right.svg'>",
-      ],
-      responsive: {
-        0: {
-          items: 1,
+    $(".product_slider_cell").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: false,
+        autoplay: true,
+        autoplaySpeed: 1500,
+        autoplayTimeout: 8000,
+        autoplayHoverPause: true,
+        navText: [
+            '<i class="fa fa-chevron-left"></i>',
+            '<i class="fa fa-chevron-right"></i>',
+        ],
+        responsive: {
+            0: {
+                items: 1,
+            },
+            600: {
+                items: 1,
+            },
+            1000: {
+                items: 1,
+            },
         },
-        600: {
-          items: 3,
-        },
-        1000: {
-          items: 5,
-        },
-      },
     });
-  });
 });

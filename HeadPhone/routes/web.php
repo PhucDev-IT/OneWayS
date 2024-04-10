@@ -32,13 +32,13 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 |
 */
 
+Route::get('/', [HomeController::class, 'index'])->name('trang_chu');
+
 Route::get('/welcom', function () {
     return view('welcome');
 });
 
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-
-Route::middleware(['middleware' => 'auth'],)->group(function () {
 
     //Trang chủ
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -64,37 +64,38 @@ Route::middleware(['middleware' => 'auth'],)->group(function () {
     Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
     Route::resource('admin/users', UserController::class);
     Route::post('admin/user/store', [UserController::class, 'store'])->name('admin.users.store');
-Route::resource('admin/roles', RoleController::class);
+    Route::resource('admin/roles', RoleController::class);
 
 
-Route::resource('admin/users', UserController::class);
-Route::resource('admin/categories', CategoryController::class);
-Route::resource('admin/products', ProductController::class);
-Route::resource('admin/vouchers', CouponController::class);
-Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
-//BANNER CATEGORIES
-Route::prefix('/banner-categories')->group(function () {
-    Route::get('/', [BannerCategoryController::class, 'index'])->name('banner-categories');
+    Route::resource('admin/users', UserController::class);
+    Route::resource('admin/categories', CategoryController::class);
+    Route::resource('admin/products', ProductController::class);
+    Route::resource('admin/vouchers', CouponController::class);
+    Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
+    //BANNER CATEGORIES
+    Route::prefix('/banner-categories')->group(function () {
+        Route::get('/', [BannerCategoryController::class, 'index'])->name('banner-categories');
 
-    Route::get('/edit-banner-categories/{id}', [BannerCategoryController::class, 'edit'])
-      ->where('id', '[0-9]+')
-      ->name('banner-categories-edit');
+        Route::get('/edit-banner-categories/{id}', [BannerCategoryController::class, 'edit'])
+          ->where('id', '[0-9]+')
+          ->name('banner-categories-edit');
 
-    Route::get('/add', [BannerCategoryController::class, 'add'])->name('banner-categories-add');
-    
-    Route::get('/delete-banner-categories/{id}', [BannerCategoryController::class, 'delete'])->name('delete-banner-categories');
+        Route::get('/add', [BannerCategoryController::class, 'add'])->name('banner-categories-add');
+        
+        Route::get('/delete-banner-categories/{id}', [BannerCategoryController::class, 'delete'])->name('delete-banner-categories');
 
-  });
-  Route::post('/banner-categories-store', [BannerCategoryController::class, 'banner_store_category'])->name('banner-categories-store');
-  
-  //BANNER
-  Route::prefix('/banner')->group(function () {
+      });
+    Route::post('/banner-categories-store', [BannerCategoryController::class, 'banner_store_category'])->name('banner-categories-store');
+      
+    //BANNER
+    Route::prefix('/banner')->group(function () {
     Route::get('/', [BannerController::class, 'index'])->name('banner');
+    Route::post('/', [BannerController::class, 'index'])->name('banner_filter');
 
     Route::get('/edit-banner/{id}', [BannerController::class, 'edit'])
       ->where('id', '[0-9]+')
       ->name('banner-edit');
-
+      
     Route::get('/add', [BannerController::class, 'add'])->name('banner-add');
     
     Route::get('/delete-banner/{id}', [BannerController::class, 'delete'])->name('delete-banner');
@@ -139,7 +140,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/show/product{id}', [ProductsController::class, 'show'])->name('products.details');
 Route::get('fetchNewProducts', [HomeController::class, 'fetchNewProducts']);
-});

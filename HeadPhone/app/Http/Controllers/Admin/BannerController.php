@@ -10,11 +10,19 @@ use App\Models\BannerCategoryModel;
 
 class BannerController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $banner = BannerModel::with('banner_cate')->orderBy('created_at','desc')->get();
         //return $banner;
-        return view('admin.banner.banners', compact('banner'));
+        $banner_categories = BannerCategoryModel::orderBy('created_at')->get();
+        $filter_categories = 0; //chua loi undefined $filter_categories khi them moi banner
+        if($request->input('banner_categories'))
+        {
+          $filter_categories = (int)$request->input('banner_categories');
+          $banner = BannerModel::with('banner_cate')->where('parent_id', $request->input('banner_categories'))->orderBy('created_at','desc')->get();
+        } 
+        return view('admin.banner.banners', compact('banner','banner_categories','filter_categories'));
     }
+
     public function add(){
         //$banner = BannerModel::with('banner_cate')->orderBy('created_at','desc')->get();
         $banner_cate = BannerCategoryModel::orderBy('created_at')->get();
@@ -24,7 +32,6 @@ class BannerController extends Controller
         $banner = BannerModel::with('banner_cate')->find($id);
         //return $banner;
         $banner_cate = BannerCategoryModel::orderBy('created_at')->get();
-        
         return view('admin.banner.banners_edit', compact('banner','banner_cate'));
     }
 
