@@ -17,6 +17,13 @@
                 @error('name')
                 <span class="text-danger"> {{ $message }}</span>
                 @enderror
+                <label for="">Icon trên menu (Nhúng thẻ i từ FontAwesome hoặc Bootstrap)</label>
+                <input name="icon" value="{{old('name')}}" type="text" class="form-control" placeholder="Nhập vào icon">
+                <label>Đường liên kết</label>
+                <input name="links" value="{{old('name')}}" type="text" class="form-control" placeholder="Đường dẫn thẻ a">
+
+                <label for="">Kích hoạt</label>
+                <input type="checkbox" name="published" id="">
             </div>
 
             <button type="submit" class="btn btn-primary mr-2">Submit</button>

@@ -13,7 +13,10 @@
                     <tr>
                         <th>
                             #
-                        </th>
+                        </th> 
+                        <th>
+                            Icon
+                        </th>  
                         <th>
                             Tên danh mục
                         </th>

@@ -43,6 +43,8 @@
       <div class="collapse" id="configuration_page">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Cấu hình chung</a></li>
+          <li class="nav-item"><a class="nav-link" href="">Cấu hình menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="">Cấu hình navbar</a></li>
 
         </ul>
       </div>

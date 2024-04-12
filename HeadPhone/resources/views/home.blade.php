@@ -83,11 +83,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -119,11 +119,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -155,11 +155,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -195,11 +195,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -231,11 +231,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -267,11 +267,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -307,11 +307,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -343,11 +343,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -379,11 +379,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -419,11 +419,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -455,11 +455,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -491,11 +491,11 @@
                   </div>
                   <div class="p_action">
                     <p class="p_qty">
-                      <i class="fa-solid fa-check"></i>
+                      <i class="bi bi-check"></i>
                       Sẵn hàng
                     </p>
                     <a href="" class="p_buy">
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i class="bi bi-cart3"></i>
                     </a>
                   </div>
                 </div>
@@ -543,11 +543,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -590,11 +590,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -623,11 +623,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -656,11 +656,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -689,11 +689,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -722,11 +722,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -755,11 +755,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -788,11 +788,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>
@@ -821,11 +821,11 @@
                         </div>
                         <div class="p_action">
                             <p class="p_qty">
-                                <i class="fa-solid fa-check"></i>
+                                <i class="bi bi-check"></i>
                                 Sẵn hàng
                             </p>
                             <a href="" class="p_buy">
-                                <i class="fa-solid fa-cart-plus"></i>
+                                <i class="bi bi-cart3"></i>
                             </a>
                         </div>
                     </div>

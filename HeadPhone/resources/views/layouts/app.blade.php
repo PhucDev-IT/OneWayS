@@ -14,6 +14,7 @@
 
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/bootstrap.min.css')}}" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/slick.css')}}" />
@@ -24,6 +25,8 @@
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 	<!-- Owl carousel css -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/owl.carousel.min.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/owl.theme.default.min.css')}}" />
