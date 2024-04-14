@@ -1,6 +1,6 @@
-@extends('admin.layouts.app')
-
-@section('content')
+@extends('profile')
+@section('title', 'Theo dõi đơn hàng')
+@section('content-profile')
 
 <style>
     .row {
@@ -9,7 +9,7 @@
 </style>
 
 <head>
-    <link rel="stylesheet" href="{{asset('admin/assets/css/order.css')}}">
+    <link rel="stylesheet" href="{{asset('client/css/customs/order.css')}}">
 </head>
 <div class="card-order">
     <div class="tracking">
@@ -41,7 +41,7 @@
 
 
     <div class="card-content">
-        <div class="content-header">
+        <div class="cart-item card-header">
             <div class="tracking-number">
                 <label>Order number</label>
                 <span style="color: #31B6C0;">#{{$order->order_id}}</span>
@@ -52,19 +52,14 @@
                 <span>{{$order->created_at}}</span>
 
             </div>
-            <div class="order-create">
+            <div class="">
                 @if($order->trackingOrders->last()->name == "PENDING")
-                <a href="{{route('orders.confirm_order',['idOrder' => $order->order_id])}}" class="btn btn-primary">Xác nhận</a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Hủy đơn hàng</button>
-                @elseif($order->trackingOrders->last()->name == "PROCESSING")
-                <a href="{{route('orders.delivering',['idOrder' => $order->order_id])}}" class="btn btn-primary">Giao hàng</a>
-                @elseif($order->trackingOrders->last()->name == "DELIVERING")
-                <a href="{{route('orders.shipped',['idOrder' => $order->order_id])}}" class="btn btn-primary">Đã giao</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
                 @endif
             </div>
         </div>
 
-        <div class="order contact">
+        <div class="order card-contact">
             <p style="font-weight: bold; font-size: 20px;">Thông tin nhận hàng</p>
             <!-- Thông tin user -->
             <div class="contact-content">
@@ -87,33 +82,33 @@
             </div>
         </div>
 
-        <div class="order order-information">
+        <div class="order ">
             <p style="font-weight: bold; font-size: 20px;">Thông tin hóa đơn</p>
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-6">Mã đơn hàng</div>
-                        <div class="col-6">#{{$order->order_id}}</div>
+                        <div class="col-md-6">Mã đơn hàng</div>
+                        <div class="col-md-6">#{{$order->order_id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Thời gian đặt</div>
-                        <div class="col-6">{{$order->created_at}} </div>
+                        <div class="col-md-6">Thời gian đặt</div>
+                        <div class="col-md-6">{{$order->created_at}} </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Phương thức thanh toán</div>
-                        <div class="col-6">{{$order->method_payment}}</div>
+                        <div class="col-md-6">Phương thức thanh toán</div>
+                        <div class="col-md-6">{{$order->method_payment}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Tổng tiền</div>
-                        <div class="col-6"> {{ number_format($order->total, 0, ',', '.') }} đ</div>
+                        <div class="col-md-6">Tổng tiền</div>
+                        <div class="col-md-6"> {{ number_format($order->total, 0, ',', '.') }} đ</div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Phí vận chuyển</div>
-                        <div class="col-6"> {{ number_format($order->feeship, 0, ',', '.') }} đ</div>
+                        <div class="col-md-6">Phí vận chuyển</div>
+                        <div class="col-md-6"> {{ number_format($order->feeship, 0, ',', '.') }} đ</div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Giảm giá</div>
-                        <div class="col-6">
+                        <div class="col-md-6">Giảm giá</div>
+                        <div class="col-md-6">
                             <?php
                             $voucher = $order->voucher()
                             ?>
@@ -125,20 +120,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Tổng thanh toán</div>
-                        <div class="col-6"> {{ number_format($order->totalmoney, 0, ',', '.') }} đ</div>
+                        <div class="col-md-6" style="font-weight: bold; font-size: 18px;">Tổng thanh toán</div>
+                        <div class="col-md-6"> <span style="font-weight: bold; font-size: 18px; color: red;">{{ number_format($order->totalmoney, 0, ',', '.') }} đ</span></div>
                     </div>
 
                 </div>
                 <div class="col-md-6">
                     @if($voucher!=null)
                     <div class="row">
-                        <div class="col-6 text-right">Mã voucher</div>
-                        <div class="col-6 text-right"><a style="color: #c42eff;">#{{$voucher->voucher_id}}</a></div>
+                        <div class="col-md-6 text-right">Mã voucher</div>
+                        <div class="col-md-6 text-right"><a style="color: #c42eff;">#{{$voucher->voucher_id}}</a></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 text-right">Loại voucher</div>
-                        <div class="col-6 text-right"><span>{{$voucher->name}}</span></div>
+                        <div class="col-md-6 text-right">Loại voucher</div>
+                        <div class="col-md-6 text-right"><span>{{$voucher->name}}</span></div>
                     </div>
                     @endif
                 </div>
@@ -163,6 +158,7 @@
             </div>
             @endforeach
         </div>
+
     </div>
 </div>
 
@@ -170,32 +166,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title fs-5" id="exampleModalLabel">Bạn muốn hủy đơn hàng?</h4>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Bạn muốn hủy đơn hàng?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="post" action="{{route('admin.orders.cancel')}}">
-                @csrf
-                <div class="modal-body">
-                    <input type="text" name="order_id" value="{{$order->order_id}}" hidden>
+            <div class="modal-body">
+                <form>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Vui lòng cho chúng tôi biết lý do của bạn</label>
-                        <textarea class="form-control" id="message-text" name="reason" required></textarea>
+                        <input type="text" class="form-control" id="recipient-name">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Xác nhận</button>
-                </div>
-            </form>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
         </div>
-
     </div>
 </div>
-
-@endsection
-@section('script')
-<script>
-    hiddenLoadingPage();
-</script>
 
 @endsection

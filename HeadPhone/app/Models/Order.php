@@ -34,35 +34,46 @@ class Order extends Model
     }
 
 
-    public static function generateRandomString($length = null) {
+    public static function generateRandomString($length = null)
+    {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $charactersLength = strlen($characters);
         $length = $length ?? rand(8, 14);
         $randomString = '';
-    
+
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-    
+
         return $randomString;
     }
 
     public function details()
-    {
-        //Quan hệ 1-n
-        return $this->hasMany(OrderDetails::class);
-    }
+{
+    return $this->hasMany(OrderDetails::class, 'order_id', 'order_id');
+}
 
-    public function user()  {
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function address() {
+    public function address()
+    {
         return $this->belongsTo(Address::class);
     }
 
     public function trackingOrders()
     {
         return $this->hasMany(TrackingOrder::class, 'order_id', 'order_id');
+    }
+
+    public function voucher()
+    {
+        if ($this->voucher_id) {
+            return Voucher::where('voucher_id', '=', $this->voucher_id)->first();
+        }
+        return null; // Hoặc trả về giá trị mặc định khác phù hợp với ứng dụng của bạn
     }
 }

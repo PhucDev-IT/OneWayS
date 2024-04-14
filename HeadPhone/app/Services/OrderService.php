@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\CartDetails;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\TrackingOrder;
@@ -65,7 +66,7 @@ class OrderService
 
             DB::commit();
 
-            Cart::whereIn('id', $cart_ids)->delete();
+            CartDetails::whereIn('id', $cart_ids)->delete();
 
             Session::forget('order');
             Session::forget('carts');

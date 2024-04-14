@@ -534,7 +534,7 @@
                                 {{$data2->name}}
                             </a>
                             <span class="p_old_price">
-                                {{$data2->price}}
+                            {{ number_format($data2->price, 0, ',', '.') }} đ
                             </span>
                             <span class="p_discount"> (Tiết kiệm: {{$data2->sale}}% )</span>
                             <span class="p_price">

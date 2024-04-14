@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->bigInteger('quantity');
             $table->double('price');
+            $table->string('color');
+            $table->boolean('is_import')->default(false);
             $table->timestamps();
         });
     }

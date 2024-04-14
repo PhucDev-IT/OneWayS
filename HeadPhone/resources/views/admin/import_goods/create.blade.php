@@ -54,6 +54,12 @@
                 </div>
             </div>
             <div class="row">
+            <div class="col">
+                    <div class="form-group">
+                        <label>Màu sắc</label>
+                        <input id="input-color"  type="text" class="form-control " placeholder="Màu sản phẩm">
+                    </div>
+                </div>
                 <div class="col">
                     <div class="form-group">
                         <label>Số lượng</label>
@@ -141,7 +147,7 @@
     function displaySuggestions(products) {
         $("#productSuggestions").empty();
         selectProduct = null;
-        console.log('hello');
+     
         if (products.length > 0) {
 
             let list = '<ul class="dropdown-menu" style="display:block; position:relative;width:100%" >';
@@ -168,10 +174,12 @@
         shouldDisplayResults = false;
         let productId = $(this).data('id');
         let name = $(this).data('name');
-        selectProduct = [
-            product_id = productId,
-            name = name
-        ];
+     
+        selectProduct = {
+            product_id : productId,
+            name : name
+        }
+
         $('#product_id').val(productId);
         $('#input-product').val(name);
         $('#productSuggestions').fadeOut();
@@ -183,15 +191,16 @@
         // Lấy giá trị từ các trường input
         var priceValue = document.getElementById('input-price').value;
         var quantityValue = document.getElementById('input-quantity').value;
-
+    
         // Kiểm tra xem giá trị có hay không
-        if (priceValue.trim() !== '' && quantityValue.trim() !== '') {
+        if (priceValue.trim() !== '' && quantityValue.trim() !== '' && document.getElementById('input-color').value.trim() !=null) {
 
             let product = {
-                product_id: selectProduct != null ? selectProduct.id : null,
+                product_id: selectProduct != null ? selectProduct.product_id : null,
                 name: selectProduct != null ? selectProduct.name : document.getElementById('input-product').value,
                 quantity: quantityValue,
-                price: priceValue
+                price: priceValue,
+                color: document.getElementById('input-color').value
             };
             products = [...products, product];
 
@@ -200,6 +209,7 @@
 
             selectProduct = null;
             $('#input-product').val('');
+            document.getElementById('input-color').value = '';
             document.getElementById('input-price').value = '';
             document.getElementById('input-quantity').value = "";
 
@@ -219,6 +229,12 @@
 
         <div class="col">
             <div class="form-group">
+             <input type="text" class="form-control "  value="${product.color}" readonly>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
             <input type="text" class="form-control " value="${product.quantity}" readonly>
             </div>
         </div>
@@ -228,7 +244,7 @@
             </div>
         </div>
 
-         <div class="col ">
+         <div class="col">
             <span id="remove-product" data-id="${product.product_id}"> <i class="fa-solid fa-trash-can" style="color: #ff0000; margin-top:10px;"></i></span>
         </div>
     </div>

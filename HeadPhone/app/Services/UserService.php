@@ -25,7 +25,7 @@ class UserService
     public function getWithPaginate(): mixed
     {
         $all_users_with_all_their_roles = User::with('getRoles')->latest('created_at')->paginate(10);
-        
+
         return $all_users_with_all_their_roles;
     }
 

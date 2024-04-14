@@ -21,6 +21,7 @@ class OrderController extends Controller
 
     public function WaitingConfirm()
     {
+      
         return view('admin.orders.waitingforconfirm');
     }
 
@@ -28,12 +29,14 @@ class OrderController extends Controller
 
     public function callOrderConfirm(Request $request)
     {
+        
         return $this->orderService->getOrders($request, "PENDING");
     }
 
     public function orderDetail($id)
     {
         $order = Order::where('order_id', '=', $id)->with(['trackingOrders.product', 'user', 'details'])->first();
+
         $orderDetails = OrderDetails::where('order_id', $id)
             ->with('product')->get(); // Eager loading mối quan hệ 'details'
     
@@ -87,6 +90,25 @@ class OrderController extends Controller
         
         if($this->orderService->addTrackingOrder($idOrder, $tracking)){
             return redirect()->route('orders.orderDetail', ['id' => $idOrder])->with(['message-success' => 'Xác nhận đơn hàng đã được giao']);
+        }else{
+            return back()->with(['message-error' => 'Lỗi']);
+        }
+    }
+
+    //HUỷ đơn hàng
+    public function cancelOrder(Request $request){
+        $dataRequest = $request->all();
+        $orderId = $dataRequest['order_id'];
+        $reason = $dataRequest['reason'];
+        $tracking = [
+            'order_id' => $orderId,
+            'name' => 'CANCEL',
+            'name_vn' => 'Đơn hàng bị hủy',
+            'time' => now(),
+            'description' =>$reason,
+        ];
+        if($this->orderService->addTrackingOrder($orderId, $tracking)){
+            return redirect()->route('orders.orderDetail', ['id' => $orderId])->with(['message-success' => 'Xác nhận đơn hàng đã được giao']);
         }else{
             return back()->with(['message-error' => 'Lỗi']);
         }

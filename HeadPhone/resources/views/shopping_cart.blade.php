@@ -294,6 +294,7 @@
             success: function(response) {
                 console.log(response)
                 $('#input-quanity-' + idCart).value = response.cart_count;
+                calculateTotalMoney();
             },
             error: function(xhr, status, error) {
                 console.error(error);

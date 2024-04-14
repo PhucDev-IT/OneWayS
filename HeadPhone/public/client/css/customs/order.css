@@ -6,7 +6,7 @@
 .card-content {
     width: 70%;
     margin-left: 10px;
-    height: 500px;
+   
 
 }
 
@@ -32,24 +32,23 @@
     font-size: 20px;
 }
 
-.content-header {
+.cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
 
 }
-
-.content-header span {
+.cart-item  span {
     display: block;
     font-weight: bold;
 }
 
-.content-header label {
-    color: #bdbbb5;
+.cart-item label {
+    color: #7b776b;
 }
 
-.contact img {
+.card-contact img {
     border-radius: 50px;
 }
 
@@ -59,6 +58,8 @@
     justify-content: center;
     font-size: 13px;
 }
+
+
 
 .contact-user {
     margin-left: 10px;
@@ -78,6 +79,13 @@
 
     display: block;
     margin: 5px;
+}
+
+
+.card-information{
+ 
+    display: flex;
+    justify-content: space-between;
 }
 
 .product-item{
@@ -107,7 +115,7 @@
   font-size: 14px;
 }
 
-/* ------------------- */
+/* ------TRACKING------------- */
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 .tracking {
   background-color: #ffffff;
@@ -182,8 +190,3 @@
 
     font-size: 12px;
   }
-  
-  /* .item-title {
-    color: #fff;
-  } */
-  

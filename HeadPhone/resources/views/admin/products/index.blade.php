@@ -115,7 +115,7 @@
             $('tbody').append(`
                     <tr>
                         <td>
-                            ${product.product_id}
+                            ${product.id}
                         </td>
                         <td>
                             <img src="{{asset('storage/uploads/${product.img_preview}')}}" alt="Demo" width="250">
@@ -124,7 +124,7 @@
                            ${product.name}
                         </td>
                         <td>
-                            <span class="text-danger">${formatCurrency(product.price)} </span>
+                            <span style="font-weight: 500; color: red;">${formatCurrency(product.price)} </span>
                         </td>
                         <td>
                     

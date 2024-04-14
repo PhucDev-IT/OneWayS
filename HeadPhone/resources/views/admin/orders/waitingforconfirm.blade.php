@@ -92,7 +92,7 @@
     function fetchData() {
         $.ajax({
             type: 'GET',
-            url: "/fetch/orders-pendding",
+            url: "/admin/fetch/orders-pendding",
 
             dataType: 'json',
             success: function(response) {
@@ -107,7 +107,7 @@
         function setData($orders) {
             $('tbody').empty();
             $.each($orders, function(key, order) {
-                console.log(order.tracking_orders);
+               
                 $('tbody').append(`
             <tr>
                         <td>
@@ -128,7 +128,7 @@
                         </td>
                         <td><span class="text-danger">${formatCurrency(order.totalmoney)} </span></td>
                         <td>
-                            <a href="/order/id=${order.order_id}" style="margin-right: 10px;"><i class="fa-solid fa-pen-to-square" style="color: #29ff1a;"></i></a>
+                            <a href="/admin/order/id=${order.order_id}" style="margin-right: 10px;"><i class="fa-solid fa-pen-to-square" style="color: #29ff1a;"></i></a>
                             <span id="btn-remove" onclick="showModelConfirm(this)" data-id=""> <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i></span>
                             
                         </td>

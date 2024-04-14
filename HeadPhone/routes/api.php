@@ -38,7 +38,7 @@ Route::get('/fetch-categories',[CategoryController::class,"fetchCategories"]);
 Route::get('/fetch-coupons',[CouponController::class,"fetchCoupon"]);
 Route::post('/create-category',[CategoryController::class,'store']);
 
-
+Route::get('admin/find-product',[ProductController::class,'findProduct']);
 //Client
 
 Route::get('/province',[ProfileController::class,'callProvinces']);

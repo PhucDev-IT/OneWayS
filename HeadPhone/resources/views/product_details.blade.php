@@ -139,7 +139,14 @@
 								<span class="qty-down">-</span>
 							</div>
 						</div>
+						@if (Route::has('login'))
+						@auth
 						<button onclick="addToCart('{{$product->id}}')" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+						@else
+						<a href="{{ route('login') }}" class="btn btn-primary btn-lg">Đăng nhập</a>
+						@endauth
+						@endif
+
 					</div>
 
 					<ul class="product-links">
@@ -545,7 +552,6 @@
 		element.classList.add('selected');
 	}
 
-
 	function addToCart(idProduct) {
 
 		if (mColor == null) {
@@ -569,12 +575,11 @@
 					},
 					dataType: "json",
 					success: function(response) {
-						console.log(response)
-					
+			
 					},
 					error: function(xhr, status, error) {
 						console.error(error);
-						// Xử lý lỗi ở đây
+						alert('có lỗi xảy ra');
 					}
 				});
 			}
