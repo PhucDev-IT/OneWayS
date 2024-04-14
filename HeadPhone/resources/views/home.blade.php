@@ -834,9 +834,559 @@
         </div>
     </div>
     <!-- CATEGORY PRODUCT 3 -->
-    
+    <div class="cate_product_1">
+        <div class="heading_cate_product">
+            <p class="title_heading_cate">LAPTOP, MACBOOK, SURFACE</p>
+            <div class="sub_cat_title"></div>
+            <a href="" class="view_all">
+                Xem tất cả
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+        </div>
+        <div class="product_cate1_slider owl-carousel owl-theme">
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- CATEGORY PRODUCT 4 -->
-    
+    <div class="cate_product_1">
+        <div class="heading_cate_product">
+            <p class="title_heading_cate">LAPTOP, MACBOOK, SURFACE</p>
+            <div class="sub_cat_title"></div>
+            <a href="" class="view_all">
+                Xem tất cả
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+        </div>
+        <div class="product_cate1_slider owl-carousel owl-theme">
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p_component item">
+                <div class="link_card_product">
+                    <div class="content_p_wrapper">
+                        <a href="" class="p_img">
+                            <img src="{{asset('client/img/products/p0.jpeg')}}" alt="" />
+                        </a>
+                        <div class="vote_pcode">
+                            <div class="star_vote">
+                                <img src="{{asset('client/img/HomePage/star_0.png')}}" alt="" />
+                            </div>
+                            <div class="p_code">Mã: <span>LTGI039</span></div>
+                        </div>
+                        <div class="p_infor">
+                            <a href="" class="p_name">
+                                Laptop Gigabyte G5 (KF-E3VN333SH) (i5 12500H/8GB RAM/512GB
+                                SSD/RTX4060)
+                            </a>
+                            <span class="p_old_price">26.799.000₫ </span>
+                            <span class="p_discount"> (Tiết kiệm: 13% )</span>
+                            <span class="p_price">23.299.000₫ </span>
+                        </div>
+                        <div class="p_action">
+                            <p class="p_qty">
+                                <i class="bi bi-check"></i>
+                                Sẵn hàng
+                            </p>
+                            <a href="" class="p_buy">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

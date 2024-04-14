@@ -55,6 +55,7 @@
         <i class="typcn typcn-image-outline menu-icon"></i>
         <span class="menu-title">Banner</span>
         <i class="menu-arrow"></i>
+        
       </a>
       <div class="collapse" id="banner">
         <ul class="nav flex-column sub-menu">

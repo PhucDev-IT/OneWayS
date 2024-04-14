@@ -138,6 +138,8 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror()
             </div>
+            
+            <x-editor name="desc" id="desc" title="Tóm tắt" content="" />
 
 
             <div class="form-group">
