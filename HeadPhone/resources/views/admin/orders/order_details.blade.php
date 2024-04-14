@@ -15,7 +15,7 @@
     <div class="tracking">
         <div class="left-header">
             <span class="left-header title">Tiến trình</span>
-            <span>{{ $order->trackingOrders->last()->name }}</span>
+            <span style="background-color: #f5cb4e; padding: 5px; border-radius: 5px; font-weight: 600;">{{ $order->trackingOrders->last()->name }}</span>
 
         </div>
         <div class="tracking-content">
@@ -93,7 +93,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">Mã đơn hàng</div>
-                        <div class="col-6">#{{$order->order_id}}</div>
+                        <div class="col-6"><span style="color: #31B6C0;">#{{$order->order_id}}</span></div>
                     </div>
                     <div class="row">
                         <div class="col-6">Thời gian đặt</div>
@@ -125,8 +125,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">Tổng thanh toán</div>
-                        <div class="col-6"> {{ number_format($order->totalmoney, 0, ',', '.') }} đ</div>
+                        <div class="col-6" style="font-weight: bold; font-size: 18px;">Tổng thanh toán</div>
+                        <div class="col-6"> <span style="font-weight: bold; font-size: 18px; color: red;">{{ number_format($order->totalmoney, 0, ',', '.') }} đ</span></div>
                     </div>
 
                 </div>
@@ -150,7 +150,8 @@
             <div class="product-item">
                 <img src="{{ asset('storage/uploads/'.$item->product->img_preview) }}" alt="" />
                 <div class="information">
-                    <label for="">{{$item->product->name}}</label>
+                    
+                    <label for=""><a href="{{route('products.show_details',['id'=>$item->product->id])}}">{{$item->product->name}}</a></label>
                     <div>
                         <span class="title">Phân loại:</span>
                         <span class="detail">{{$item->color}}</span>

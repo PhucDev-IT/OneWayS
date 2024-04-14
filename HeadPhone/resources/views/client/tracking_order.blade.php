@@ -15,7 +15,8 @@
     <div class="tracking">
         <div class="left-header">
             <span class="left-header title">Tiến trình</span>
-            <span>{{ $order->trackingOrders->last()->name }}</span>
+            <span style="background-color: #f5cb4e; padding: 5px; border-radius: 5px; font-weight: 600;">{{ $order->trackingOrders->last()->name }}</span>
+
 
         </div>
         <div class="tracking-content">
@@ -54,7 +55,9 @@
             </div>
             <div class="">
                 @if($order->trackingOrders->last()->name == "PENDING")
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hủy đơn hàng</button>
+                @elseif($order->trackingOrders->last()->name == "SHIPPED")
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-review">Đánh giá</button>
                 @endif
             </div>
         </div>
@@ -88,7 +91,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">Mã đơn hàng</div>
-                        <div class="col-md-6">#{{$order->order_id}}</div>
+                        <div class="col-md-6"><span style="color: #31B6C0;">#{{$order->order_id}}</span></div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">Thời gian đặt</div>
@@ -110,6 +113,9 @@
                         <div class="col-md-6">Giảm giá</div>
                         <div class="col-md-6">
                             <?php
+
+                            use function PHPSTORM_META\map;
+
                             $voucher = $order->voucher()
                             ?>
                             @if($voucher != null)
@@ -145,7 +151,7 @@
             <div class="product-item">
                 <img src="{{ asset('storage/uploads/'.$item->product->img_preview) }}" alt="" />
                 <div class="information">
-                    <label for="">{{$item->product->name}}</label>
+                    <label for=""><a href="{{route('products.show_details',['id'=>$item->product->id])}}">{{$item->product->name}}</a></label>
                     <div>
                         <span class="title">Phân loại:</span>
                         <span class="detail">{{$item->color}}</span>
@@ -162,31 +168,118 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Bạn muốn hủy đơn hàng?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Vui lòng cho chúng tôi biết lý do của bạn</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
-            </div>
+            <form method="post" action="/order/cancel">
+                @csrf
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Xác nhận hủy đơn hàng</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Thật đáng tiếc, vui lòng cho chúng tôi biết lý do của bạn?
+                    <textarea class="form-control" id="message-text" name="reason" required></textarea>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<!-- modal đánh giá sản phẩm -->
+<div class="modal fade" id="modal-review">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Đánh giá sản phẩm</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <form action="" method="post" class="review-form">
+                <div class="modal-body">
+                    <label for="">Chọn sản phẩm đánh giá</label>
+                    <br>
+                    <?php
+                    $products = [];
+                    foreach ($orderDetails as $item) {
+                        $productId = $item->product->id;
+                        $color = $item->color;
+
+                        // Kiểm tra xem sản phẩm đã tồn tại trong danh sách hay chưa
+                        if (array_key_exists($productId, $products)) {
+                            // Nếu sản phẩm đã tồn tại, thêm màu vào danh sách color của sản phẩm
+                            $products[$productId]['color'] .= ", " . $color;
+                        } else {
+                            // Nếu sản phẩm chưa tồn tại, thêm mới vào danh sách
+                            $products[$productId] = [
+                                'id' => $productId,
+                                'name' => $item->product->name,
+                                'color' => $color  // Sử dụng mảng để lưu trữ danh sách color
+                            ];
+                        }
+                    }
+                    ?>
+                    <select style="height: 30px; margin-bottom: 10px;" name="" id="">
+
+                        @foreach($products as $productId => $product)
+
+                        <option value="{{$productId}}">{{$product['name']}} -  {{$product['color']}}</option>
+
+                        @endforeach
+                    </select>
+                    <div id="review-form">
+
+                        <label for="">Vui lòng cho chúng tôi biết trải nghiệm sản phẩm của bạn</label>
+                        <textarea class="input" placeholder="Your Review" required></textarea>
+                        <div class="input-rating">
+                            <span>Your Rating: </span>
+                            <div class="stars">
+                                <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" onclick="return validateForm()" class="btn btn-primary">Đánh giá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('script')
+<script src="{{ asset('admin/assets/js/public-js.js') }}"></script>
+<script>
+    function validateForm() {
+        var ratingSelected = document.querySelector('input[name="rating"]:checked');
+        if (!ratingSelected) {
+            alert("Vui lòng chọn rating trước khi đánh giá.");
+            return false;
+        }
+        return true;
+    }
+</script>
 
 @endsection

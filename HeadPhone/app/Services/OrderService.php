@@ -82,7 +82,6 @@ class OrderService
 
     public function addTrackingOrder($idOrder,$tracking)
     {
-
         try {
             
             $order = Order::where('order_id', '=', $idOrder)->first();

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\TrackingOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PurchaseHistoryController extends Controller
@@ -62,5 +64,38 @@ class PurchaseHistoryController extends Controller
             $orderDetails = [];
             return view('client.tracking_order', compact('order', 'orderDetails'));
         }
+    }
+
+    public function cancelOrder(Request $request){
+        $dataRequest = $request->all();
+        $orderId = $dataRequest['order_id'];
+        $reason = $dataRequest['reason'];
+        $tracking = [
+            'order_id' => $orderId,
+            'name' => 'cancel',
+            'name_vn' => 'Đơn hàng bị hủy',
+            'time' => now(),
+            'description' =>$reason,
+        ];
+        try {
+            DB::beginTransaction();
+            $order = Order::where('order_id', '=', $orderId)->first();
+
+            if ($order) {
+                $order->where('order_id', $orderId)->update(['current_status' => $tracking['name']]);
+            }
+            TrackingOrder::create($tracking);
+            DB::commit();
+            return redirect()->route('/order/tracking/'+$orderId)->with(['message-success' => 'Đơn hàng đã bị hủy']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error($e->getMessage());
+            return back()->with(['message-error' => 'Lỗi']);
+        }
+       
+    }
+
+    public function review(){
+        
     }
 }

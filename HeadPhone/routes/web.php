@@ -56,12 +56,13 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
     //admin - orders
     Route::get('admin/orders', [OrderController::class, 'index'])->name('orders.index');
-  
+
+    Route::post('admin/order/cancel',[OrderController::class,'cancelOrder'])->name('admin.orders.cancel');
     Route::get('admin/order/id={id}', [OrderController::class, 'orderDetail'])->name('orders.orderDetail');
     Route::get("admin/confirm-order/{idOrder}", [OrderController::class, 'confirmOrder'])->name("orders.confirm_order");
     Route::get('admin/transport-order/{idOrder}', [OrderController::class, 'transportOrder'])->name("orders.delivering");
     Route::get('admin/shipped-order/{idOrder}', [OrderController::class, 'shipped'])->name("orders.shipped");
-    Route::post('admin/order/cancel',[OrderController::class,'cancelOrder'])->name('admin.orders.cancel');
+
 
 
     Route::get('admin/filler-products', [ProductController::class, 'fillerByName'])->name('admin.products.filler');
@@ -146,6 +147,9 @@ Route::middleware(['auth'])->group(function () {
     //Xem đơn hàng
     Route::get('/orders',[PurchaseHistoryController::class,'index']);
     Route::get('/order/tracking/{id}',[PurchaseHistoryController::class,'OrderDetails']);
+    Route::post('order/cancel',[PurchaseHistoryController::class,'cancelOrder']);
+    Route::post('order/review',[PurchaseHistoryController::class,'review']);
+
 });
 
 

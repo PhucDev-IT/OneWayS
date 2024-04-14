@@ -104,7 +104,7 @@ class OrderController extends Controller
             'description' =>$reason,
         ];
         if($this->orderService->addTrackingOrder($orderId, $tracking)){
-            return redirect()->route('orders.orderDetail', ['id' => $orderId])->with(['message-success' => 'Xác nhận đơn hàng đã được giao']);
+            return redirect()->route('orders.orderDetail', ['id' => $orderId])->with(['message-success' => 'Đơn hàng đã bị hủy']);
         }else{
             return back()->with(['message-error' => 'Lỗi']);
         }
