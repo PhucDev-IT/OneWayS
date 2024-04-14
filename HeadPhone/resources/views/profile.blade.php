@@ -62,14 +62,14 @@
         <ul>
             <li>
                 <div>
-                    <img class="avatar" src="{{asset('client/img/product02.png')}}" alt="" width="110">
+                    <img class="avatar" src="{{asset('admin/assets/images/favicon.png')}}" alt="" width="110">
                     <label style="margin-top: 10px;" for="">Nguyễn Văn Phúc</label>
                 </div>
             </li>
 
             <li class="menu-item"><a href="#">Thông tin tài khoản</a></li>
             <li><a href="{{ route('profile.fetchAddress') }}">Địa chỉ nhận hàng</a></li>
-            <li><a href="#">Đơn hàng</a></li>
+            <li><a href="/orders">Đơn hàng</a></li>
             <li><a href="#">Mã giảm giá</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">

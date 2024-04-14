@@ -44,8 +44,8 @@
                         <img src="{{asset('client/img/HomePage/logoOneWay.svg')}}" alt="">
                     </a>
                 </div>
-                <form action="" method="post" class="form-search-header">
-                    <input class="search-input-field" type="text" placeholder="Bạn cần tìm gì? iPhone, iPad, Macbook...?" name="search">
+                <form action="{{route('store.index')}}" method="get" class="form-search-header">
+                    <input class="search-input-field" type="text" placeholder="Bạn cần tìm gì? iPhone, iPad, Macbook...?" name="name">
                     <button type="submit" class="SearchIcon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
@@ -87,7 +87,7 @@
                     </div>
                     <div class="desc-services-header">
                         <p>Giỏ hàng</p>
-                        <p class="bolder-p">Sản phẩm <span>{{ session('cart-count')?:0 }}</span></p>
+                        <p class="bolder-p">Sản phẩm <span id="cart-count">{{ session('cart-count')?:0 }}</span></p>
                     </div>
                 </div>
                 <div class="service-items">

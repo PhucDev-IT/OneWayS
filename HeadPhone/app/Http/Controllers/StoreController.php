@@ -11,14 +11,23 @@ class StoreController extends Controller
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $name = $request->query('name');
 
+        $products  = [];
+        if($name != null){
+            $products = Product::where('name', 'LIKE', '%' . $name . '%')->paginate(8);
+        }else{
+            $products = Product::paginate(6);
+        }
         $categories = Category::withCount('products')->get();
         $suppliers = Supplier::withCount('products')->get();
-        $products = Product::paginate(6);
+        
         return view('store', compact('categories', 'suppliers', 'products'));
     }
+
+     
 
     public function filler(Request $request)
     {

@@ -3,12 +3,12 @@
     <li class="nav-item">
       <div class="d-flex sidebar-profile">
         <div class="sidebar-profile-image">
-          <img src="{{asset('admin/assets/images/faces/face29.png')}}" alt="image">
+          <img src="{{@Auth::user()->avatar}}" alt="image">
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
           <p class="sidebar-name">
-             Nguyễn Văn Phúc
+            {{@Auth::user()->name}}
           </p>
           <p class="sidebar-designation">
             Welcome
@@ -92,18 +92,11 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+      <a class="nav-link"  href="{{route('orders.index')}}" >
         <i class="typcn typcn-dropbox menu-icon"></i>
         <span class="menu-title">Đơn hàng</span>
-        <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="form-elements">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{{route('orders.waiting_confirm')}}">Chờ xác nhận</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Chờ gói hàng</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Đang giao hàng</a></li>
-        </ul>
-      </div>
+
     </li>
 
     <li class="nav-item">
@@ -125,71 +118,16 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
         <i class="typcn typcn-chart-pie-outline menu-icon"></i>
-        <span class="menu-title">Charts</span>
+        <span class="menu-title">Báo cáo - Thống kê</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="charts">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{route('admin.statistical.products')}}">Doanh thu sản phẩm</a></li>
         </ul>
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-        <i class="typcn typcn-th-small-outline menu-icon"></i>
-        <span class="menu-title">Tables</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="tables">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-        <i class="typcn typcn-compass menu-icon"></i>
-        <span class="menu-title">Icons</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="icons">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-        <i class="typcn typcn-user-add-outline menu-icon"></i>
-        <span class="menu-title">User Pages</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="auth">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-        <i class="typcn typcn-globe-outline menu-icon"></i>
-        <span class="menu-title">Error pages</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="error">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="pages/documentation/documentation.html">
-        <i class="typcn typcn-document-text menu-icon"></i>
-        <span class="menu-title">Documentation</span>
-      </a>
-    </li>
+
   </ul>
- 
+
 </nav>

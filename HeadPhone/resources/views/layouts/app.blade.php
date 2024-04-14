@@ -15,6 +15,7 @@
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/bootstrap.min.css')}}" />
 	
+	
 
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/slick.css')}}" />
@@ -25,6 +26,7 @@
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
+
 
 
 	<!-- Owl carousel css -->

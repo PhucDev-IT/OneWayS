@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class BannerModel extends Model
 {
-    use HasFactory;
-    protected $table = 'banners';
-    public function banner_store($request)
-    {
+  use HasFactory;
+  protected $table = 'banners';
+  public function banner_store($request)
+  {
     try {
 
       $id = $request->input('id');
-        //dd($id);
+      //dd($id);
       if ($id) {
         $banner = BannerModel::find($id);
         $banner->updated_at = date('Y-m-d H:i:s');
@@ -24,7 +24,7 @@ class BannerModel extends Model
       }
       $banner->name = $request->input('name');
       $banner->parent_id = $request->input('parent_id');
-      if(@$request->file('img_preview')){
+      if (@$request->file('img_preview')) {
         $banner->image = $request->file('img_preview')->store('public/images/banner');
       }
       //$banner->image = $request->input('image');
@@ -38,11 +38,9 @@ class BannerModel extends Model
       // Nếu có lỗi, chuyển hướng với thông báo lỗi
       return 0;
     }
-    
   }
-  public function banner_cate():HasOne
+  public function banner_cate(): HasOne
   {
     return $this->hasOne(BannerCategoryModel::class, 'id', 'parent_id');
   }
-    
-}   
+}

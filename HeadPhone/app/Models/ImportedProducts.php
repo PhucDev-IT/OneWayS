@@ -12,8 +12,10 @@ class ImportedProducts extends Model
         'name',
         'import_information_id',
         'product_id',
+        'color',
         'quantity',
-        'price'
+        'price',
+        'is_import'
 
     ];
 }

@@ -30,10 +30,10 @@ class ShoppingCartController extends Controller
         
         $id = Auth::id();
         $cart = Cart::where('user_id', $id)->first();
-        
+     
         if ($cart) {
             $carts = $cart->load('cartDetails');
-           
+
             return view('shopping_cart', compact('carts'));
         }
 
@@ -78,12 +78,23 @@ class ShoppingCartController extends Controller
                     'product_id' => $idProduct
                 ]);
             }
-            $request->session()->put('cart-count', $request->session()->get('cart-count', 0) + 1);
+            $this->countCart();
             return response()->json(['success' => "Thêm thành công"], 200);
         } catch (QueryException $e) {
             Log::error($e->getMessage()); // Ghi thông điệp lỗi vào tệp nhật ký
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    function countCart()
+    {
+        $idUser = Auth::id();
+        $count = $count = CartDetails::join('carts', 'cart_details.cart_id', '=', 'carts.id')
+            ->where('carts.user_id', $idUser)
+            ->count();
+
+        session(['cart-count' => $count]);
+        session()->save();
     }
 
     //Cập nhật số lượng sản phẩm khi thay đổi

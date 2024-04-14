@@ -124,7 +124,7 @@
             <div class="col-md-9">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <span class="pull-right">(<strong>5</strong>) items</span>
+                        <span class="pull-right">(<strong>{{$carts->cartDetails->count()}}</strong>) items</span>
                         <h5>Items in your cart</h5>
                     </div>
 
@@ -294,6 +294,7 @@
             success: function(response) {
                 console.log(response)
                 $('#input-quanity-' + idCart).value = response.cart_count;
+                calculateTotalMoney();
             },
             error: function(xhr, status, error) {
                 console.error(error);

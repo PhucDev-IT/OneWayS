@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\CartDetails;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\TrackingOrder;
@@ -54,7 +55,7 @@ class OrderService
 
             $tracking = [
                 'order_id' => $orderNew->order_id,
-                'name' => 'PENDING',
+                'name' => 'pending',
                 'name_vn' => 'Chờ xác nhận',
                 'time' => now(),
                 'description' => 'Đơn hàng đã được đặt. Chờ người bán xác nhận đơn hàng',
@@ -65,7 +66,7 @@ class OrderService
 
             DB::commit();
 
-            Cart::whereIn('id', $cart_ids)->delete();
+            CartDetails::whereIn('id', $cart_ids)->delete();
 
             Session::forget('order');
             Session::forget('carts');
@@ -81,7 +82,6 @@ class OrderService
 
     public function addTrackingOrder($idOrder,$tracking)
     {
-
         try {
             
             $order = Order::where('order_id', '=', $idOrder)->first();

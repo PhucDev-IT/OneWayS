@@ -15,6 +15,9 @@ use App\Http\Controllers\Admin\BannerCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ImportGoodsController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\StatisticalController;
+use App\Http\Controllers\Client\PurchaseHistory;
+use App\Http\Controllers\Client\PurchaseHistoryController;
 use App\Http\Controllers\StoreController;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
@@ -48,17 +51,31 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('admin/nhap-hang', [ImportGoodsController::class, 'index'])->name('imports.index');
     Route::get('admin/them-phieu-nhap', [ImportGoodsController::class, 'create'])->name('imports.create');
     Route::post('admin/nhap-hang/store', [ImportGoodsController::class, 'store'])->name('imports.store');
+    Route::get('admin/nhap-hang/san-pham',[ImportGoodsController::class,'showProducts'])->name('admin.nhap-hang.san-pham');
+    Route::post('admin/sync-product',[ImportGoodsController::class,'addQuantityToProduct'])->name('admin.sync-product');
 
     //admin - orders
-    Route::get('orders/pendding', [OrderController::class, 'WaitingConfirm'])->name('orders.waiting_confirm');
-    Route::get('fetch/orders-pendding', [OrderController::class, 'callOrderConfirm'])->name('orders.fetch_order_pending');
-    Route::get('order/id={id}', [OrderController::class, 'orderDetail'])->name('orders.orderDetail');
-    Route::get("confirm-order/{idOrder}", [OrderController::class, 'confirmOrder'])->name("orders.confirm_order");
-    Route::get('transport-order/{idOrder}', [OrderController::class, 'transportOrder'])->name("orders.delivering");
-    Route::get('shipped-order/{idOrder}', [OrderController::class, 'shipped'])->name("orders.shipped");
+    Route::get('admin/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    Route::post('admin/order/cancel',[OrderController::class,'cancelOrder'])->name('admin.orders.cancel');
+    Route::get('admin/order/id={id}', [OrderController::class, 'orderDetail'])->name('orders.orderDetail');
+    Route::get("admin/confirm-order/{idOrder}", [OrderController::class, 'confirmOrder'])->name("orders.confirm_order");
+    Route::get('admin/transport-order/{idOrder}', [OrderController::class, 'transportOrder'])->name("orders.delivering");
+    Route::get('admin/shipped-order/{idOrder}', [OrderController::class, 'shipped'])->name("orders.shipped");
+
+
 
     Route::get('admin/filler-products', [ProductController::class, 'fillerByName'])->name('admin.products.filler');
     Route::get('admin/products/search', [ProductController::class, 'search'])->name('products.search');
+
+  //Thống kê
+  Route::get('admin/statistical-products',[StatisticalController::class,'statisticalProducts'])->name('admin.statistical.products');
+  Route::get('admin/product/pie-chart',[StatisticalController::class,'pieChart'])->name('admin.statistical.piechart');
+
+
+
+
+
 
     //User
     Route::get('search-users', [UserController::class, 'searchUsers'])->name('voucher.search_user');
@@ -105,10 +122,6 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
   
 
 
-//admin - orders
-Route::get('waiting-confirm',[OrderController::class,'WaitingConfirm'])->name('orders.waiting_confirm');
-Route::get('fetch-order-confirm',[OrderController::class,'callOrderConfirm'])->name('orders.fetch_order_pending');
-Route::get('order/id={id}',[OrderController::class,'orderDetail'])->name('orders.orderDetail');
 
 Route::resource('admin/banner', BannerController::class);
 Route::resource('admin/banner_category', BannerCategoryController::class);
@@ -129,6 +142,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/request', [CheckoutController::class, 'requestCheckout'])->name('checkout.request');
     Route::get('completed', [CheckoutController::class, 'paymentCompleted'])->name('checkout.complete');
     Route::post('payment', [CheckoutController::class, 'payment'])->name('checkout.payment');
+
+
+    //Xem đơn hàng
+    Route::get('/orders',[PurchaseHistoryController::class,'index']);
+    Route::get('/order/tracking/{id}',[PurchaseHistoryController::class,'OrderDetails']);
+    Route::post('order/cancel',[PurchaseHistoryController::class,'cancelOrder']);
+    Route::post('order/review',[PurchaseHistoryController::class,'review']);
+
 });
 
 
@@ -142,5 +163,5 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/show/product{id}', [ProductsController::class, 'show'])->name('products.details');
+Route::get('/show/product', [ProductsController::class, 'show'])->name('products.show_details');
 Route::get('fetchNewProducts', [HomeController::class, 'fetchNewProducts']);

@@ -11,6 +11,7 @@ use App\Services\ProductService;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
+use Laravel\Ui\Presets\React;
 
 class ProductController extends Controller
 {
@@ -146,5 +147,12 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    //Tìm sản phẩm với detail
+    public function findProduct(Request $request){
+        $id = $request->query('product_id');
+        $product = $this->productService->findOrFail($id)->load('details');
+        return response()->json($product);
     }
 }

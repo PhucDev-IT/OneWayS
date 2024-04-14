@@ -520,7 +520,7 @@
             <div class="p_component item">
                 <div class="link_card_product">
                     <div class="content_p_wrapper">
-                        <a href="/show/product{{$data2->id}}" class="p_img">
+                        <a href="{{route('products.show_details',['id' => $data2->id])}}" class="p_img">
                             <img src="{{ asset('storage/uploads/'.$data2->img_preview) }}" alt="" />
                         </a>
                         <div class="vote_pcode">
@@ -530,11 +530,11 @@
                             <div class="p_code">Mã: <span>LDAHP1762</span></div>
                         </div>
                         <div class="p_infor">
-                            <a href="/show/product{{$data2->id}}" class="p_name">
+                            <a href="{{route('products.show_details',['id' => $data2->id])}}" class="p_name">
                                 {{$data2->name}}
                             </a>
                             <span class="p_old_price">
-                                {{$data2->price}}
+                            {{ number_format($data2->price, 0, ',', '.') }} đ
                             </span>
                             <span class="p_discount"> (Tiết kiệm: {{$data2->sale}}% )</span>
                             <span class="p_price">

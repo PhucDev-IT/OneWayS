@@ -7,8 +7,8 @@
     <div class="card-body">
         <h4 class="card-title">Danh sách banner</h4>
         <div class="group_btn_function">
-            <a href="{{route('banner-add')}}" class="btn btn-primary">Thêm mới</a>  
-            <form action="{{route('banner_filter')}}" method="POST">   
+            <a href="{{route('banner-add')}}" class="btn btn-primary">Thêm mới</a>
+            <form action="{{route('banner_filter')}}" method="POST">
                 @csrf
                 <select name="banner_categories" class="" id="">
                     <option value="0">-- Tất cả --</option>
@@ -20,7 +20,7 @@
                     Tìm kiếm
                 </button>
             </form>
-            
+
         </div>
         <div class="table-responsive pt-3">
             <table class="table table-bordered">
@@ -39,13 +39,13 @@
                             Danh mục banner
                         </th>
                         <th class="fix_width_img_column">
-                            Ảnh 
-                        </th>   
+                            Ảnh
+                        </th>
                         <th class="fix_width_ordering_column">
-                            Thứ tự 
+                            Thứ tự
                         </th>
                         <th class="fix_width_published_column">
-                            Kích hoạt 
+                            Kích hoạt
                         </th>
                         <th>
                             Thời gian cập nhật
@@ -56,7 +56,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($banner as $item)
+                    @foreach($banner as $item)
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <th>{{$item->id}}</th>
@@ -68,28 +68,30 @@
                         <th>{{$item->ordering}}</th>
                         <th class="fix_width_published_column">
                             @if($item->published == 1)
-                                <i class="published typcn typcn-input-checked"></i>
+                            <i class="published typcn typcn-input-checked"></i>
                             @else
-                                <i class="unpublished typcn typcn-input-checked"></i>
+                            <i class="unpublished typcn typcn-input-checked"></i>
                             @endif
                         </th>
                         <th>{{$item->updated_at}}</th>
 
-                        <th><div class="group_action">
-                            <a class="edit" href="{{ route('banner-edit', ['id' => $item->id]) }}">
-                                <i class="typcn typcn-pencil"></i>
-                                Chỉnh sửa
-                            </a>
-                            <a class="delete" href="{{ route('delete-banner', ['id' => $item->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xoá?')">
-                                <i class="typcn typcn-trash"></i>
-                                Xoá
-                            </a>
-                        </div>
-                    </th>
+                        <th>
+                            <div class="group_action">
+                                <a class="edit" href="{{ route('banner-edit', ['id' => $item->id]) }}">
+                                    <i class="typcn typcn-pencil"></i>
+                                    Chỉnh sửa
+                                </a>
+                                <a class="delete" href="{{ route('delete-banner', ['id' => $item->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xoá?')">
+                                    <i class="typcn typcn-trash"></i>
+                                    Xoá
+                                </a>
+                            </div>
+                        </th>
                     </tr>
-                @endforeach
+                    @endforeach
                 </tbody>
             </table>
+         
         </div>
     </div>
 </div>
