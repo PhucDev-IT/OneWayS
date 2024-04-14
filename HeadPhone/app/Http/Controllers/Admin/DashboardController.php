@@ -3,14 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Raw;
 
 class DashboardController extends Controller
 {
 
     public function index() {
-        return view('admin.dashboard.index');
+        $count_new_order = Order::whereDate('orderdate', '=', now()->toDateString())->count();
+
+        $total_monthly = DB::table('orders')
+        ->selectRaw('SUM(orders.totalmoney) as total_month')
+        ->where('orders.current_status','=','shipped')
+        ->first();    
+    
+        $total_waiting = DB::table('orders')
+        ->selectRaw('SUM(orders.totalmoney) as total_month')
+        ->where('orders.current_status','!=','shipped')
+        ->first();  
+
+    
+        return view('admin.dashboard.index',compact('count_new_order','total_monthly','total_waiting'));
     }
 
     public function statisticalByYear()

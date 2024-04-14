@@ -19,19 +19,15 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function WaitingConfirm()
+    public function index(Request $request)
     {
-      
-        return view('admin.orders.waitingforconfirm');
+        $status = $request->query('tracking')??'pending';
+        $orders = Order::where('current_status', '=' ,$status)->with(['trackingOrders.product', 'user'])->get();
+       
+        return view('admin.orders.index',compact('orders'));
     }
 
 
-
-    public function callOrderConfirm(Request $request)
-    {
-        
-        return $this->orderService->getOrders($request, "PENDING");
-    }
 
     public function orderDetail($id)
     {
@@ -49,7 +45,7 @@ class OrderController extends Controller
     {
         $tracking = [
             'order_id' => $idOrder,
-            'name' => 'PROCESSING',
+            'name' => 'processing',
             'name_vn' => 'Đang xử lý',
             'time' => now(),
             'description' => 'Đơn hàng đang được chuẩn bị, vui lòng chờ người bán gửi hàng!',
@@ -66,7 +62,7 @@ class OrderController extends Controller
     public function transportOrder($idOrder) {
         $tracking = [
             'order_id' => $idOrder,
-            'name' => 'DELIVERING',
+            'name' => 'delivering',
             'name_vn' => 'Đang giao hàng',
             'time' => now(),
             'description' => 'Đơn hàng đang được vận chuyển đến bạn.',
@@ -82,7 +78,7 @@ class OrderController extends Controller
     public function shipped($idOrder) {
         $tracking = [
             'order_id' => $idOrder,
-            'name' => 'SHIPPED',
+            'name' => 'shipped',
             'name_vn' => 'Giao thành công',
             'time' => now(),
             'description' => 'Đơn hàng đã được giao thành công.',
@@ -102,7 +98,7 @@ class OrderController extends Controller
         $reason = $dataRequest['reason'];
         $tracking = [
             'order_id' => $orderId,
-            'name' => 'CANCEL',
+            'name' => 'cancel',
             'name_vn' => 'Đơn hàng bị hủy',
             'time' => now(),
             'description' =>$reason,

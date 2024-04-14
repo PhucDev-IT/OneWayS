@@ -55,7 +55,7 @@ class OrderService
 
             $tracking = [
                 'order_id' => $orderNew->order_id,
-                'name' => 'PENDING',
+                'name' => 'pending',
                 'name_vn' => 'Chờ xác nhận',
                 'time' => now(),
                 'description' => 'Đơn hàng đã được đặt. Chờ người bán xác nhận đơn hàng',

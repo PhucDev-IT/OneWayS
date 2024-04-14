@@ -29,10 +29,10 @@
                 <form action="/orders" id="selected-status" method="get">
                     <div class="col-md-3 text-right">
                         <select class="form-control" name="status" id="status-select">
-                            <option value="PENDING" selected>Chờ xác nhận</option>
-                            <option value="PROCESSING">Đang giao hàng</option>
-                            <option value="SHIPPED">Đã mua</option>
-                            <option value="CANCEL">Đơn đã hủy</option>
+                            <option value="pending" selected>Chờ xác nhận</option>
+                            <option value="processing">Đang giao hàng</option>
+                            <option value="shipped">Đã mua</option>
+                            <option value="cancel">Đơn đã hủy</option>
                         </select>
                     </div>
                 </form>

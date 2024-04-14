@@ -68,6 +68,9 @@
                            ${category.id}
                         </td>
                         <td>
+                           
+                        </td>
+                        <td>
                             ${category.name}
                         </td>
                         <td>

@@ -67,13 +67,13 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>0</h3>
+            <h3>{{$count_new_order!=null?$count_new_order:0}}</h3>
             <p>Đơn hàng mới</p>
           </div>
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="{{route('orders.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div><!-- ./col -->
       <div class="col-lg-3 col-xs-6">
@@ -93,8 +93,8 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>44</h3>
-            <p>Người Dùng Mới</p>
+            <h3>{{ number_format($total_waiting->total_month, 0, ',', '.') }} đ</h3>
+            <p>Doanh thu chờ</p>
           </div>
           <div class="icon">
             <i class="ion ion-person-add"></i>
@@ -106,8 +106,8 @@
         <!-- small box -->
         <div class="small-box bg-red">
           <div class="inner">
-            <h3>65</h3>
-            <p>Unique Visitors</p>
+            <h3>{{ number_format($total_monthly->total_month, 0, ',', '.') }} đ</h3>
+            <p>Doanh thu tháng này</p>
           </div>
           <div class="icon">
             <i class="ion ion-pie-graph"></i>

@@ -17,8 +17,8 @@ class ProductsController extends Controller
         $this->productService = $proService;
     }
 
-    public function show(string $id) {
-    
+    public function show(Request $request) {
+        $id = $request->query('id');
         $product =  $this->productService->findOrFail($id)->load(['details', 'categories', 'images']);
         
         return view('product_details',compact('product'));

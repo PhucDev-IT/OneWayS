@@ -32,10 +32,15 @@
                 </div>
 
                 <div class="col-md-3 text-right">
-                    <select class="form-control" name="category">
-                        <option value="0" selected>Tất cả</option>
-
-                    </select>
+                    <form action="{{route('orders.index')}}" method="get" id="selected-status">
+                        <select class="form-control" name="tracking" id="status-select">
+                            <option value="pending" selected>Chờ xác nhận</option>
+                            <option value="processing">Đang đóng hàng</option>
+                            <option value="delivering">Đang giao hàng</option>
+                            <option value="shipped">Đã giao hàng</option>
+                            <option value="cancel">Đơn hàng đã hủy</option>
+                        </select>
+                    </form>
                 </div>
             </div>
 
@@ -48,7 +53,7 @@
                             #
                         </th>
                         <th>
-                            Tên sản phẩm
+                            Sản phẩm
                         </th>
                         <th>
                             Khách hàng
@@ -67,7 +72,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($orders as $order)
+                    <tr>
+                        <td>
+                            {{$order->order_id}}
+                        </td>
 
+                        <td>{{$order->details->count()}} sản phẩm</td>
+                        <td>{{$order->user->name}}</td>
+                        <td>{{$order->orderdate}}</td>
+                        <td>{{$order->current_status}}</td>
+                        <td><span style="font-weight: 500; color: red;">{{ number_format($order->totalmoney, 0, ',', '.') }}đ</span></td>
+                        <td>
+                            
+                             <a href="/admin/order/id={{$order->order_id}}"><i class="fa-regular fa-eye" style="margin-right: 10px;"></i>Xem chi tiết</a>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
             <nav class="pagination_contain" aria-label="Page navigation example" style="margin-top: 10px;">
@@ -87,13 +108,15 @@
 <script>
     hiddenLoadingPage();
 
-    fetchData();
+    document.getElementById('status-select').addEventListener('change', function() {
+        document.getElementById('selected-status').submit();
+    });
+
 
     function fetchData() {
         $.ajax({
             type: 'GET',
-            url: "/admin/fetch/orders-pendding",
-
+            url: "/admin/fetch/orders",
             dataType: 'json',
             success: function(response) {
                 console.log(response);
@@ -107,7 +130,7 @@
         function setData($orders) {
             $('tbody').empty();
             $.each($orders, function(key, order) {
-               
+
                 $('tbody').append(`
             <tr>
                         <td>

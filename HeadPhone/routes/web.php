@@ -55,8 +55,8 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::post('admin/sync-product',[ImportGoodsController::class,'addQuantityToProduct'])->name('admin.sync-product');
 
     //admin - orders
-    Route::get('admin/orders/pendding', [OrderController::class, 'WaitingConfirm'])->name('orders.waiting_confirm');
-    Route::get('admin/fetch/orders-pendding', [OrderController::class, 'callOrderConfirm'])->name('orders.fetch_order_pending');
+    Route::get('admin/orders', [OrderController::class, 'index'])->name('orders.index');
+  
     Route::get('admin/order/id={id}', [OrderController::class, 'orderDetail'])->name('orders.orderDetail');
     Route::get("admin/confirm-order/{idOrder}", [OrderController::class, 'confirmOrder'])->name("orders.confirm_order");
     Route::get('admin/transport-order/{idOrder}', [OrderController::class, 'transportOrder'])->name("orders.delivering");
@@ -159,5 +159,5 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/show/product{id}', [ProductsController::class, 'show'])->name('products.details');
+Route::get('/show/product', [ProductsController::class, 'show'])->name('products.show_details');
 Route::get('fetchNewProducts', [HomeController::class, 'fetchNewProducts']);

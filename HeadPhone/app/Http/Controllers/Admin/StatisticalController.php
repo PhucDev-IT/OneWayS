@@ -17,7 +17,7 @@ class StatisticalController extends Controller
             ->select('products.id','products.name','products.img_preview', DB::raw('SUM(order_details.quantity * order_details.price) as total_sales'))
             ->leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
             ->leftJoin('orders','orders.order_id', '=' ,'order_details.order_id')
-            ->where('orders.current_status','=','SHIPPED')
+            ->where('orders.current_status','=','shipped')
             ->groupBy('products.id','products.name','products.img_preview')
             ->get();
        
@@ -31,7 +31,7 @@ class StatisticalController extends Controller
             ->select('order_details.color', DB::raw('SUM(order_details.quantity * order_details.price) as total_sales'))
             ->where('order_details.product_id','=',$id)
             ->leftJoin('orders','orders.order_id', '=' ,'order_details.order_id')
-            ->where('orders.current_status','=','SHIPPED')
+            ->where('orders.current_status','=','shipped')
             ->groupBy('order_details.color')
             ->get();
 

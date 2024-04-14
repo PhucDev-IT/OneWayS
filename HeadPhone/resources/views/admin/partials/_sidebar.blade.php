@@ -3,12 +3,12 @@
     <li class="nav-item">
       <div class="d-flex sidebar-profile">
         <div class="sidebar-profile-image">
-          <img src="{{asset('admin/assets/images/faces/face29.png')}}" alt="image">
+          <img src="{{@Auth::user()->avatar}}" alt="image">
           <span class="sidebar-status-indicator"></span>
         </div>
         <div class="sidebar-profile-name">
           <p class="sidebar-name">
-             Nguyễn Văn Phúc
+            {{@Auth::user()->name}}
           </p>
           <p class="sidebar-designation">
             Welcome
@@ -91,18 +91,11 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+      <a class="nav-link"  href="{{route('orders.index')}}" >
         <i class="typcn typcn-dropbox menu-icon"></i>
         <span class="menu-title">Đơn hàng</span>
-        <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="form-elements">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{{route('orders.waiting_confirm')}}">Chờ xác nhận</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Chờ gói hàng</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Đang giao hàng</a></li>
-        </ul>
-      </div>
+
     </li>
 
     <li class="nav-item">
@@ -133,7 +126,7 @@
         </ul>
       </div>
     </li>
-    
+
   </ul>
- 
+
 </nav>

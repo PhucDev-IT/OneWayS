@@ -13,16 +13,16 @@ class PurchaseHistoryController extends Controller
 {
     public function index(Request $request)
     {
-        $status = $request->query('status') ?? 'PENDING';
+        $status = $request->query('status') ?? 'pending';
 
         $user_id = Auth::id();
         try {
             $orders = [];
 
-            if ($status == "PROCESSING") {
+            if ($status == "processing") {
                 $orders = Order::where(function ($query) use ($user_id) {
-                    $query->where('current_status', '=', 'PROCESSING')
-                        ->orWhere('current_status', '=', 'DELIVERING');
+                    $query->where('current_status', '=', 'processing')
+                        ->orWhere('current_status', '=', 'delivering');
                 })
                     ->where('user_id', '=', $user_id)
                     ->with(['trackingOrders.product'])

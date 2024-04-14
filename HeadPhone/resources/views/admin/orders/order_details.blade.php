@@ -53,12 +53,12 @@
 
             </div>
             <div class="order-create">
-                @if($order->trackingOrders->last()->name == "PENDING")
+                @if($order->trackingOrders->last()->name == "pending")
                 <a href="{{route('orders.confirm_order',['idOrder' => $order->order_id])}}" class="btn btn-primary">Xác nhận</a>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Hủy đơn hàng</button>
-                @elseif($order->trackingOrders->last()->name == "PROCESSING")
+                @elseif($order->trackingOrders->last()->name == "processing")
                 <a href="{{route('orders.delivering',['idOrder' => $order->order_id])}}" class="btn btn-primary">Giao hàng</a>
-                @elseif($order->trackingOrders->last()->name == "DELIVERING")
+                @elseif($order->trackingOrders->last()->name == "delivering")
                 <a href="{{route('orders.shipped',['idOrder' => $order->order_id])}}" class="btn btn-primary">Đã giao</a>
                 @endif
             </div>
