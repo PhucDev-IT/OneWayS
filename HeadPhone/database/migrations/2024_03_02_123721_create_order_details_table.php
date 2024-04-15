@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('color');
             $table->integer('quantity');
             $table->double('price');
-            $table->string('order_id')->references('id')->on('orders');
+            $table->string('order_id')->nullable()->index();
+            $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('set null');
             $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
