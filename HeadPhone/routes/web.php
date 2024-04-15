@@ -136,7 +136,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('cart/addToCart', [ShoppingCartController::class, 'addToCart'])->name('cart.addToCart');
     Route::post('/cart/updateQuantity', [ShoppingCartController::class, 'updateQuantity'])->name('cart.update_quantity');
     Route::resource('shopping-cart', ShoppingCartController::class);
-    Route::get('store', [StoreController::class, 'index'])->name('store.index');
+    
 
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/request', [CheckoutController::class, 'requestCheckout'])->name('checkout.request');
@@ -148,7 +148,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders',[PurchaseHistoryController::class,'index']);
     Route::get('/order/tracking/{id}',[PurchaseHistoryController::class,'OrderDetails']);
     Route::post('order/cancel',[PurchaseHistoryController::class,'cancelOrder']);
-    Route::post('order/review',[PurchaseHistoryController::class,'review']);
+    Route::post('order/reviews',[PurchaseHistoryController::class,'reviews'])->name('order.reviews');
+    Route::get('product/review',[ProductsController::class,'getReviews'])->name('products.reviews');
 
 });
 
@@ -165,3 +166,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/show/product', [ProductsController::class, 'show'])->name('products.show_details');
 Route::get('fetchNewProducts', [HomeController::class, 'fetchNewProducts']);
+
+Route::get('store', [StoreController::class, 'index'])->name('store.index');

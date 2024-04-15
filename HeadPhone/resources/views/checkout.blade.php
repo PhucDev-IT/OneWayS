@@ -446,7 +446,8 @@
             totalmoney: totalMoney,
             voucher_id: idCouponSelected,
             address_id: address_id,
-            current_status:'PENDING'
+            current_status:'PENDING',
+            redirect:'/completed',
 
         };
         var requestData = {
@@ -460,8 +461,9 @@
             data: JSON.stringify(requestData),
             contentType: 'application/json; charset=utf-8',
             success: function(response) {
-                console.log(response);
-                window.location.href = response.payUrl;
+                var responseData = JSON.parse(response);
+                console.log(responseData);
+               window.location.href = responseData.payUrl;
             },
             error: function(xhr, status, error) {
                 console.error(error);

@@ -76,4 +76,8 @@ class Order extends Model
         }
         return null; // Hoặc trả về giá trị mặc định khác phù hợp với ứng dụng của bạn
     }
+
+    public function review(){
+        return $this->belongsTo(Reviews::class,'order_id', 'order_id');
+    }
 }

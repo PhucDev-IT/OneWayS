@@ -89,7 +89,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="{{ route('products.details', $product->id) }}">{{ $product->name }}</a></h3>
+                                <h3 class="product-name"><a  href="{{route('products.show_details',['id' => $product->id])}}">{{ $product->name }}</a></h3>
 
                                 <h4 class="product-price">{{ number_format($product->price - ($product->price * $product->sale)/100, 0, ',', '.') }} đ <del class="product-old-price">{{ number_format($product->price, 0, ',', '.') }}đ</del></h4>
 

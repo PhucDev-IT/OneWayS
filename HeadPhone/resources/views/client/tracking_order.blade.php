@@ -56,9 +56,8 @@
             <div class="">
                 @if($order->trackingOrders->last()->name == "PENDING")
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hủy đơn hàng</button>
-                @elseif($order->trackingOrders->last()->name == "SHIPPED")
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-review">Đánh giá</button>
-                @endif
+                @elseif($order->trackingOrders->last()->name == "SHIPPED" && $order->review()->count() <= 0) <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-review">Đánh giá</button>
+                    @endif
             </div>
         </div>
 
@@ -113,8 +112,6 @@
                         <div class="col-md-6">Giảm giá</div>
                         <div class="col-md-6">
                             <?php
-
-                            use function PHPSTORM_META\map;
 
                             $voucher = $order->voucher()
                             ?>
@@ -207,15 +204,23 @@
             </div>
 
             <!-- Modal body -->
-            <form action="" method="post" class="review-form">
+            <form action="{{route('order.reviews')}}" method="post" class="review-form">
+                @csrf
                 <div class="modal-body">
                     <label for="">Chọn sản phẩm đánh giá</label>
                     <br>
                     <?php
+                    $index = 0;
                     $products = [];
+                    $first_id = "";
                     foreach ($orderDetails as $item) {
                         $productId = $item->product->id;
                         $color = $item->color;
+
+                       if($index++ == 0){
+                        $first_id = $productId;
+                       }
+                       
 
                         // Kiểm tra xem sản phẩm đã tồn tại trong danh sách hay chưa
                         if (array_key_exists($productId, $products)) {
@@ -231,18 +236,19 @@
                         }
                     }
                     ?>
-                    <select style="height: 30px; margin-bottom: 10px;" name="" id="">
 
+                    <select style="height: 30px; margin-bottom: 10px;" name="product_id" id="dropdown">
                         @foreach($products as $productId => $product)
-
-                        <option value="{{$productId}}">{{$product['name']}} -  {{$product['color']}}</option>
-
+                        <option value="{{$productId}}">{{$product['name']}} - {{$product['color']}}</option>
                         @endforeach
                     </select>
-                    <div id="review-form">
 
+                    <input type="text" hidden name="title" id="classify_product" value="{{$products[$first_id]['name']}} - {{$products[$first_id]['color']}}">
+
+                    <div id="review-form">
+                        <input type="text" hidden value="{{$order->order_id}}" name="order_id">
                         <label for="">Vui lòng cho chúng tôi biết trải nghiệm sản phẩm của bạn</label>
-                        <textarea class="input" placeholder="Your Review" required></textarea>
+                        <textarea name="comment" class="input" placeholder="Your Review" required></textarea>
                         <div class="input-rating">
                             <span>Your Rating: </span>
                             <div class="stars">
@@ -280,6 +286,31 @@
         }
         return true;
     }
+
+    // Lắng nghe sự kiện DOMContentLoaded để đảm bảo rằng toàn bộ trang đã được tải xong
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lấy ra dropdown và input hidden
+        var dropdown = document.getElementById("dropdown");
+        var hiddenInput = document.getElementById("classify_product");
+
+        // Lấy ra giá trị của option đầu tiên trong dropdown
+        var defaultValue = dropdown.options[0].innerText;
+        console.log(defaultValue);
+        // Gán giá trị mặc định cho input hidden
+        hiddenInput.value = defaultValue;
+    });
+
+
+    document.getElementById("dropdown").addEventListener("change", function() {
+        // Lấy ra giá trị của option được chọn
+        var selectedValue = this.value;
+        // Lấy ra text của option được chọn
+        var selectedText = this.options[this.selectedIndex].innerText;
+
+        $('#classify_product').val(selectedText);
+        // Hiển thị text của option được chọn trong console
+        console.log(selectedText);
+    });
 </script>
 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Reviews;
 use App\Models\TrackingOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class PurchaseHistoryController extends Controller
 {
     public function index(Request $request)
     {
-        $status = $request->query('status') ?? 'pending';
+        $status = $request->query('status') ?? 'PENDING';
 
         $user_id = Auth::id();
         try {
@@ -95,7 +96,17 @@ class PurchaseHistoryController extends Controller
        
     }
 
-    public function review(){
-        
+    public function reviews(Request $request){
+        $data = $request->all();
+        $data['time'] = now();
+        $data['user_id'] = Auth::id();
+        try{
+            $review = Reviews::create($data);
+            return redirect()->route('products.show_details',['id'=>$data['product_id']]);
+        }catch (\Exception $e) {
+          
+            Log::error($e->getMessage());
+            return back()->with(['message-error' => 'Lỗi']);
+        }
     }
 }

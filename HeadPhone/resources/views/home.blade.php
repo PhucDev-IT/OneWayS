@@ -507,9 +507,9 @@
     <!-- CATEGORY PRODUCT 1 -->
     <div class="cate_product_1">
         <div class="heading_cate_product">
-            <p class="title_heading_cate">LAPTOP, MACBOOK, SURFACE</p>
+            <p class="title_heading_cate">NỔI BẬT, THỊNH HÀNH</p>
             <div class="sub_cat_title"></div>
-            <a href="" class="view_all">
+            <a href="{{route('store.index')}}" class="view_all">
                 Xem tất cả
                 <i class="fa-solid fa-arrow-right-long"></i>
             </a>

@@ -45,7 +45,7 @@ class OrderController extends Controller
     {
         $tracking = [
             'order_id' => $idOrder,
-            'name' => 'processing',
+            'name' => 'PROCESSING',
             'name_vn' => 'Đang xử lý',
             'time' => now(),
             'description' => 'Đơn hàng đang được chuẩn bị, vui lòng chờ người bán gửi hàng!',
@@ -62,7 +62,7 @@ class OrderController extends Controller
     public function transportOrder($idOrder) {
         $tracking = [
             'order_id' => $idOrder,
-            'name' => 'delivering',
+            'name' => 'DELIVERING',
             'name_vn' => 'Đang giao hàng',
             'time' => now(),
             'description' => 'Đơn hàng đang được vận chuyển đến bạn.',
@@ -78,7 +78,7 @@ class OrderController extends Controller
     public function shipped($idOrder) {
         $tracking = [
             'order_id' => $idOrder,
-            'name' => 'shipped',
+            'name' => 'SHIPPED',
             'name_vn' => 'Giao thành công',
             'time' => now(),
             'description' => 'Đơn hàng đã được giao thành công.',
@@ -98,7 +98,7 @@ class OrderController extends Controller
         $reason = $dataRequest['reason'];
         $tracking = [
             'order_id' => $orderId,
-            'name' => 'cancel',
+            'name' => 'CANCEL',
             'name_vn' => 'Đơn hàng bị hủy',
             'time' => now(),
             'description' =>$reason,

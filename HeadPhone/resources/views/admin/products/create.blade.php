@@ -139,9 +139,6 @@
                 @enderror()
             </div>
             
-            <x-editor name="desc" id="desc" title="Tóm tắt" content="" />
-
-
             <div class="form-group">
                 <label for="">Sản phẩm thuộc danh mục</label>
                 <div class="row">

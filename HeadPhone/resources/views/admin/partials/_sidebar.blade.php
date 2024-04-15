@@ -113,20 +113,22 @@
         </ul>
       </div>
     </li>
-
-
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-        <i class="typcn typcn-chart-pie-outline menu-icon"></i>
+      <a class="nav-link" data-toggle="collapse" href="#ui-chart" aria-expanded="false" aria-controls="ui-chart">
+      <i class="typcn typcn-chart-pie-outline menu-icon"></i>
         <span class="menu-title">Báo cáo - Thống kê</span>
-        <i class="menu-arrow"></i>
+        <i class="typcn typcn-chevron-right menu-arrow"></i>
       </a>
-      <div class="collapse" id="charts">
+      <div class="collapse" id="ui-chart">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{route('admin.statistical.products')}}">Doanh thu sản phẩm</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{{route('admin.statistical.products')}}">Doanh thu sản phẩm</a></li>
+          
+
         </ul>
       </div>
     </li>
+
+   
 
   </ul>
 

@@ -4,8 +4,7 @@
 <style>
     .card {
         display: flex;
-        height: 100vh;
-        /* Set chiều cao cho container */
+        
         padding-right: 10px;
         padding-left: 20px;
     }

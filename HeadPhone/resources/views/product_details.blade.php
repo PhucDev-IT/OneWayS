@@ -91,6 +91,7 @@
 			<!-- Product details -->
 			<div class="col-md-5">
 				<div class="product-details">
+					<input type="text" hidden value="{{$product->id}}" id="product-id">
 					<h2 class="product-name">{{$product->name}}</h2>
 					<div>
 						<div class="product-rating">
@@ -292,7 +293,7 @@
 								<!-- Reviews -->
 								<div class="col-md-6">
 									<div id="reviews">
-										<ul class="reviews">
+										<ul id="row-reviews" class="reviews">
 											<li>
 												<div class="review-heading">
 													<h5 class="name">John</h5>
@@ -321,7 +322,9 @@
 														<i class="fa fa-star-o empty"></i>
 													</div>
 												</div>
+
 												<div class="review-body">
+													<span style="font-weight: 600; color: #857c6e; margin-bottom: 4px;">Tai nghe chụp Buetooth chất lượng cao MW93 -  Đen</span>
 													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
 												</div>
 											</li>
@@ -341,6 +344,7 @@
 													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
 												</div>
 											</li>
+
 										</ul>
 										<ul class="reviews-pagination">
 											<li class="active">1</li>
@@ -353,27 +357,7 @@
 								</div>
 								<!-- /Reviews -->
 
-								<!-- Review Form -->
-								<div class="col-md-3">
-									<div id="review-form">
-										<form class="review-form">
-											<input class="input" type="text" placeholder="Your Name">
-											<input class="input" type="email" placeholder="Your Email">
-											<textarea class="input" placeholder="Your Review"></textarea>
-											<div class="input-rating">
-												<span>Your Rating: </span>
-												<div class="stars">
-													<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-													<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-													<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-													<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-												</div>
-											</div>
-											<button class="primary-btn">Submit</button>
-										</form>
-									</div>
-								</div>
+
 								<!-- /Review Form -->
 							</div>
 						</div>
@@ -403,9 +387,9 @@
 				</div>
 			</div>
 
-		
 
-		
+
+
 
 			<div class="clearfix visible-sm visible-xs"></div>
 
@@ -473,8 +457,55 @@
 			}
 
 		}
-
-
 	}
+	fetchReviews($('#product-id').val());
+	//Lấy đánh giá sản phẩm
+	function fetchReviews(idProduct) {
+
+		$.ajax({
+			type: 'get',
+			url: "{{route('products.reviews')}}",
+			data: {
+				id: idProduct
+			},
+			dataType: 'json',
+			success: function(response) {
+				console.log(response);
+				$.each(response,function(key,review){
+					renderReviews(review);
+				});
+			},
+			error: function(xhr, err) {
+				console.log(err);
+			}
+		});
+	}
+
+	function renderReviews(review) {
+    var html = `
+    <li>
+        <div class="review-heading">
+            <h5 class="name">${review.user.name}</h5>
+            <p class="date">${review.time}</p>
+            <div class="review-rating">`;
+
+		// Thêm sao đánh giá vào HTML dựa trên rating
+		for (var i = 0; i < review.rating; i++) {
+			html += `<i class="fa fa-star"></i>`;
+		}
+
+    html += `
+            </div>
+        </div>
+        <div class="review-body">
+		<span style="font-weight: 600; color: #857c6e; margin-bottom: 4px;">${review.title}</span>
+            <p>${review.comment}</p>
+        </div>
+    </li>
+    `;
+    
+    $('#row-reviews').append(html);
+}
+
 </script>
 @endsection

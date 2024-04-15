@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\CartDetails;
 use App\Services\OrderService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class CheckoutController extends Controller
     }
 
 
-    
+
 
     public function index()
     {
@@ -62,7 +63,7 @@ class CheckoutController extends Controller
                     return $this->paymentWithMomo();
                     break;
                 case 'VNPAY':
-                    return response()->json(["payUrl" => "http://127.0.0.1:8000/completed"]);
+                    return $this->paymentWithVnPay($order['totalmoney']);
                     break;
                 case 'CASH':
                     return response()->json(['payUrl' => '/completed']);
@@ -145,9 +146,9 @@ class CheckoutController extends Controller
             'signature' => $signature
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
-        $jsonResult = json_decode($result, true);  // decode json
+       // $jsonResult = json_decode($result, true);  // decode json
 
-        return response()->json($jsonResult);
+        return response()->json($result);
     }
 
 
@@ -161,17 +162,93 @@ class CheckoutController extends Controller
         $cart_ids = Session::get('cartIds');
         $order['user_id'] = $idUser;
 
-    
-        if($this->orderService->addOrder($order,$carts,$cart_ids)==true){
+
+        if ($this->orderService->addOrder($order, $carts, $cart_ids) == true) {
             return view('payment_success');
-        }else{
+        } else {
             return view('shopping_cart');
         }
-
-       
-         
     }
 
-  
-    
+
+    //Thanh toán qua VNPAY
+    public function paymentWithVnPay($total = 1000)
+    {
+
+       
+ 
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = "http://127.0.0.1:8000/completed";
+        $vnp_TmnCode = "2YM2BN6W"; //Mã website tại VNPAY 
+        $vnp_HashSecret = "SFWKWLBQDHGGNGCYJURLXQNQCDMKGNRB"; //Chuỗi bí mật
+
+        $orderId = time() . "";
+        $orderInfo = "Thanh toán qua VNPAY";
+
+        $vnp_TxnRef = $orderId; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = $orderInfo;
+        $vnp_OrderType = 'bill payment';
+        $vnp_Amount = $total;
+        $vnp_Locale = 'VN';
+        $vnp_BankCode = 'NCB';
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+       
+
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef,
+        
+
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        }
+
+        //var_dump($inputData);
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+      
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $returnData = array(
+            'code' => '00', 'message' => 'success', 'payUrl' => $vnp_Url
+        );
+       
+        if (isset($_POST['redirect'])) {
+           
+            return response()->json($vnp_Url);
+            header('Location: ' . $vnp_Url);
+            die();
+        } else {
+            echo json_encode($returnData);
+        }
+    }
 }

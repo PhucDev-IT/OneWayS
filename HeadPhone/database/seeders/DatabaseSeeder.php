@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +28,7 @@ class DatabaseSeeder extends Seeder
             RoleDatabaseSeeder::class,
             BannerCategories_Seeder::class,
             Banners_Seeder::class,
+            ProductDatabaseSeeder::class
         ]);
 
     }
