@@ -77,7 +77,7 @@
                 <div class="row" id="store-products">
                     <!-- product -->
                     @foreach($products as $product)
-                    <div class="col-md-4 col-xs-6">
+                    <div class="product_cart">
                         <div class="product">
                             <div class="product-img">
                                 <img src="{{asset('storage/uploads/'.$product->img_preview)}}" alt="">
@@ -178,7 +178,7 @@
 
     function setProducts(product){
         $('#store-products').append(`
-        <div class="col-md-4 col-xs-6">
+        <div class="product_cart">
                         <div class="product">
                             <div class="product-img">
                                 <img src="{{asset('storage/uploads/${product.img_preview}')}}" alt="">
