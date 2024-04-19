@@ -5,7 +5,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Sửa thông tin người dùng "{{$user->fullname}}"</h4>
+        <h4 class="card-title">Sửa thông tin người dùng "{{$user->name}}"</h4>
 
         <form class="forms-sample" action="{{route('users.update',$user->id)}}" method="post" enctype="multipart/form-data">
             @csrf

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Sản phẩm')
 @section('content')
 <div class="section">
     <!-- container -->
@@ -187,7 +188,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="/show/product${product.id}">${product.name}</a></h3>
+                                <h3 class="product-name"><a href="/show/product/?id=${product.id}">${product.name}</a></h3>
 
                                 <h4 class="product-price">${formatCurrency(product.price - (product.price*product.sale)/100)} đ <del class="product-old-price">${formatCurrency(product.price)}đ</del></h4>
 

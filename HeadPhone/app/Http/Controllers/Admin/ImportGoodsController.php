@@ -46,7 +46,7 @@ class ImportGoodsController extends Controller
         
             foreach ($products as $product) {
                 $total += $product->price;
-                $importGoods[] = ['product_id' => $product->product_id, 'quantity' => $product->quantity, 'price' => $product->price, 'name' => $product->name];
+                $importGoods[] = ['product_id' => $product->product_id, 'quantity' => $product->quantity, 'price' => $product->price, 'name' => $product->name,'color' => $product->color];
             }
         
 
@@ -75,6 +75,7 @@ class ImportGoodsController extends Controller
     //Cộng số lượng sản phẩm đã nhập vào sản phẩm đã có
     public function addQuantityToProduct(Request $request){
         $dataRequest = $request->all();
+      
         $product_detail_id = $dataRequest['color_id'];
         $productDetails = $dataRequest['import_product_id'];
         $import_infor =  $dataRequest['import_infor_id'];

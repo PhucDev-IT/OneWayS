@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Thanh toán hóa đơn')
 @section('content')
 <style>
     .coupon {
@@ -232,11 +232,7 @@
 
                                             </div>
                                         </label>
-                                        <div class="edit-btn bg-light  rounded">
-                                            <a href="/Profile/Index" data-bs-toggle="tooltip" data-placement="top" title data-bs-original-title="Edit">
-                                                <i class="bx bx-pencil font-size-16"></i>
-                                            </a>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -263,12 +259,15 @@
                     <div class="order-products">
                         @foreach($cartDetails as $item)
                         <div class="order-col">
+                            <?php
+                            $price = $item->product->price - ($item->product->price * $item->product->sale) / 100;
+                            $money = $price * $item->quantity;
+                            $total  += $money;
+                            ?>
                             <div>x{{$item->quantity}} {{$item->product->name}}</div>
-                            <div>{{ number_format($currentPrice * $item->quantity, 0, ',', '.') }}đ</div>
+                            <div>{{ number_format($money, 0, ',', '.') }}đ</div>
                         </div>
-                        <?php
-                        $total  += $currentPrice * $item->quantity
-                        ?>
+
                         @endforeach
 
                     </div>
@@ -310,18 +309,18 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6">
-                                <div>
+                                <div data-bs-toggle="collapse">
                                     <label class="card-radio-label">
                                         <input type="radio" name="pay-method" value="VNPAY" id="pay-methodoption2" class="card-radio-input">
                                         <span class="card-radio py-3 text-center text-truncate">
-                                            <img width="35" style="display: block; margin: 0 auto;" src="https://www.nexusinw.com/wp-content/uploads/2017/08/Paypal-icon.png" alt="">
+                                            <img width="35" style="display: block; margin: 0 auto;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8qnQtPQ53XVM6ePcYxSNO6yRX2T3foWwJpo40sjqp_g&s" alt="">
                                             VnPay
                                         </span>
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6">
-                                <div>
+                                <div data-bs-toggle="collapse">
                                     <label class="card-radio-label">
                                         <input type="radio" name="pay-method" value="CASH" id="pay-methodoption3" class="card-radio-input" checked>
                                         <span class="card-radio py-3 text-center text-truncate">
@@ -360,7 +359,7 @@
         </div>
 
         <div id="voucher-contain" class="modal-body">
-        
+
         </div>
     </div>
 
@@ -375,6 +374,8 @@
     let address_id = null;
     let feeShip = 0;
     let idCouponSelected = null;
+
+    //Có nhiệm vụ lưu tính toán tiền và đưa ra giá cuối cùng
     let totalMoney = parseFloat($('#total-cache').val());
 
 
@@ -411,6 +412,7 @@
         });
     }
 
+    //Tính giá vận chuyển
     function calculateFee(service_id) {
 
         //   calculate();
@@ -446,8 +448,8 @@
             totalmoney: totalMoney,
             voucher_id: idCouponSelected,
             address_id: address_id,
-            current_status:'PENDING',
-            redirect:'/completed',
+            current_status: 'PENDING',
+            redirect: '/completed',
 
         };
         var requestData = {
@@ -461,9 +463,10 @@
             data: JSON.stringify(requestData),
             contentType: 'application/json; charset=utf-8',
             success: function(response) {
+               
                 var responseData = JSON.parse(response);
-                console.log(responseData);
-               window.location.href = responseData.payUrl;
+               
+                window.location.href = responseData.payUrl;
             },
             error: function(xhr, status, error) {
                 console.error(error);
@@ -502,17 +505,16 @@
                     } else {
                         title = 'Giảm ' + formatCurrency(coupon.discount);
                     }
-                   // var isChecked = idCouponSelected === coupon.voucher_id ? 'checked' : '';
-                    
+                    // var isChecked = idCouponSelected === coupon.voucher_id ? 'checked' : '';
+
                     $('#voucher-contain').append(`
                         <div onclick="selectCoupon('${encodeURIComponent(JSON.stringify(coupon))}')"  class="row">
                             <div class="col-lg-4 col-sm-6" style="width: 100%;">
                                 <div data-bs-toggle="collapse">
                                     <label class="card-radio-label mb-0">
-                                 
                                         <input type="radio"  class="card-radio-input" >
                                         <div class="card-radio text-truncate p-3" style="width: 100%;">
-                                            <!-- <span class="fs-14 mb-4 d-block">Mặc định</span> -->
+                                          
                                             <span style="color: #de23ce;" class="fs-14 mb-2 d-block">${coupon.voucher_id} | </span>
                                             
                                             <span >
@@ -554,10 +556,10 @@
             $('#total-money').html(formatCurrency(total));
             totalMoney = total;
         } else if (object.type == "DISCOUNTPERCENT") {
-            console.log('hello');
+            console.log('giảm : ', object.discount);
             totalMoney = total - ((total * object.discount) / 100);
             $('#coupon_discount').html('- ' + formatCurrency(total * (object.discount / 100)));
-            $('#total-money').html( formatCurrency(total));
+            $('#total-money').html(formatCurrency(totalMoney));
 
         } else {
             totalMoney = total + feeShip - object.discount;
@@ -572,6 +574,10 @@
             var value = $(this).val();
             var districtData = $(this).data('district');
             address_id = value;
+
+            document.getElementById("id_coupon").innerText = "";
+            idCouponSelected = null;
+            
             transportUnit(districtData);
         }
     })

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Thêm danh mục')
 @section('content')
 
 <div class="card">

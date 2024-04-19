@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title', 'Chi tiết hóa đơn')
 @section('content')
 
 <style>

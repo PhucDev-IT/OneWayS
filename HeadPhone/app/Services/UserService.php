@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\ProductRepository;
 use App\Traits\HandleImagesTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\This;
 use Illuminate\Support\Facades\Hash;
@@ -113,18 +114,20 @@ class UserService
 
 
     //Khóa tài khoản
-    public function lockOnUser($id, $status)
+    public function lockOnUser(Request $request)
     {
+        $id = $request->query('id');
+        $is_active = $request->query('is_active');
         try {
             $user = $this->findOrFail($id);
 
-            $user->update(['status' => $status]);
+            $user->update(['is_active' => $is_active]);
 
             return true;
         } catch (\Exception $e) {
             // Xử lý nếu có lỗi
-            $errorMessage = $e->getMessage();
-
+           
+            Log::error($e->getMessage());
             return false;
         }
     }

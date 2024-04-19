@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Thông tin cá nhân')
 @section('content')
 <style>
     .card {

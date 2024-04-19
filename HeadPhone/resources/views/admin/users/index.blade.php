@@ -249,14 +249,14 @@
     // Hiển thị modal khi người dùng nhấn nút xóa
     function showModelConfirm(value) {
         var id = $(value).data('id');
-        var status = $(value).data('status');
+        var is_active = $(value).data('is_active');
 
-        if (status === 0) {
+        if (is_active === 0) {
             document.getElementById('modal-body__text').innerHTML = 'Bạn có chắc muốn mở khóa tài khoản này?';
         } else {
             document.getElementById('modal-body__text').innerHTML = 'Bạn có chắc muốn khóa tài khoản này?';
         }
-        $('#confirmDeleteModal').data('status', status);
+        $('#confirmDeleteModal').data('is_active', is_active);
         $('#confirmDeleteModal').data('itemid', id).modal('show');
     }
 
@@ -264,7 +264,7 @@
     // Gọi hành động xóa khi xác nhận
     $('#confirmDeleteButton').click(function() {
         var itemId = $('#confirmDeleteModal').data('itemid');
-        var status = $('#confirmDeleteModal').data('status');
+        var is_active = $('#confirmDeleteModal').data('is_active');
 
         $.ajax({
             url: '/api/lock-on-user',
@@ -272,9 +272,10 @@
             data: {
                 _token: '{{ csrf_token() }}',
                 id: itemId,
-                status: status
+                is_active: is_active
             },
             success: function(response) {
+                console.log(response);
                 fetchData();
             },
             error: function(error) {
@@ -319,11 +320,11 @@
                     </td>
 
                     <td>
-                        ${user.status == '0' ? '<span class="status text-success">&bull;</span> Mở' : '<span class="status text-danger">&bull;</span> Khóa'}
+                        ${user.is_active == 1 ? '<span class="status text-success">&bull;</span> Mở' : '<span class="status text-danger">&bull;</span> Khóa'}
                     </td>
                     <td>
-                        <a href="/users/${user.id}/edit" class="edit" title="Sửa" data-toggle="tooltip" style="color: #ff0000;"><i class="material-icons" style="color: #f0da35;">&#xE254;</i></a>
-                        ${user.status == '0' ? '<a onclick="showModelConfirm(this)" data-id="' + user.id + '" data-status="1" class="lock" title="Khóa" data-toggle="tooltip" style="color: #e64e30;"><i class="material-icons">&#xe897;</i></a>' : '<a onclick="showModelConfirm(this)" data-id="' + user.id + '" data-status="0" class="lock" title="Mở" data-toggle="tooltip" style="color: #12e34a;"><i class="material-icons">&#xe898;</i></a>'}
+                        <a href="/admin/users/${user.id}/edit" class="edit" title="Sửa" data-toggle="tooltip" style="color: #ff0000;"><i class="material-icons" style="color: #f0da35;">&#xE254;</i></a>
+                        ${user.is_active == 1 ? '<a onclick="showModelConfirm(this)" data-id="' + user.id + '" data-status="0" class="lock" title="Khóa" data-toggle="tooltip" style="color: #e64e30;"><i class="material-icons">&#xe897;</i></a>' : '<a onclick="showModelConfirm(this)" data-id="' + user.id + '" data-status="1" class="lock" title="Mở" data-toggle="tooltip" style="color: #12e34a;"><i class="material-icons">&#xe898;</i></a>'}
                     </td>
                     </tr>
             `);

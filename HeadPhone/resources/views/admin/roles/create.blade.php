@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Add New Role')
+@section('title', 'Thêm vai trò')
 @section('content')
 
 

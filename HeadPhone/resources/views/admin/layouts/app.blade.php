@@ -17,7 +17,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/vertical-layout-light/style.css')}}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('imgs/logo_orange.svg')}}" />
     <link rel="stylesheet" href="{{asset('admin/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 
     <!-- Font awesome -->

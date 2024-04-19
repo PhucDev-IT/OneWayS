@@ -115,11 +115,13 @@ class UserController extends Controller
 
     //Khóa người dùng
     public function lockOnUser(Request $request){
-        $id = $request['id'];
-        $status = $request['status'];
-
-        $this->userService->lockOnUser($id,$status);
-      return redirect()->route('users.index');
+   
+        if($this->userService->lockOnUser($request)){
+            return response()->json('http://127.0.0.1:8000/admin/users');
+        }else{
+            return response()->json(['mess' => 'có lỗi xảy ra']);
+        }
+      
         
     }
 

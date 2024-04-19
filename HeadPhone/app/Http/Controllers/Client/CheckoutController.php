@@ -22,7 +22,13 @@ class CheckoutController extends Controller
     }
 
 
+    /*
+        1. Đầu tiên người dùng ở trang shopping cart chọn các sản phẩm
+        2. Sau khi chọn và nhấn 'mua ngay' thì lưu các id cart đã chọn và gửi lên server và lưu vào session
+        3. Form check out sẽ từ các id cart đã chọn đó select các cart_details có id đã chọn
+        4. Lưu cartZ_detail vào session để sau lưu thông tin thanh toán
 
+    */
 
     public function index()
     {
@@ -53,7 +59,11 @@ class CheckoutController extends Controller
     public function payment(Request $request)
     {
         $order = $request->input('order') ?? null;
-
+      
+        $returnData = json_encode(array(
+            'code' => '200', 'message' => 'success', 'payUrl' => '/completed'
+        ));
+        
         if ($order != null) {
             Session::put('order', $order);
             $method_payment = trim($order['method_payment']);
@@ -66,10 +76,11 @@ class CheckoutController extends Controller
                     return $this->paymentWithVnPay($order['totalmoney']);
                     break;
                 case 'CASH':
-                    return response()->json(['payUrl' => '/completed']);
+                   
+                    return response()->json($returnData);
                     break;
                 default:
-                    return response()->json(['payUrl' => '/completed']);
+                    return response()->json($returnData);
                     break;
             }
         }
@@ -175,8 +186,6 @@ class CheckoutController extends Controller
     public function paymentWithVnPay($total = 1000)
     {
 
-       
- 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://127.0.0.1:8000/completed";
         $vnp_TmnCode = "2YM2BN6W"; //Mã website tại VNPAY 

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Quản lý voucher')
 @section('content')
 @include('admin/partials/modal_remove')
 <div class="card">
