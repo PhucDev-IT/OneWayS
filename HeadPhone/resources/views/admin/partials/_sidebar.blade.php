@@ -49,7 +49,18 @@
         </ul>
       </div>
     </li>
-
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#Blocks_page" aria-expanded="false" aria-controls="Blocks_page">
+        <i style="margin-right: 20px" class="fas fa-boxes"></i>
+        <span class="menu-title">Blocks</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="Blocks_page">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Cấu hình trang tĩnh</a></li>
+        </ul>
+      </div>
+    </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#banner" aria-expanded="false" aria-controls="banner">
         <i class="typcn typcn-image-outline menu-icon"></i>

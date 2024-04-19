@@ -339,6 +339,9 @@
     font-size: 13px;
     margin: 0;
 }
+.typcn-tick {
+    font-size: 18px;
+}
 .cate_product_1
     .product_cate1_slider
     .p_component
@@ -472,7 +475,7 @@
 }
 .p_action .p_qty {
     color: #2cc067;
-    font-size: 13px;
+    font-size: 18px;
     margin: 0;
 }
 .p_action .p_buy {

@@ -8,6 +8,8 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<title>  @yield('title','Trang chủ')</title>
+	{{-- icons --}}
+	<link rel="stylesheet" href="{{asset('admin/assets/vendors/typicons.font/font/typicons.css')}}">
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -15,8 +17,6 @@
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/bootstrap.min.css')}}" />
 	
-	
-
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/slick.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{asset('client/css/slick-theme.css')}}" />

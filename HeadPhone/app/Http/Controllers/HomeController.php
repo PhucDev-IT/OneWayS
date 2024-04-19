@@ -53,7 +53,11 @@ class HomeController extends Controller
             ->where('published', 1)
             ->take(3)
             ->get();
-        return view('home', compact('cate_p_data', 'p_data', 'bannerSlider', 'right_banner_slider', 'bottom_banner_slider'));
+        $full_width_banner = BannerModel::where('parent_id', 6)
+            ->where('published', 1)
+            ->take(1)
+            ->get();
+        return view('home', compact('cate_p_data', 'p_data', 'bannerSlider', 'right_banner_slider', 'bottom_banner_slider','full_width_banner'));
     }
 
     public function fetchNewProducts()
