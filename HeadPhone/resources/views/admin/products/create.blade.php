@@ -34,7 +34,6 @@
                             </span>
                         </div>
                     </div>
-
                 </div>
 
                 <div style="margin-bottom: 30px;">
@@ -133,7 +132,9 @@
 
             <div class="form-group">
                 <label for="exampleTextarea1">Mô tả chi tiết sản phẩm</label>
-                <textarea class="form-control" name="description" rows="6">{{ old('description') }}</textarea>
+                <textarea name="description" id="product_desc" class="form-control ckeditor" data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
+                    {{ old('description') }}
+                </textarea>
                 @error('description')
                 <span class="text-danger">{{$message}}</span>
                 @enderror()
@@ -190,6 +191,28 @@
 
     });
 </script>
+{{-- <script>
+    import { SourceEditing } from "@ckeditor/ckeditor5-source-editing";
 
+    ClassicEditor
+        .create(document.querySelector(`#product_desc`), {
+            removePlugins: ['Markdown'],
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(handleSampleError);
+</script> --}}
+<script>
 
+ClassicEditor.create(document.querySelector(`#product_desc`), {
+    removePlugins: ["Markdown"],
+    
+})
+    .then((editor) => {
+        window.editor = editor;
+    })
+    .catch(handleSampleError);
+
+</script>
 @endsection

@@ -167,7 +167,7 @@
 
             <div class="form-group">
                 <label for="exampleTextarea1">Mô tả chi tiết sản phẩm</label>
-                <textarea class="form-control" name="description" rows="6">{{ old('description')  ?? $product->description }}</textarea>
+                <textarea class="form-control ckeditor" id="product_desc" name="description" rows="6">{{ old('description')  ?? $product->description }} </textarea>
                 @error('description')
                 <span class="text-danger">{{$message}}</span>
                 @enderror()
@@ -226,6 +226,18 @@
 
     });
 </script>
+<script>
+
+    ClassicEditor.create(document.querySelector(`#product_desc`), {
+        removePlugins: ["Markdown"],
+        
+    })
+        .then((editor) => {
+            window.editor = editor;
+        })
+        .catch(handleSampleError);
+    
+    </script>
 
 
 @endsection
